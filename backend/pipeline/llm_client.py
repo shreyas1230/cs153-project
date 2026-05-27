@@ -11,14 +11,15 @@ import httpx
 
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "cloudflare")
 
-# Cloudflare Workers AI via AI Gateway
+# Cloudflare Workers AI via AI Gateway (OpenAI-compat endpoint)
 CF_ACCOUNT_ID = os.getenv("CF_ACCOUNT_ID", "")
-CF_GATEWAY_ID = os.getenv("CF_GATEWAY_ID", "")
+CF_GATEWAY_ID = os.getenv("CF_GATEWAY_ID", "default")
 CF_API_TOKEN = os.getenv("CF_API_TOKEN", "")
-CF_MODEL = os.getenv("CF_MODEL", "@cf/meta/llama-3.3-70b-instruct")
+CF_GATEWAY_TOKEN = os.getenv("CF_GATEWAY_TOKEN", "")
+CF_MODEL = os.getenv("CF_MODEL", "@cf/meta/llama-3.3-70b-instruct-fp8-fast")
 CF_URL = (
     f"https://gateway.ai.cloudflare.com/v1/{CF_ACCOUNT_ID}/{CF_GATEWAY_ID}"
-    f"/workers-ai/{CF_MODEL}"
+    f"/workers-ai/v1/chat/completions"
 )
 
 # Anthropic (fallback)
@@ -52,7 +53,9 @@ async def _chat_cloudflare(
     json_mode: bool,
     temperature: float,
 ) -> str:
+    # OpenAI-compat format
     payload: dict = {
+        "model": CF_MODEL,
         "messages": [{"role": "system", "content": system}, *messages] if system else messages,
         "temperature": temperature,
         "max_tokens": 4096,
@@ -60,21 +63,22 @@ async def _chat_cloudflare(
     if json_mode:
         payload["response_format"] = {"type": "json_object"}
 
+    headers = {
+        "Authorization": f"Bearer {CF_API_TOKEN}",
+        "Content-Type": "application/json",
+    }
+    if CF_GATEWAY_TOKEN:
+        headers["cf-aig-authorization"] = f"Bearer {CF_GATEWAY_TOKEN}"
+
     async with httpx.AsyncClient(timeout=120.0) as client:
-        resp = await client.post(
-            CF_URL,
-            headers={
-                "Authorization": f"Bearer {CF_API_TOKEN}",
-                "Content-Type": "application/json",
-            },
-            json=payload,
-        )
+        resp = await client.post(CF_URL, headers=headers, json=payload)
         resp.raise_for_status()
         data = resp.json()
 
-    raw = data.get("result", {}).get("response", "")
+    # OpenAI-compat response shape: choices[0].message.content
+    raw = data.get("choices", [{}])[0].get("message", {}).get("content", "")
     if json_mode:
-        _validate_json(raw)
+        return _extract_json(raw)
     return raw
 
 
@@ -103,17 +107,50 @@ async def _chat_anthropic(
     return raw
 
 
-def _validate_json(text: str) -> None:
-    """Raises ValueError if text is not valid JSON. Tries to extract a JSON block first."""
+def _extract_json(text: str) -> str:
+    """Extract and return the JSON object from a response that may have prose or code fences."""
+    # Strip markdown code fences (```json ... ``` or ``` ... ```)
+    import re
+    stripped = re.sub(r"```(?:json)?\s*", "", text).strip()
+
+    # Try parsing cleaned text directly
     try:
-        json.loads(text)
-        return
+        json.loads(stripped)
+        return stripped
     except json.JSONDecodeError:
         pass
-    # try to extract last {...} block (some models wrap JSON in prose)
-    start = text.rfind("{")
-    end = text.rfind("}") + 1
-    if start != -1 and end > start:
-        json.loads(text[start:end])
-        return
-    raise ValueError(f"Response is not valid JSON: {text[:200]}")
+
+    # Find first { and its matching closing }
+    start = stripped.find("{")
+    if start == -1:
+        raise ValueError(f"No JSON object found in response: {text[:200]}")
+
+    depth = 0
+    in_string = False
+    escape = False
+    for i, ch in enumerate(stripped[start:], start):
+        if escape:
+            escape = False
+            continue
+        if ch == "\\" and in_string:
+            escape = True
+            continue
+        if ch == '"':
+            in_string = not in_string
+            continue
+        if not in_string:
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    candidate = stripped[start: i + 1]
+                    json.loads(candidate)  # raises if still invalid
+                    return candidate
+
+    raise ValueError(f"Could not extract valid JSON from response: {text[:200]}")
+
+
+def _validate_json(text: str) -> None:
+    """Raises ValueError if a JSON object cannot be extracted from text."""
+    _extract_json(text)
