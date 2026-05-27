@@ -26,3 +26,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Local env overrides (contain secrets and local port config)
+frontend/.env.local
