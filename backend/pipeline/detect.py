@@ -59,6 +59,8 @@ async def detect_conflicts(
         b = claim_map.get(item.get("claim_b_id", ""))
         if not a or not b:
             continue
+        if a.paper_index == b.paper_index:
+            continue
         pairs.append(
             ClaimPair(
                 claim_a_id=a.id,

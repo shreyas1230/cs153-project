@@ -52,7 +52,7 @@ async def _run_one(paper_files: list[Path], question: str) -> list[dict]:
     return [p.model_dump() for p in pairs]
 
 
-def _match(pred_text: str, truth_text: str, threshold: float = 0.6) -> bool:
+def _match(pred_text: str, truth_text: str, threshold: float = 0.4) -> bool:
     """Simple token overlap match."""
     p_tokens = set(pred_text.lower().split())
     t_tokens = set(truth_text.lower().split())

@@ -8,6 +8,9 @@ import os
 import json
 import asyncio
 import httpx
+from dotenv import load_dotenv
+
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "cloudflare")
 
