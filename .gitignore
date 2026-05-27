@@ -10,6 +10,9 @@ dist/
 # Sessions (runtime data)
 backend/sessions/
 
+# Test papers (PDFs not committed — re-download with arXiv IDs in README)
+backend/test_papers/
+
 # Node
 node_modules/
 frontend/.next/
