@@ -125,9 +125,11 @@ async def _chat_openrouter(
         "messages": [{"role": "system", "content": system}, *messages] if system else messages,
         "temperature": temperature,
         "max_tokens": 4096,
+        # Pin to Nebius to avoid provider-routing non-determinism at temperature=0.
+        # Fall back to any provider if Nebius is unavailable.
+        "provider": {"order": ["Nebius"], "allow_fallbacks": True},
     }
-    # Don't send response_format for OpenRouter — some vLLM providers misinterpret it
-    # as a tool-call trigger, returning null content. The system prompts already request JSON.
+    # Don't send response_format — some vLLM providers misinterpret it as a tool-call trigger.
 
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
