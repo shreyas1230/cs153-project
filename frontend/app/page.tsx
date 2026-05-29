@@ -336,9 +336,17 @@ export default function HomePage() {
           {/* Recent analyses */}
           {recent.length > 0 && (
             <div>
-              <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-500">
-                <Clock className="h-4 w-4" /> Recent analyses
-              </h3>
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-500">
+                  <Clock className="h-4 w-4" /> Recent analyses
+                </h3>
+                <button
+                  onClick={() => { localStorage.removeItem("recent_analyses"); setRecent([]); }}
+                  className="text-xs text-slate-400 hover:text-red-500 transition-colors"
+                >
+                  Clear
+                </button>
+              </div>
               <div className="space-y-2">
                 {recent.map((r) => (
                   <a
