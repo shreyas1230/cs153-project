@@ -105,6 +105,16 @@ export default function ResultsPage() {
     );
   }
 
+  // status===null means the first check hasn't returned yet — show a plain spinner,
+  // not the step animation (avoids the flash on shared/completed links).
+  if (!result && status === null) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-slate-50">
+        <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+      </main>
+    );
+  }
+
   if (!result) {
     const currentStage = status?.status ?? "extracting";
     const progress = status?.progress ?? 0;
