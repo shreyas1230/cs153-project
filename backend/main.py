@@ -30,6 +30,23 @@ app.add_middleware(
 SESSIONS_DIR = Path(__file__).parent / "sessions"
 SESSIONS_DIR.mkdir(exist_ok=True)
 
+
+def _mark_stale_sessions() -> None:
+    """Any session still in-progress when the server starts was orphaned by a restart."""
+    in_progress = {"extracting", "normalizing", "detecting"}
+    for path in SESSIONS_DIR.glob("*.json"):
+        try:
+            data = json.loads(path.read_text())
+            if data.get("status") in in_progress:
+                data["status"] = "error"
+                data["error"] = "Analysis interrupted by server restart. Please run again."
+                path.write_text(json.dumps(data, indent=2))
+        except Exception:
+            pass
+
+
+_mark_stale_sessions()
+
 PAPERS_DIR = Path(__file__).parent / "papers"
 PAPERS_DIR.mkdir(exist_ok=True)
 
