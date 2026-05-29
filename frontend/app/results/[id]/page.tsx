@@ -47,7 +47,19 @@ export default function ResultsPage() {
         setStatus(data);
         if (data.status === "done") {
           const r = await fetch(`${API_BASE}/api/results/${id}`);
-          setResult(await r.json());
+          const resultData = await r.json();
+          setResult(resultData);
+          // Save to recent analyses so shared links also appear on home page
+          const recent = JSON.parse(localStorage.getItem("recent_analyses") ?? "[]");
+          if (!recent.find((e: { id: string }) => e.id === id)) {
+            const entry = {
+              id,
+              question: resultData.question ?? "",
+              papers: resultData.papers ?? [],
+              ts: Date.now(),
+            };
+            localStorage.setItem("recent_analyses", JSON.stringify([entry, ...recent].slice(0, 5)));
+          }
           return true;
         } else if (data.status === "error") {
           setPollError(data.error ?? "Unknown pipeline error");
