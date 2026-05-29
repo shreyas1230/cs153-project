@@ -57,9 +57,7 @@ export default function ConflictCard({
         <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${style.badge}`}>
           {style.label}
         </span>
-        <span className="ml-auto flex items-center gap-1 text-xs text-gray-400 group-hover:text-gray-600 transition-colors">
-          Click to read <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-        </span>
+        <ChevronRight className="ml-auto h-3.5 w-3.5 text-gray-400 transition-transform group-hover:translate-x-0.5 group-hover:text-gray-600" />
       </div>
 
       <div className="space-y-1.5 text-sm">
