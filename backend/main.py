@@ -12,7 +12,8 @@ from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadF
 from fastapi.middleware.cors import CORSMiddleware
 
 from pipeline import detect_conflicts, extract_claims, normalize_terminology
-from pipeline.models import AnalysisResult
+from pipeline.models import AnalysisResult, UsageSummary
+from pipeline.llm_client import set_usage_tracker, reset_usage_tracker
 
 app = FastAPI(title="Claim Conflict Detector")
 
@@ -64,6 +65,8 @@ async def _run_pipeline(session_id: str, texts: list[str], titles: list[str], qu
     if result is None:
         return
 
+    usage_records: list = []
+    token = set_usage_tracker(usage_records)
     try:
         # Stage 1: extract claims from each paper in parallel
         result.status = "extracting"
@@ -86,6 +89,11 @@ async def _run_pipeline(session_id: str, texts: list[str], titles: list[str], qu
         _save(result)
         result.claim_pairs = await detect_conflicts(result.claims, result.term_conflicts)
 
+        result.usage = UsageSummary(
+            total_tokens=sum(u["tokens"] for u in usage_records),
+            total_cost_usd=sum(u["cost"] for u in usage_records),
+            llm_calls=len(usage_records),
+        )
         result.status = "done"
         _save(result)
 
@@ -93,6 +101,8 @@ async def _run_pipeline(session_id: str, texts: list[str], titles: list[str], qu
         result.status = "error"
         result.error = str(exc)
         _save(result)
+    finally:
+        reset_usage_tracker(token)
 
 
 # ---------- endpoints ----------

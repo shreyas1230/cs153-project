@@ -9,9 +9,29 @@ import os
 import json
 import asyncio
 import httpx
+from contextvars import ContextVar
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
+
+# Accumulates usage records across all chat() calls within a pipeline run.
+# Set via set_usage_tracker() before running the pipeline; read after.
+_usage_tracker: ContextVar[list | None] = ContextVar("usage_tracker", default=None)
+
+
+def set_usage_tracker(acc: list) -> object:
+    return _usage_tracker.set(acc)
+
+
+def reset_usage_tracker(token: object) -> None:
+    _usage_tracker.reset(token)
+
+
+def _record_usage(tokens: int, cost: float) -> None:
+    acc = _usage_tracker.get()
+    if acc is not None:
+        acc.append({"tokens": tokens, "cost": cost})
+
 
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "cloudflare")
 
@@ -86,8 +106,9 @@ async def _chat_cloudflare(
         resp.raise_for_status()
         data = resp.json()
 
-    # OpenAI-compat response shape: choices[0].message.content
     raw = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+    usage = data.get("usage", {})
+    _record_usage(tokens=usage.get("total_tokens", 0), cost=0.0)
     if json_mode:
         return _extract_json(raw)
     return raw
@@ -123,6 +144,11 @@ async def _chat_openrouter(
     raw = data.get("choices", [{}])[0].get("message", {}).get("content") or ""
     if not raw:
         raise ValueError(f"Empty response from OpenRouter: {data}")
+    usage = data.get("usage", {})
+    _record_usage(
+        tokens=usage.get("total_tokens", 0),
+        cost=usage.get("cost", 0.0),
+    )
     if json_mode:
         return _extract_json(raw)
     return raw

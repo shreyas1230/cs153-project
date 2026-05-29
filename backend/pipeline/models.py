@@ -41,6 +41,12 @@ class ClaimPair(BaseModel):
     terminology_note: Optional[str] = None
 
 
+class UsageSummary(BaseModel):
+    total_tokens: int = 0
+    total_cost_usd: float = 0.0
+    llm_calls: int = 0
+
+
 class AnalysisResult(BaseModel):
     session_id: str
     question: str
@@ -50,3 +56,4 @@ class AnalysisResult(BaseModel):
     claim_pairs: list[ClaimPair]
     status: Literal["extracting", "normalizing", "detecting", "done", "error"] = "extracting"
     error: Optional[str] = None
+    usage: UsageSummary = Field(default_factory=UsageSummary)

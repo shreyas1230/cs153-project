@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ConflictCard from "./ConflictCard";
 import SourceDrawer from "./SourceDrawer";
-import { FileText, AlertTriangle, CheckCheck, BookOpen } from "lucide-react";
+import { FileText, AlertTriangle, CheckCheck, BookOpen, Zap } from "lucide-react";
 
 type Claim = {
   id: string;
@@ -35,6 +35,12 @@ type TermConflict = {
   definitions: TermDefinition[];
 };
 
+type UsageSummary = {
+  total_tokens: number;
+  total_cost_usd: number;
+  llm_calls: number;
+};
+
 type AnalysisResult = {
   session_id: string;
   question: string;
@@ -42,6 +48,7 @@ type AnalysisResult = {
   claims: Claim[];
   term_conflicts: TermConflict[];
   claim_pairs: ClaimPair[];
+  usage?: UsageSummary;
 };
 
 type Filter = "ALL" | "CONTRADICT" | "SUPPORT" | "INCOMMENSURABLE";
@@ -70,11 +77,19 @@ export default function ClaimMap({ result }: { result: Record<string, unknown> }
               Q: {data.question}
             </p>
           </div>
-          <div className="flex shrink-0 gap-4 text-sm">
+          <div className="flex shrink-0 flex-wrap gap-4 text-sm">
             <Stat icon={<FileText className="h-4 w-4" />} label="Papers" value={data.papers.length} />
             <Stat icon={<BookOpen className="h-4 w-4" />} label="Claims" value={data.claims.length} />
             <Stat icon={<AlertTriangle className="h-4 w-4 text-red-500" />} label="Contradictions" value={contradicts.length} />
             <Stat icon={<CheckCheck className="h-4 w-4 text-yellow-500" />} label="Term conflicts" value={divergentTerms.length} />
+            {data.usage && (
+              <div className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600">
+                <Zap className="h-3 w-3 text-slate-400" />
+                <span>{data.usage.total_tokens.toLocaleString()} tokens</span>
+                <span className="text-slate-300">·</span>
+                <span className="font-medium text-slate-700">${data.usage.total_cost_usd.toFixed(4)}</span>
+              </div>
+            )}
           </div>
         </div>
       </header>
