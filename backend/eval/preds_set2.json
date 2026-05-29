@@ -1,0 +1,59 @@
+[
+  [
+    {
+      "claim_a_id": "0af7bdae",
+      "claim_b_id": "e82fbabe",
+      "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+      "claim_b_text": "The Transformer model uses multi-head attention, which allows the model to jointly attend to information from different representation subspaces at different positions.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are addressing different topics, with claim A discussing elastic weight consolidation (EWC) for avoiding catastrophic forgetting, and claim B discussing the Transformer model's use of multi-head attention for sequence-to-sequence tasks.",
+      "terminology_note": "The terminology used in the two claims is different, with EWC focusing on protecting previous knowledge and the Transformer model focusing on attention mechanisms."
+    },
+    {
+      "claim_a_id": "23bbee14",
+      "claim_b_id": "3bd58e88",
+      "claim_a_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+      "claim_b_text": "The Transformer model can be trained significantly faster than architectures based on recurrent or convolutional layers.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims discuss the efficiency of their respective algorithms, with claim A stating that EWC has low computational complexity and claim B stating that the Transformer model can be trained significantly faster than other architectures.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "cca6c52a",
+      "claim_b_id": "679ff190",
+      "claim_a_text": "The EWC algorithm can be combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios, such as Atari 2600 games.",
+      "claim_b_text": "The Transformer model generalizes well to other tasks, such as English constituency parsing, both with large and limited training data.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are addressing different applications, with claim A discussing the use of EWC in reinforcement learning scenarios and claim B discussing the Transformer model's performance on English constituency parsing tasks.",
+      "terminology_note": "The terminology used in the two claims is different, with EWC focusing on reinforcement learning and the Transformer model focusing on natural language processing tasks."
+    },
+    {
+      "claim_a_id": "bcb95c5b",
+      "claim_b_id": "74552d5b",
+      "claim_a_text": "The EWC algorithm can be used to learn multiple tasks in sequence, with only a small decrease in performance on each task.",
+      "claim_b_text": "The Transformer model achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest 2014 tests at a fraction of the training cost.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are addressing different metrics, with claim A discussing the performance of EWC in terms of task switching and claim B discussing the Transformer model's performance in terms of BLEU scores.",
+      "terminology_note": "The terminology used in the two claims is different, with EWC focusing on task switching and the Transformer model focusing on machine translation metrics."
+    },
+    {
+      "claim_a_id": "3d32f6a3",
+      "claim_b_id": "18c8c2d5",
+      "claim_a_text": "The EWC algorithm can be used to protect previously-acquired knowledge, and to allow for rapid and flexible switching between tasks.",
+      "claim_b_text": "The Transformer model uses positional encoding to inject information about the relative or absolute position of the tokens in the sequence.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are addressing different aspects of their respective models, with claim A discussing the ability of EWC to protect previously-acquired knowledge and claim B discussing the Transformer model's use of positional encoding.",
+      "terminology_note": "The terminology used in the two claims is different, with EWC focusing on knowledge protection and the Transformer model focusing on sequence encoding."
+    }
+  ]
+]

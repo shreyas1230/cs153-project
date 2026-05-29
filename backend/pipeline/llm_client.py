@@ -1,7 +1,8 @@
 """
 Single abstraction over LLM providers.
-Set LLM_PROVIDER=cloudflare (default, free via course credits)
-     LLM_PROVIDER=anthropic  (claude-sonnet-4-6, ~$10-20 total if needed)
+Set LLM_PROVIDER=cloudflare   (free tier, 10k neurons/day limit)
+     LLM_PROVIDER=openrouter  (recommended; cheap Llama or Claude via $20 credit)
+     LLM_PROVIDER=anthropic   (claude-sonnet-4-6 direct)
 """
 from __future__ import annotations
 import os
@@ -25,6 +26,11 @@ CF_URL = (
     f"/workers-ai/v1/chat/completions"
 )
 
+# OpenRouter (OpenAI-compat, supports many models)
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "meta-llama/llama-3.3-70b-instruct")
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+
 # Anthropic (fallback)
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-6")
@@ -41,6 +47,8 @@ async def chat(
         try:
             if LLM_PROVIDER == "anthropic":
                 return await _chat_anthropic(messages, system, json_mode, temperature)
+            elif LLM_PROVIDER == "openrouter":
+                return await _chat_openrouter(messages, system, json_mode, temperature)
             else:
                 return await _chat_cloudflare(messages, system, json_mode, temperature)
         except (ValueError, json.JSONDecodeError) as e:
@@ -80,6 +88,41 @@ async def _chat_cloudflare(
 
     # OpenAI-compat response shape: choices[0].message.content
     raw = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+    if json_mode:
+        return _extract_json(raw)
+    return raw
+
+
+async def _chat_openrouter(
+    messages: list[dict],
+    system: str,
+    json_mode: bool,
+    temperature: float,
+) -> str:
+    payload: dict = {
+        "model": OPENROUTER_MODEL,
+        "messages": [{"role": "system", "content": system}, *messages] if system else messages,
+        "temperature": temperature,
+        "max_tokens": 4096,
+    }
+    # Don't send response_format for OpenRouter — some vLLM providers misinterpret it
+    # as a tool-call trigger, returning null content. The system prompts already request JSON.
+
+    headers = {
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json",
+        "X-Title": "CS153 Claim Conflict Detector",
+    }
+
+    async with httpx.AsyncClient(timeout=120.0) as client:
+        resp = await client.post(OPENROUTER_URL, headers=headers, json=payload)
+        resp.raise_for_status()
+        data = resp.json()
+
+    # Use `or ""` because content can be None (e.g. tool-call responses or error payloads)
+    raw = data.get("choices", [{}])[0].get("message", {}).get("content") or ""
+    if not raw:
+        raise ValueError(f"Empty response from OpenRouter: {data}")
     if json_mode:
         return _extract_json(raw)
     return raw

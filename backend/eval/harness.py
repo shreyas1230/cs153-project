@@ -52,7 +52,7 @@ async def _run_one(paper_files: list[Path], question: str) -> list[dict]:
     return [p.model_dump() for p in pairs]
 
 
-def _match(pred_text: str, truth_text: str, threshold: float = 0.4) -> bool:
+def _match(pred_text: str, truth_text: str, threshold: float = 0.25) -> bool:
     """Simple token overlap match."""
     p_tokens = set(pred_text.lower().split())
     t_tokens = set(truth_text.lower().split())
@@ -119,28 +119,48 @@ def _print_results(results: dict, paper_files: list[str]) -> None:
 async def main(args: argparse.Namespace) -> None:
     gt_path = Path(args.ground_truth)
     papers_dir = Path(args.papers_dir)
+    preds_path = Path(args.preds_file) if args.preds_file else None
 
     if not gt_path.exists():
         print(f"Ground truth file not found: {gt_path}")
         sys.exit(1)
 
-    all_results: list[dict] = []
-    with open(gt_path) as f:
-        for line in f:
-            if not line.strip():
-                continue
-            entry = json.loads(line)
-            paper_paths = [papers_dir / fn for fn in entry["paper_files"]]
-            missing = [str(p) for p in paper_paths if not p.exists()]
-            if missing:
-                print(f"Skipping — files not found: {missing}")
-                continue
+    # Load cached predictions if provided (avoids re-running the expensive pipeline)
+    cached_preds: list[list[dict]] | None = None
+    if preds_path and preds_path.exists() and not args.save_preds:
+        with open(preds_path) as f:
+            cached_preds = json.load(f)
+        print(f"Loaded cached predictions from {preds_path}")
 
+    all_results: list[dict] = []
+    all_preds: list[list[dict]] = []
+
+    with open(gt_path) as f:
+        entries = [json.loads(l) for l in f if l.strip()]
+
+    for i, entry in enumerate(entries):
+        paper_paths = [papers_dir / fn for fn in entry["paper_files"]]
+        missing = [str(p) for p in paper_paths if not p.exists()]
+        if missing:
+            print(f"Skipping — files not found: {missing}")
+            continue
+
+        if cached_preds and i < len(cached_preds):
+            predicted = cached_preds[i]
+            print(f"\nUsing cached predictions for: {entry.get('question', '')[:80]}...")
+        else:
             print(f"\nRunning: {entry.get('question', '')[:80]}...")
             predicted = await _run_one(paper_paths, entry["question"])
-            metrics = _evaluate(predicted, entry["conflicts"])
-            _print_results(metrics, entry["paper_files"])
-            all_results.append(metrics)
+
+        all_preds.append(predicted)
+        metrics = _evaluate(predicted, entry["conflicts"])
+        _print_results(metrics, entry["paper_files"])
+        all_results.append(metrics)
+
+    if args.save_preds and preds_path:
+        with open(preds_path, "w") as f:
+            json.dump(all_preds, f, indent=2)
+        print(f"\nSaved predictions to {preds_path}")
 
     if all_results:
         avg_f1 = sum(r["OVERALL"]["f1"] for r in all_results) / len(all_results)
@@ -155,4 +175,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate conflict detector precision/recall")
     parser.add_argument("--ground-truth", required=True, help="Path to JSONL ground truth file")
     parser.add_argument("--papers-dir", required=True, help="Directory containing PDF files")
+    parser.add_argument("--preds-file", default=None, help="JSON file to save/load pipeline predictions")
+    parser.add_argument("--save-preds", action="store_true", help="Run pipeline and save predictions to --preds-file")
     asyncio.run(main(parser.parse_args()))

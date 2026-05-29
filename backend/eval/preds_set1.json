@@ -1,0 +1,48 @@
+[
+  [
+    {
+      "claim_a_id": "f3319562",
+      "claim_b_id": "e0e55747",
+      "claim_a_text": "The Transformer model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+      "claim_b_text": "The agent developed a better attention schema when it was useful in performing the task, and the schema contained better information about the attentional state when it was more useful for the task.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are addressing different concepts of 'attention', one in machine learning and the other in cognitive neuroscience, making them incommensurable due to terminology drift.",
+      "terminology_note": "The term 'attention' has different meanings in the two papers, referring to self-attention layers in the Transformer model in 'attention_is_all_you_need' and the brain's control of attention in 'attention_schema_neuroscience'."
+    },
+    {
+      "claim_a_id": "36fbffc0",
+      "claim_b_id": "e4f9ae14",
+      "claim_a_text": "Self-attention layers are faster than recurrent layers when the sequence length is smaller than the representation dimensionality.",
+      "claim_b_text": "The attention schema is more useful when the inference of the attentional state solely from the attended stimulus is harder.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are discussing different aspects of 'attention', one focusing on the computational efficiency of self-attention layers and the other on the usefulness of the attention schema in cognitive tasks, making them incommensurable due to differences in scope and methodology.",
+      "terminology_note": "The term 'attention' has different meanings and applications in the two papers, leading to incommensurability."
+    },
+    {
+      "claim_a_id": "b9a61a6b",
+      "claim_b_id": "0be255b2",
+      "claim_a_text": "The Transformer model outperforms all previously reported models, including ensembles, on the WMT 2014 English-to-German and English-to-French translation tasks.",
+      "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are addressing different topics, one focusing on the performance of the Transformer model in machine translation tasks and the other proposing a theory about the brain's control of attention, making them incommensurable due to differences in topic and methodology.",
+      "terminology_note": "The papers are discussing distinct concepts and areas of research, with 'attention' being used in different contexts."
+    },
+    {
+      "claim_a_id": "3b4fdf64",
+      "claim_b_id": "21ebbd02",
+      "claim_a_text": "The Transformer model can be used for other tasks, such as image, audio, and video processing, by extending it to problems involving input and output modalities other than text.",
+      "claim_b_text": "The attention schema theory proposes that the content of awareness draws upon the information contained in the attention schema.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are discussing the application and theory of 'attention' in different domains, one in machine learning and the other in cognitive neuroscience, making them incommensurable due to differences in scope and terminology.",
+      "terminology_note": "The term 'attention' and its applications diverge significantly between the two papers, leading to incommensurability."
+    }
+  ]
+]

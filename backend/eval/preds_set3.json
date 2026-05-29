@@ -1,0 +1,59 @@
+[
+  [
+    {
+      "claim_a_id": "f3c1e9a2",
+      "claim_b_id": "58773a6d",
+      "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+      "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims address different topics, with the first discussing elastic weight consolidation in machine learning and the second proposing the Attention Schema Theory in neuroscience.",
+      "terminology_note": "The terminology used in the two claims is distinct, with 'elastic weight consolidation' and 'Attention Schema Theory' referring to different concepts in different fields."
+    },
+    {
+      "claim_a_id": "bff788e3",
+      "claim_b_id": "3c4b878a",
+      "claim_a_text": "EWC can be effectively combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios, such as Atari 2600 games.",
+      "claim_b_text": "The agent trained with an additional resource accumulated a mean ball-tracking reward of 3.74 and a mean ball-catching reward of 1.73, which was not significantly higher than the agent trained without the additional resource.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims operate at different scopes, with the first discussing the application of EWC in deep neural networks and the second presenting experimental results on an agent's performance.",
+      "terminology_note": "The terms 'deep neural networks' and 'agent' refer to different concepts, with the former being a type of machine learning model and the latter being an entity in a reinforcement learning scenario."
+    },
+    {
+      "claim_a_id": "5e669ae9",
+      "claim_b_id": "58773a6d",
+      "claim_a_text": "The EWC algorithm can be grounded in Bayesian approaches to learning, where the network parameters are tempered by a prior which is the posterior distribution on the parameters given data from previous tasks.",
+      "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims use different methods, with the first discussing Bayesian approaches to learning and the second proposing a theoretical framework for attention in neuroscience.",
+      "terminology_note": "The terminology used in the two claims is distinct, with 'Bayesian approaches' and 'Attention Schema Theory' referring to different concepts in different fields."
+    },
+    {
+      "claim_a_id": "72772b3a",
+      "claim_b_id": "453d9fc3",
+      "claim_a_text": "The EWC algorithm can be used to learn multiple tasks in sequence without suffering from catastrophic forgetting, and can achieve successful performance in a range of challenging domains.",
+      "claim_b_text": "The attention schema is more useful when the inference of the attentional state solely from the attended stimulus is harder.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims address different questions, with the first discussing the application of EWC in learning multiple tasks and the second examining the usefulness of the attention schema in certain conditions.",
+      "terminology_note": "The terms 'learning multiple tasks' and 'usefulness of the attention schema' refer to different concepts, with the former being a topic in machine learning and the latter being a concept in neuroscience."
+    },
+    {
+      "claim_a_id": "1089c854",
+      "claim_b_id": "12ff3362",
+      "claim_a_text": "The EWC algorithm has a low computational cost, making it suitable for large-scale learning systems.",
+      "claim_b_text": "The agent developed a better attention schema when it was useful in performing the task.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims operate at different levels of abstraction, with the first discussing the computational cost of the EWC algorithm and the second examining the development of an attention schema in an agent.",
+      "terminology_note": "The terms 'computational cost' and 'attention schema' refer to different concepts, with the former being a property of an algorithm and the latter being a theoretical framework in neuroscience."
+    }
+  ]
+]
