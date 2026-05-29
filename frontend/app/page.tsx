@@ -4,11 +4,13 @@ import { useRouter } from "next/navigation";
 import {
   Upload, FileText, X, Loader2, Layers, Search,
   ArrowRight, BookOpen, Zap, AlertTriangle, Clock, ExternalLink,
+  CheckCircle2, Library, Trash2,
 } from "lucide-react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8001";
 
 type RecentEntry = { id: string; question: string; papers: string[]; ts: number };
+type SavedPaper = { name: string; uploaded_at: number };
 
 export default function HomePage() {
   const router = useRouter();
@@ -18,12 +20,30 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [recent, setRecent] = useState<RecentEntry[]>([]);
+  const [savedPapers, setSavedPapers] = useState<SavedPaper[]>([]);
+  const [selectedPapers, setSelectedPapers] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem("recent_analyses");
     if (stored) setRecent(JSON.parse(stored));
+    fetch(`${API_BASE}/api/papers`)
+      .then((r) => r.json())
+      .then(setSavedPapers)
+      .catch(() => {});
   }, []);
+
+  const togglePaper = (name: string) =>
+    setSelectedPapers((prev) =>
+      prev.includes(name) ? prev.filter((p) => p !== name) : [...prev, name]
+    );
+
+  const deletePaper = async (name: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    await fetch(`${API_BASE}/api/papers/${encodeURIComponent(name)}`, { method: "DELETE" });
+    setSavedPapers((prev) => prev.filter((p) => p.name !== name));
+    setSelectedPapers((prev) => prev.filter((p) => p !== name));
+  };
 
   const addFiles = (incoming: FileList | File[]) => {
     const pdfs = Array.from(incoming).filter((f) => f.type === "application/pdf");
@@ -41,8 +61,10 @@ export default function HomePage() {
 
   const removeFile = (name: string) => setFiles((prev) => prev.filter((f) => f.name !== name));
 
+  const totalPapers = files.length + selectedPapers.length;
+
   const submit = async () => {
-    if (files.length < 2) { setError("Upload at least 2 PDFs to compare."); return; }
+    if (totalPapers < 2) { setError("Select or upload at least 2 papers to compare."); return; }
     if (!question.trim()) { setError("Enter a research question."); return; }
     setError("");
     setLoading(true);
@@ -50,13 +72,17 @@ export default function HomePage() {
       const form = new FormData();
       form.append("question", question.trim());
       files.forEach((f) => form.append("files", f));
+      selectedPapers.forEach((name) => form.append("paper_names", name));
       const res = await fetch(`${API_BASE}/api/analyze`, { method: "POST", body: form });
       if (!res.ok) throw new Error((await res.json()).detail ?? "Server error");
       const { session_id } = await res.json();
-      const entry: RecentEntry = { id: session_id, question: question.trim(), papers: files.map((f) => f.name), ts: Date.now() };
+      const allPaperNames = [...selectedPapers, ...files.map((f) => f.name)];
+      const entry: RecentEntry = { id: session_id, question: question.trim(), papers: allPaperNames, ts: Date.now() };
       const updated = [entry, ...recent].slice(0, 5);
       localStorage.setItem("recent_analyses", JSON.stringify(updated));
       setRecent(updated);
+      // Refresh saved papers list (new uploads are now cached)
+      fetch(`${API_BASE}/api/papers`).then((r) => r.json()).then(setSavedPapers).catch(() => {});
       router.push(`/results/${session_id}`);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Unknown error");
@@ -194,6 +220,52 @@ export default function HomePage() {
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm space-y-6">
+            {/* My Papers library */}
+            {savedPapers.length > 0 && (
+              <div>
+                <div className="mb-2 flex items-center gap-2">
+                  <Library className="h-4 w-4 text-violet-500" />
+                  <span className="text-sm font-medium text-slate-700">My Papers</span>
+                  <span className="text-xs text-slate-400">— click to select, no re-upload needed</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {savedPapers.map((p) => {
+                    const selected = selectedPapers.includes(p.name);
+                    return (
+                      <button
+                        key={p.name}
+                        type="button"
+                        onClick={() => togglePaper(p.name)}
+                        className={`group flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs transition-all ${
+                          selected
+                            ? "border-violet-400 bg-violet-50 text-violet-700"
+                            : "border-slate-200 bg-white text-slate-600 hover:border-violet-300 hover:bg-violet-50"
+                        }`}
+                      >
+                        {selected
+                          ? <CheckCircle2 className="h-3.5 w-3.5 text-violet-500" />
+                          : <FileText className="h-3.5 w-3.5 text-slate-400" />
+                        }
+                        <span className="max-w-[160px] truncate">{p.name}</span>
+                        <span
+                          onClick={(e) => deletePaper(p.name, e)}
+                          className="ml-0.5 hidden rounded-full p-0.5 hover:bg-red-100 group-hover:inline-flex"
+                        >
+                          <Trash2 className="h-3 w-3 text-red-400" />
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+                {selectedPapers.length > 0 && (
+                  <p className="mt-2 text-xs text-violet-600">
+                    {selectedPapers.length} paper{selectedPapers.length > 1 ? "s" : ""} selected from library
+                    {files.length > 0 ? ` + ${files.length} new upload${files.length > 1 ? "s" : ""}` : ""}
+                  </p>
+                )}
+              </div>
+            )}
+
             {/* Drop zone */}
             <div
               onDrop={onDrop}
@@ -257,7 +329,7 @@ export default function HomePage() {
             >
               {loading
                 ? <><Loader2 className="h-4 w-4 animate-spin" /> Submitting…</>
-                : <><ArrowRight className="h-4 w-4" /> Analyze Papers</>}
+                : <><ArrowRight className="h-4 w-4" /> Analyze {totalPapers > 0 ? `${totalPapers} ` : ""}Papers</>}
             </button>
           </div>
 

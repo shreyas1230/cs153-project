@@ -7,6 +7,9 @@ import uuid
 from pathlib import Path
 from typing import Optional
 
+import re
+import time
+
 import pdfplumber
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -26,6 +29,27 @@ app.add_middleware(
 
 SESSIONS_DIR = Path(__file__).parent / "sessions"
 SESSIONS_DIR.mkdir(exist_ok=True)
+
+PAPERS_DIR = Path(__file__).parent / "papers"
+PAPERS_DIR.mkdir(exist_ok=True)
+
+
+def _paper_key(filename: str) -> str:
+    return re.sub(r"[^\w\-]", "_", Path(filename).stem)
+
+
+def _save_paper(title: str, text: str) -> None:
+    key = _paper_key(title)
+    path = PAPERS_DIR / f"{key}.json"
+    if not path.exists():  # don't overwrite existing paper
+        path.write_text(json.dumps({"title": title, "text": text, "uploaded_at": time.time()}, indent=2))
+
+
+def _load_paper_text(name: str) -> str | None:
+    path = PAPERS_DIR / f"{_paper_key(name)}.json"
+    if not path.exists():
+        return None
+    return json.loads(path.read_text())["text"]
 
 
 # ---------- helpers ----------
@@ -111,17 +135,22 @@ async def _run_pipeline(session_id: str, texts: list[str], titles: list[str], qu
 async def analyze(
     background_tasks: BackgroundTasks,
     question: str = Form(...),
-    files: list[UploadFile] = File(...),
+    files: list[UploadFile] = File(default=[]),
+    paper_names: list[str] = Form(default=[]),
 ):
-    if not files:
-        raise HTTPException(status_code=400, detail="At least one PDF is required.")
-    if len(files) > 10:
-        raise HTTPException(status_code=400, detail="Maximum 10 PDFs per analysis.")
-
     session_id = str(uuid.uuid4())
     texts: list[str] = []
     titles: list[str] = []
 
+    # Load cached papers from library
+    for name in paper_names:
+        text = _load_paper_text(name)
+        if text is None:
+            raise HTTPException(status_code=404, detail=f"Saved paper '{name}' not found.")
+        texts.append(text)
+        titles.append(name)
+
+    # Process newly uploaded PDFs and save them to the library
     for f in files:
         raw = await f.read()
         text, _ = _extract_text(raw)
@@ -130,8 +159,15 @@ async def analyze(
                 status_code=422,
                 detail=f"Could not extract text from '{f.filename}'. It may be a scanned PDF.",
             )
+        title = Path(f.filename or "Unknown").stem
         texts.append(text)
-        titles.append(Path(f.filename or "Unknown").stem)
+        titles.append(title)
+        _save_paper(title, text)  # cache for future use
+
+    if len(texts) < 2:
+        raise HTTPException(status_code=400, detail="At least 2 papers are required.")
+    if len(texts) > 10:
+        raise HTTPException(status_code=400, detail="Maximum 10 papers per analysis.")
 
     result = AnalysisResult(
         session_id=session_id,
@@ -176,6 +212,27 @@ async def results(session_id: str):
     if result.status not in ("done", "error"):
         raise HTTPException(status_code=202, detail="Analysis still in progress.")
     return result.model_dump()
+
+
+@app.get("/api/papers")
+async def list_papers():
+    papers = []
+    for path in sorted(PAPERS_DIR.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True):
+        try:
+            meta = json.loads(path.read_text())
+            papers.append({"name": meta["title"], "uploaded_at": meta.get("uploaded_at", 0)})
+        except Exception:
+            pass
+    return papers
+
+
+@app.delete("/api/papers/{name}")
+async def delete_paper(name: str):
+    path = PAPERS_DIR / f"{_paper_key(name)}.json"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Paper not found.")
+    path.unlink()
+    return {"ok": True}
 
 
 @app.get("/health")
