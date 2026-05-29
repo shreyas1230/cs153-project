@@ -38,25 +38,39 @@ export default function ResultsPage() {
 
   useEffect(() => {
     if (!id) return;
-    const poll = setInterval(async () => {
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+
+    const checkStatus = async (): Promise<boolean> => {
       try {
         const res = await fetch(`${API_BASE}/api/status/${id}`);
         const data: Status = await res.json();
         setStatus(data);
         if (data.status === "done") {
-          clearInterval(poll);
           const r = await fetch(`${API_BASE}/api/results/${id}`);
           setResult(await r.json());
+          return true;
         } else if (data.status === "error") {
-          clearInterval(poll);
           setPollError(data.error ?? "Unknown pipeline error");
+          return true;
         }
+        return false;
       } catch {
         setPollError("Could not reach the server.");
-        clearInterval(poll);
+        return true;
       }
-    }, 2500);
-    return () => clearInterval(poll);
+    };
+
+    // Check immediately so shared links don't flash the loading screen
+    checkStatus().then((done) => {
+      if (!done) {
+        intervalId = setInterval(async () => {
+          const finished = await checkStatus();
+          if (finished && intervalId) clearInterval(intervalId);
+        }, 2500);
+      }
+    });
+
+    return () => { if (intervalId) clearInterval(intervalId); };
   }, [id]);
 
   if (pollError) {
