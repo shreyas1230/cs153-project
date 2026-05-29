@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import ConflictCard from "./ConflictCard";
 import SourceDrawer from "./SourceDrawer";
 import {
-  FileText, AlertTriangle, CheckCheck, BookOpen,
+  FileText, AlertTriangle, CheckCheck,
   Zap, Download, Link2, ArrowLeft, Layers, Check,
 } from "lucide-react";
 
@@ -134,26 +134,29 @@ export default function ClaimMap({ result }: { result: Record<string, unknown> }
           Q: {data.question}
         </p>
 
-        {/* Paper chips */}
-        <div className="mt-2 flex flex-wrap gap-2">
+        {/* Pipeline summary: extracted → compared → conflicts found */}
+        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+          {/* Per-paper claim counts */}
           {data.papers.map((paper, idx) => (
-            <span key={paper} className="flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-3 py-0.5 text-xs text-blue-700">
+            <span key={paper} className="flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-3 py-0.5 text-blue-700">
               <FileText className="h-3 w-3" />
               {paper}
-              <span className="rounded-full bg-blue-200 px-1.5 py-0.5 text-xs font-semibold text-blue-800">
+              <span className="rounded-full bg-blue-200 px-1.5 py-0.5 font-semibold text-blue-800">
                 {claimsPerPaper[idx]} claims
               </span>
             </span>
           ))}
-        </div>
-
-        {/* Summary stats */}
-        <div className="mt-3 flex flex-wrap gap-3 text-xs">
-          <StatChip icon={<BookOpen className="h-3.5 w-3.5" />} label="Claims" value={data.claims.length} color="slate" />
-          <StatChip icon={<AlertTriangle className="h-3.5 w-3.5 text-red-400" />} label="Contradictions" value={contradicts.length} color="red" />
-          <StatChip icon={<CheckCheck className="h-3.5 w-3.5 text-emerald-500" />} label="Support" value={supports.length} color="green" />
-          <StatChip icon={<AlertTriangle className="h-3.5 w-3.5 text-yellow-400" />} label="Incommensurable" value={incomm.length} color="yellow" />
-          <StatChip icon={<Zap className="h-3.5 w-3.5 text-violet-400" />} label="Term conflicts" value={divergentTerms.length} color="violet" />
+          <span className="text-slate-300">→</span>
+          <span className="italic text-slate-400">cross-paper pairs compared</span>
+          <span className="text-slate-300">→</span>
+          {/* Conflict breakdown */}
+          {contradicts.length > 0 && <StatChip icon={<AlertTriangle className="h-3.5 w-3.5 text-red-400" />} label="Contradictions" value={contradicts.length} color="red" />}
+          {supports.length > 0 && <StatChip icon={<CheckCheck className="h-3.5 w-3.5 text-emerald-500" />} label="Support" value={supports.length} color="green" />}
+          {incomm.length > 0 && <StatChip icon={<AlertTriangle className="h-3.5 w-3.5 text-yellow-400" />} label="Incommensurable" value={incomm.length} color="yellow" />}
+          {divergentTerms.length > 0 && <StatChip icon={<Zap className="h-3.5 w-3.5 text-violet-400" />} label="Term conflicts" value={divergentTerms.length} color="violet" />}
+          {(contradicts.length + supports.length + incomm.length) === 0 && (
+            <span className="text-slate-400">no meaningful conflicts found</span>
+          )}
         </div>
       </header>
 
