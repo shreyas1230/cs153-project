@@ -39,11 +39,16 @@ Return a JSON object with this exact schema:
 }"""
 
 
-async def normalize_terminology(claims: list[Claim]) -> list[TermConflict]:
+async def normalize_terminology(claims: list[Claim], question: str = "") -> list[TermConflict]:
     if not claims:
         return []
 
     claims_summary = _build_claims_summary(claims)
+    if question.strip():
+        claims_summary = (
+            f'The reader is investigating: "{question.strip()}"\n'
+            "Pay particular attention to terms central to this question.\n\n"
+        ) + claims_summary
     raw = await chat(
         messages=[{"role": "user", "content": claims_summary}],
         system=SYSTEM_PROMPT,

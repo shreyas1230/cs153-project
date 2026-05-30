@@ -1,0 +1,1051 @@
+[
+  [
+    [
+      {
+        "claim_a_id": "7c9e23e9",
+        "claim_b_id": "c7fb6a8c",
+        "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "claim_b_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in various experiments.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics, with EWC focusing on catastrophic forgetting in sequential learning and Adam discussing stochastic optimization methods.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC focusing on 'catastrophic forgetting' and Adam discussing 'stochastic optimization'."
+      },
+      {
+        "claim_a_id": "f1b66e78",
+        "claim_b_id": "1ce3204f",
+        "claim_a_text": "The EWC algorithm can be grounded in Bayesian approaches to learning, where the network parameters are tempered by a prior which is the posterior distribution on the parameters given data from previous tasks.",
+        "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims operate at different levels, with EWC discussing Bayesian approaches to learning and Adam focusing on stochastic optimization methods.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC using 'Bayesian approaches' and Adam discussing 'stochastic optimization'."
+      },
+      {
+        "claim_a_id": "8dd7ce04",
+        "claim_b_id": "6a9cb669",
+        "claim_a_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+        "claim_b_text": "Adam can efficiently solve practical deep learning problems.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims discuss the efficiency and suitability of their respective algorithms for large-scale learning systems.",
+        "terminology_note": ""
+      },
+      {
+        "claim_a_id": "edb5a117",
+        "claim_b_id": "abc6f626",
+        "claim_a_text": "EWC can be used in supervised learning and reinforcement learning problems to train several tasks sequentially without forgetting older ones.",
+        "claim_b_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics, with EWC focusing on sequential learning and Adam discussing non-convex optimization problems.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC discussing 'sequential learning' and Adam focusing on 'non-convex optimization'."
+      },
+      {
+        "claim_a_id": "f241ecc6",
+        "claim_b_id": "8e8ec8c0",
+        "claim_a_text": "The Fisher information matrix can be used to estimate the importance of each parameter for a task, and to compute the EWC penalty.",
+        "claim_b_text": "The bias-correction term in Adam is important for preventing large initial steps and divergence, especially when \u03b22 is close to 1.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different aspects of their respective algorithms, with EWC focusing on the Fisher information matrix and Adam discussing the bias-correction term.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC using 'Fisher information matrix' and Adam discussing 'bias-correction term'."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "1e9cb814",
+        "claim_b_id": "5324a65b",
+        "claim_a_text": "BERT obtains new state-of-the-art results on eleven natural language processing tasks.",
+        "claim_b_text": "The EWC algorithm can be used to learn multiple tasks in sequence, with only a small decrease in performance on each task.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different aspects of learning, with BERT focusing on achieving state-of-the-art results on various NLP tasks and EWC focusing on continual learning and avoiding catastrophic forgetting. The scope and objectives of the two approaches are different, making direct comparison challenging.",
+        "terminology_note": "The terminology used in the two papers differs, with BERT focusing on 'state-of-the-art results' and EWC focusing on 'continual learning' and 'catastrophic forgetting'. This difference in terminology reflects the distinct research objectives and methodologies employed in the two papers."
+      },
+      {
+        "claim_a_id": "ad08959b",
+        "claim_b_id": "4bcda84c",
+        "claim_a_text": "The pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different aspects of model training, with BERT focusing on fine-tuning a pre-trained model and EWC focusing on protecting previously-acquired knowledge during new learning. The methods and goals of the two approaches are distinct, making direct comparison difficult.",
+        "terminology_note": "The terminology used in the two papers differs, with BERT focusing on 'fine-tuning' and EWC focusing on 'protecting previously-acquired knowledge'. This difference in terminology reflects the distinct research objectives and methodologies employed in the two papers."
+      },
+      {
+        "claim_a_id": "f9e34ac8",
+        "claim_b_id": "4530bef5",
+        "claim_a_text": "The BERT model achieves a score of 80.5 on the GLUE leaderboard.",
+        "claim_b_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different aspects of model performance, with BERT focusing on achieving a high score on the GLUE leaderboard and EWC focusing on the computational complexity of the algorithm. The metrics and objectives of the two approaches are different, making direct comparison challenging.",
+        "terminology_note": "The terminology used in the two papers differs, with BERT focusing on 'GLUE leaderboard' and EWC focusing on 'computational complexity'. This difference in terminology reflects the distinct research objectives and methodologies employed in the two papers."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "77c7e5c5",
+        "claim_b_id": "c263aeb4",
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "Self-attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims appear to conflict because they discuss different types of representations (visual vs. sequence) and are operating in different contexts (image recognition vs. sequence modeling).",
+        "terminology_note": "The term 'representation' has different meanings in the two papers, referring to visual representations in resnet_he and sequence representations in attention_is_all_you_need."
+      },
+      {
+        "claim_a_id": "9f40b81b",
+        "claim_b_id": "43073c3b",
+        "claim_a_text": "Our 152-layer ResNet is the deepest network ever presented on ImageNet, while still having lower complexity than VGG nets.",
+        "claim_b_text": "The Transformer model allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as 12 hours on 8 P100 GPUs.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different aspects of neural network architecture (depth and complexity vs. parallelization and training time) and are not directly comparable.",
+        "terminology_note": "The papers focus on different aspects of neural network design and performance, making direct comparison challenging."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "fd874232",
+        "claim_b_id": "96cc457b",
+        "claim_a_text": "BERT obtains new state-of-the-art results on eleven natural language processing tasks.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different domains, with one discussing BERT's performance on NLP tasks and the other proposing a theory about attention in the brain.",
+        "terminology_note": "The terminology used in the two claims is distinct, with 'attention' referring to different concepts in each context."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "a63bdf98",
+        "claim_b_id": "6bd5414f",
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Claim a63bdf98 discusses the importance of depth in visual recognition tasks, while claim 6bd5414f introduces the Attention Schema Theory, which deals with cognitive attention, making the two claims incommensurable due to different contexts and types of attention.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to visual attention in object detection tasks in Paper 0 and cognitive attention in Paper 1."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "ffb8eb5a",
+        "claim_b_id": "1bc65ea2",
+        "claim_a_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different domains, with Adam being an optimization algorithm and the Attention Schema Theory being a neuroscience concept, making them incommensurable due to different scopes and terminology.",
+        "terminology_note": "The terminology used in the two papers is distinct, with Adam focusing on stochastic optimization and the Attention Schema Theory focusing on neuroscience and attentional states."
+      },
+      {
+        "claim_a_id": "618f87ce",
+        "claim_b_id": "1bc65ea2",
+        "claim_a_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different fields, with Adam being a machine learning optimization algorithm and the Attention Schema Theory being a neuroscience concept, making them incommensurable due to different domains and methods.",
+        "terminology_note": "The terminology used in the two papers is distinct, with Adam focusing on non-convex optimization problems and the Attention Schema Theory focusing on attentional states and neuroscience."
+      },
+      {
+        "claim_a_id": "dae5c4c8",
+        "claim_b_id": "a45d2c12",
+        "claim_a_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in experiments on logistic regression and neural networks.",
+        "claim_b_text": "The agent trained with an additional resource accumulated a mean ball-tracking reward of 3.74 and a mean ball-catching reward of 1.73.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different contexts, with Adam being compared to other optimization methods in machine learning and the agent's performance being evaluated in a neuroscience experiment, making them incommensurable due to different evaluation metrics and goals.",
+        "terminology_note": "The terminology used in the two papers is distinct, with Adam focusing on optimization performance and the agent's performance being evaluated in terms of rewards and attentional state inference."
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "claim_a_id": "a7f1e98a",
+        "claim_b_id": "bdf3cfac",
+        "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "claim_b_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different topics, with EWC focusing on catastrophic forgetting in sequential learning and Adam focusing on stochastic optimization in general.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC discussing 'tasks' and 'forgetting', while Adam discusses 'optimization problems' and 'regret bounds'."
+      },
+      {
+        "claim_a_id": "f9a640fe",
+        "claim_b_id": "ea6fb2ed",
+        "claim_a_text": "The Fisher information matrix can be used to estimate the importance of each parameter for a task, and to compute the EWC penalty.",
+        "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are using different mathematical frameworks, with EWC using the Fisher information matrix and Adam using stochastic optimization techniques.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC discussing 'Fisher information matrix' and 'EWC penalty', while Adam discusses 'stochastic optimization' and 'regret bounds'."
+      },
+      {
+        "claim_a_id": "7877a93a",
+        "claim_b_id": "06dfacaf",
+        "claim_a_text": "The EWC algorithm can be used to learn multiple tasks in sequence, with only a small decrease in performance on each task.",
+        "claim_b_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in various experiments.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims discuss the effectiveness of their respective algorithms in learning multiple tasks or optimizing functions, with EWC showing a small decrease in performance and Adam outperforming other optimization methods.",
+        "terminology_note": ""
+      },
+      {
+        "claim_a_id": "22123eea",
+        "claim_b_id": "504ae18a",
+        "claim_a_text": "The EWC algorithm can be combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios, such as Atari 2600 games.",
+        "claim_b_text": "Adam can efficiently solve practical deep learning problems with large models and datasets.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims discuss the application of their respective algorithms to deep learning problems, with EWC supporting continual learning in reinforcement learning scenarios and Adam efficiently solving practical deep learning problems.",
+        "terminology_note": ""
+      },
+      {
+        "claim_a_id": "159de3a4",
+        "claim_b_id": "ea6fb2ed",
+        "claim_a_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+        "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are discussing different aspects of their respective algorithms, with EWC focusing on computational complexity and Adam focusing on stochastic optimization.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC discussing 'computational complexity' and Adam discussing 'stochastic optimization' and 'memory requirement'."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "a648f943",
+        "claim_b_id": "cc307b4e",
+        "claim_a_text": "BERT obtains new state-of-the-art results on eleven natural language processing tasks.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics, with BERT focusing on natural language processing tasks and EWC focusing on avoiding catastrophic forgetting in neural networks, making them incommensurable due to different scopes and methods.",
+        "terminology_note": "The terminology used in the two papers differs, with BERT focusing on 'state-of-the-art results' and EWC discussing 'catastrophic forgetting' and 'knowledge protection'."
+      },
+      {
+        "claim_a_id": "f334b54c",
+        "claim_b_id": "7ed6b767",
+        "claim_a_text": "Larger models lead to a strict accuracy improvement across all four datasets.",
+        "claim_b_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different aspects, with the BERT claim discussing the impact of model size on accuracy and the EWC claim discussing computational complexity, making them incommensurable due to different focuses.",
+        "terminology_note": "The terminology used in the two papers differs, with BERT discussing 'model size' and 'accuracy' and EWC discussing 'computational complexity'."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "c6a111bd",
+        "claim_b_id": "a16b2cc1",
+        "claim_a_text": "Our ResNets manage to overcome the optimization difficulty and demonstrate accuracy gains when the depth increases.",
+        "claim_b_text": "The Transformer model can be trained significantly faster than architectures based on recurrent or convolutional layers.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are about different models (ResNets and Transformers) and their training difficulties, making them hard to compare directly.",
+        "terminology_note": "The term 'depth' is used in Paper 0 to describe the number of layers in a neural network, but is not directly applicable to the Transformer model in Paper 1."
+      },
+      {
+        "claim_a_id": "2746e72b",
+        "claim_b_id": "f8389831",
+        "claim_a_text": "Our method has good generalization performance on other recognition tasks.",
+        "claim_b_text": "The Transformer model generalizes well to other tasks, such as English constituency parsing, both with large and limited training data.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that their respective models (ResNets and Transformers) generalize well to other tasks, indicating a shared ability to learn useful representations.",
+        "terminology_note": null
+      },
+      {
+        "claim_a_id": "402969f6",
+        "claim_b_id": "23628de4",
+        "claim_a_text": "Solely due to our extremely deep representations, we obtain a 28% relative improvement on the COCO object detection dataset.",
+        "claim_b_text": "The Transformer model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are about different models (ResNets and Transformers) and their performance on different tasks (object detection and machine translation), making them hard to compare directly.",
+        "terminology_note": "The evaluation metrics used (mAP and BLEU) are also different, making a direct comparison challenging."
+      },
+      {
+        "claim_a_id": "7b26e515",
+        "claim_b_id": "f2e9dd1c",
+        "claim_a_text": "The responses of ResNets have generally smaller magnitudes than their plain counterparts.",
+        "claim_b_text": "The Transformer model uses multi-head attention, which allows the model to jointly attend to information from different representation subspaces at different positions.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are about different aspects of the models (response magnitudes and attention mechanisms), making them hard to compare directly.",
+        "terminology_note": "The concepts of 'response magnitudes' and 'attention mechanisms' are specific to their respective models and cannot be directly compared."
+      },
+      {
+        "claim_a_id": "22391bbe",
+        "claim_b_id": "6dafedd8",
+        "claim_a_text": "We achieve 85.6% mAP on PASCAL VOC 2007 and 83.8% on PASCAL VOC 2012.",
+        "claim_b_text": "The Transformer model achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French news test 2014 tests at a fraction of the training cost.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are about different models (ResNets and Transformers) and their performance on different tasks (object detection and machine translation), making them hard to compare directly.",
+        "terminology_note": "The evaluation metrics used (mAP and BLEU) are also different, making a direct comparison challenging."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "3a671c66",
+        "claim_b_id": "a1611034",
+        "claim_a_text": "The next sentence prediction (NSP) task is beneficial for both QA and NLI tasks.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state, but only needs to provide hints that improve attentional state inference.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims appear to discuss different concepts of 'attention', one in the context of machine learning and the other in cognitive neuroscience, making direct comparison challenging.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a machine learning concept in Paper 0 and a cognitive process in Paper 1."
+      },
+      {
+        "claim_a_id": "5251863f",
+        "claim_b_id": "9eb57c75",
+        "claim_a_text": "Increasing the model size leads to a strict accuracy improvement across all four datasets.",
+        "claim_b_text": "The usefulness of the attention schema is dependent on factors such as network size and memory.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss the impact of model size and network characteristics on performance, but in different contexts (machine learning vs. cognitive neuroscience) and with different metrics, making direct comparison difficult.",
+        "terminology_note": "The terms 'model size' and 'network size' may refer to different concepts in the two papers, one in machine learning and the other in cognitive neuroscience."
+      },
+      {
+        "claim_a_id": "07b36dd0",
+        "claim_b_id": "d954333d",
+        "claim_a_text": "BERT achieves state-of-the-art results on the SQuAD 1.1 and SQuAD 2.0 datasets.",
+        "claim_b_text": "The agent accumulated a mean ball-tracking reward of 3.74 and a mean ball-catching reward of 1.73 when the noise probability was 0.5.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims report on different tasks and performance metrics, with Paper 0 discussing natural language processing tasks and Paper 1 discussing a ball-tracking task, making direct comparison not meaningful.",
+        "terminology_note": "The claims are discussing different tasks and performance metrics, with no direct relationship between the two."
+      },
+      {
+        "claim_a_id": "1c7040d1",
+        "claim_b_id": "77ffcfcf",
+        "claim_a_text": "BERT outperforms the previous state-of-the-art results on the GLUE benchmark.",
+        "claim_b_text": "The attention schema theory proposes that the content of awareness draws upon the information contained in the attention schema.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different concepts, one related to machine learning performance on a benchmark and the other related to cognitive processes and awareness, making direct comparison not possible.",
+        "terminology_note": "The claims are discussing different concepts and fields of study, with no direct relationship between the two."
+      },
+      {
+        "claim_a_id": "47904db7",
+        "claim_b_id": "482df11e",
+        "claim_a_text": "The feature-based approach with BERT performs competitively with state-of-the-art methods on the CoNLL-2003 Named Entity Recognition task.",
+        "claim_b_text": "The agent can improve its knowledge of its attentional state by using the attention schema in the additional resource.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different tasks and methods, with Paper 0 discussing named entity recognition and Paper 1 discussing attentional state inference, making direct comparison challenging.",
+        "terminology_note": "The claims are discussing different tasks and methods, with different performance metrics and goals."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "51979503",
+        "claim_b_id": "8454942b",
+        "claim_a_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "claim_b_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "paper_a_title": "attention_schema_neuroscience",
+        "paper_b_title": "resnet_he",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "These claims address different concepts of 'attention', one in the context of cognitive neuroscience and the other in computer vision, making them incommensurable due to differing contexts and definitions.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to cognitive attention in Paper 1 and visual recognition focus in Paper 0."
+      },
+      {
+        "claim_a_id": "b012d8d7",
+        "claim_b_id": "3ff1f99e",
+        "claim_a_text": "Our 152-layer residual net is the deepest network ever presented on ImageNet, while still having lower complexity than VGG nets.",
+        "claim_b_text": "The attention schema emerged in the additional resource and contained information about the attentional state.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Claim b012d8d7 discusses the depth of a neural network in the context of computer vision, while claim 3ff1f99e talks about the emergence of an attention schema in a cognitive agent, operating at different scopes and using different methods.",
+        "terminology_note": "The term 'network' refers to different concepts in the two papers, a machine learning model in Paper 0 and a cognitive system in Paper 1."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "db03767b",
+        "claim_b_id": "edb73516",
+        "claim_a_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different domains, with Paper 0 discussing stochastic optimization in machine learning and Paper 1 discussing the Attention Schema Theory in neuroscience.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a machine learning concept in Paper 0 and a cognitive process in Paper 1."
+      },
+      {
+        "claim_a_id": "407212a9",
+        "claim_b_id": "edb73516",
+        "claim_a_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different fields, with Paper 0 discussing optimization algorithms and Paper 1 discussing cognitive processes, making them unrelated and incomparable.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a machine learning concept in Paper 0 and a cognitive process in Paper 1."
+      },
+      {
+        "claim_a_id": "db03712e",
+        "claim_b_id": "aee9032b",
+        "claim_a_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in experiments on logistic regression and neural networks.",
+        "claim_b_text": "The agent trained with an additional resource accumulated a mean ball-tracking reward of 3.74 and a mean ball-catching reward of 1.73.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are evaluating different types of performance, with Paper 0 discussing optimization algorithm performance and Paper 1 discussing agent performance in a task, using different metrics and criteria.",
+        "terminology_note": "The context and goals of the two papers are distinct, with Paper 0 focused on optimization and Paper 1 on cognitive processes and agent behavior."
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "claim_a_id": "1f9ddb74",
+        "claim_b_id": "77799bac",
+        "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "claim_b_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in experiments on logistic regression and neural networks.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics: catastrophic forgetting in neural networks versus the performance of the Adam optimizer. They operate at different scopes and use different methods, making them incommensurable.",
+        "terminology_note": "The terminology used in the two papers differs, with 'catastrophic forgetting' referring to a specific problem in neural networks, while 'Adam optimizer' refers to a stochastic optimization method."
+      },
+      {
+        "claim_a_id": "62e5d8b2",
+        "claim_b_id": "19f25c90",
+        "claim_a_text": "EWC can be used in supervised learning and reinforcement learning problems to train several tasks sequentially without forgetting older ones.",
+        "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics: elastic weight consolidation for sequential learning versus the Adam optimizer for stochastic optimization. They use different methods and operate at different scopes, making them incommensurable.",
+        "terminology_note": "The terminology used in the two papers differs, with 'elastic weight consolidation' referring to a method for sequential learning, while 'Adam optimizer' refers to a stochastic optimization method."
+      },
+      {
+        "claim_a_id": "6a7a61dc",
+        "claim_b_id": "7b856b6f",
+        "claim_a_text": "EWC allows a network to learn multiple tasks in sequence without suffering from catastrophic forgetting.",
+        "claim_b_text": "Adam is robust and well-suited to a wide range of non-convex optimization problems in machine learning.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics: catastrophic forgetting in neural networks versus the robustness of the Adam optimizer. They operate at different scopes and use different methods, making them incommensurable.",
+        "terminology_note": "The terminology used in the two papers differs, with 'catastrophic forgetting' referring to a specific problem in neural networks, while 'robustness' refers to the ability of the Adam optimizer to handle non-convex optimization problems."
+      },
+      {
+        "claim_a_id": "ad4f3ec9",
+        "claim_b_id": "1705d66b",
+        "claim_a_text": "The EWC algorithm can be grounded in Bayesian approaches to learning.",
+        "claim_b_text": "The convergence proof of Adam relies on the boundedness of the gradients and the distance between the parameters.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics: the Bayesian approach to elastic weight consolidation versus the convergence proof of the Adam optimizer. They use different methods and operate at different scopes, making them incommensurable.",
+        "terminology_note": "The terminology used in the two papers differs, with 'Bayesian approach' referring to a statistical framework, while 'convergence proof' refers to a mathematical guarantee of the Adam optimizer's performance."
+      },
+      {
+        "claim_a_id": "949ca891",
+        "claim_b_id": "6e1f0997",
+        "claim_a_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+        "claim_b_text": "The regret bound of Adam can be derived using the online convex optimization framework and the update rules of the algorithm.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics: the computational complexity of elastic weight consolidation versus the regret bound of the Adam optimizer. They operate at different scopes and use different methods, making them incommensurable.",
+        "terminology_note": "The terminology used in the two papers differs, with 'computational complexity' referring to the resources required by an algorithm, while 'regret bound' refers to a measure of an optimizer's performance."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "c218c028",
+        "claim_b_id": "b358ccd9",
+        "claim_a_text": "BERT obtains new state-of-the-art results on eleven natural language processing tasks.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Claim_a_id discusses BERT's performance on NLP tasks, while claim_b_id introduces the concept of EWC for preventing catastrophic forgetting; these claims address different topics and methods.",
+        "terminology_note": "The claims use different terminology, with 'NLP tasks' and 'catastrophic forgetting' referring to distinct concepts in the context of AI research."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "570dbb31",
+        "claim_b_id": "a430d360",
+        "claim_a_text": "Deeper neural networks are more difficult to train.",
+        "claim_b_text": "The Transformer model can be trained significantly faster than architectures based on recurrent or convolutional layers.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different aspects of neural networks, with Paper 0 discussing the difficulty of training deeper networks and Paper 1 discussing the training speed of the Transformer model, which doesn't necessarily relate to depth.",
+        "terminology_note": "The term 'depth' is used differently in the two papers, with Paper 0 referring to the number of layers and Paper 1 implicitly relating to representation subspaces."
+      },
+      {
+        "claim_a_id": "4475f7e3",
+        "claim_b_id": "d3bc2fa9",
+        "claim_a_text": "Solely due to our extremely deep representations, we obtain a 28% relative improvement on the COCO object detection dataset.",
+        "claim_b_text": "The Transformer model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different domains, with Paper 0 discussing object detection and Paper 1 discussing machine translation, making a direct comparison challenging.",
+        "terminology_note": "The performance metrics used are different, with Paper 0 using relative improvement on the COCO object detection dataset and Paper 1 using BLEU score on the WMT 2014 English-to-German translation task."
+      },
+      {
+        "claim_a_id": "b980ff37",
+        "claim_b_id": "5d043d7e",
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "The Transformer model uses multi-head attention, which allows the model to jointly attend to information from different representation subspaces at different positions.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims emphasize the importance of depth or representation subspaces in neural networks, with Paper 0 discussing the central importance of depth for visual recognition tasks and Paper 1 discussing the use of multi-head attention to jointly attend to information from different representation subspaces.",
+        "terminology_note": "The term 'depth' in Paper 0 can be related to the concept of representation subspaces in Paper 1."
+      },
+      {
+        "claim_a_id": "1151a14f",
+        "claim_b_id": "a430d360",
+        "claim_a_text": "Our method shows no optimization difficulty, and this 1202-layer network is able to achieve training error < 0.1%.",
+        "claim_b_text": "The Transformer model can be trained significantly faster than architectures based on recurrent or convolutional layers.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different aspects of neural network training, with Paper 0 discussing the optimization difficulty of deep networks and Paper 1 discussing the training speed of the Transformer model.",
+        "terminology_note": "The metrics used to evaluate training are different, with Paper 0 discussing training error and Paper 1 discussing training time."
+      },
+      {
+        "claim_a_id": "eb1d9a0e",
+        "claim_b_id": "d24aeb48",
+        "claim_a_text": "ResNet-101 has a 6% increase of mAP@[.5, .95] over VGG-16, which is a 28% relative improvement, solely contributed by the features learned by the better network.",
+        "claim_b_text": "The Transformer model establishes a new single-model state-of-the-art BLEU score of 41.8 on the WMT 2014 English-to-French translation task.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different domains, with Paper 0 discussing object detection and Paper 1 discussing machine translation, making a direct comparison challenging.",
+        "terminology_note": "The performance metrics used are different, with Paper 0 using mAP and Paper 1 using BLEU score."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "befbb42c",
+        "claim_b_id": "f4d8d216",
+        "claim_a_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "claim_b_text": "The BERT model uses a masked language model (MLM) pre-training objective, which enables the representation to fuse the left and right context.",
+        "paper_a_title": "attention_schema_neuroscience",
+        "paper_b_title": "bert_devlin",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The Attention Schema Theory and BERT's masked language model pre-training objective operate in different domains (neuroscience and NLP, respectively) and use different terminology, making direct comparison challenging.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to the cognitive process in the Attention Schema Theory and the attention mechanism in BERT."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "d25d49fc",
+        "claim_b_id": "cabcde6e",
+        "claim_a_text": "The degradation problem is not caused by overfitting.",
+        "claim_b_text": "The agent relied on its additional resources to perform the task.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different concepts, with 'd25d49fc' discussing the degradation problem in neural networks and 'cabcde6e' talking about an agent relying on additional resources to perform a task.",
+        "terminology_note": "The term 'learning' is used differently in the two papers, but it's not directly relevant to this pair of claims."
+      },
+      {
+        "claim_a_id": "e7521cbb",
+        "claim_b_id": "c92e0401",
+        "claim_a_text": "The 34-layer ResNet is better than the 18-layer ResNet.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims operate at different scopes, with 'e7521cbb' comparing the performance of different neural network architectures and 'c92e0401' discussing the properties of an attention schema.",
+        "terminology_note": "The concepts of 'learning' and 'performance' are used in distinct contexts, making direct comparison challenging."
+      },
+      {
+        "claim_a_id": "c12bcd6e",
+        "claim_b_id": "a6f0d68d",
+        "claim_a_text": "Solely due to our extremely deep representations, we obtain a 28% relative improvement on the COCO object detection dataset.",
+        "claim_b_text": "The usefulness of the attention schema is dependent on the noise probability in the environment.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different research questions, with 'c12bcd6e' focusing on the benefits of deep representations in neural networks and 'a6f0d68d' exploring the dependence of attention schema usefulness on noise probability.",
+        "terminology_note": "The term 'learning' is used differently in the two papers, with 'c12bcd6e' referring to neural network training and 'a6f0d68d' related to the development of an attention schema."
+      },
+      {
+        "claim_a_id": "31b94011",
+        "claim_b_id": "f8ac9c62",
+        "claim_a_text": "The ResNet-101 achieves an mAP of 48.4% on the COCO validation set.",
+        "claim_b_text": "The attention schema is useful when the attentional state cannot be inferred solely from the attended stimulus due to noise.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims use different methods and evaluate different aspects, with '31b94011' reporting the performance of a neural network on a specific task and 'f8ac9c62' discussing the usefulness of an attention schema in a particular scenario.",
+        "terminology_note": "The concepts of 'performance' and 'usefulness' are used in distinct contexts, making direct comparison challenging."
+      },
+      {
+        "claim_a_id": "c48f3fe6",
+        "claim_b_id": "cc59843c",
+        "claim_a_text": "The ResNet-101 improves the mAP by >3% over VGG-16 on the PASCAL VOC 2007 test set.",
+        "claim_b_text": "The agent developed a better attention schema when it was useful in performing the task.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims operate at different levels, with 'c48f3fe6' comparing the performance of different neural network architectures and 'cc59843c' discussing the development of an attention schema in an agent.",
+        "terminology_note": "The term 'learning' is used differently in the two papers, with 'c48f3fe6' referring to neural network training and 'cc59843c' related to the development of an attention schema."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "d54febac",
+        "claim_b_id": "d43211b0",
+        "claim_a_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "claim_b_text": "The Attention Schema Theory suggests that the brain explicitly models its state of attention, termed an attention schema, for its control.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different domains, with Adam being a stochastic optimization method and the Attention Schema Theory being a neuroscience concept, making them impossible to directly compare.",
+        "terminology_note": "The terminology used in the two papers is distinct, with 'optimization' and 'neuroscience' being unrelated fields."
+      },
+      {
+        "claim_a_id": "c3fce20f",
+        "claim_b_id": "d43211b0",
+        "claim_a_text": "Adam is robust and well-suited to a wide range of non-convex optimization problems in machine learning.",
+        "claim_b_text": "The Attention Schema Theory suggests that the brain explicitly models its state of attention, termed an attention schema, for its control.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims operate at different scopes, with Adam being a machine learning algorithm and the Attention Schema Theory being a cognitive neuroscience concept, making them incommensurable.",
+        "terminology_note": "The terminology used in the two papers is distinct, with 'machine learning' and 'cognitive neuroscience' being unrelated fields."
+      },
+      {
+        "claim_a_id": "ba1d62b6",
+        "claim_b_id": "eaf0f537",
+        "claim_a_text": "Adam outperforms other stochastic optimization methods, including SGD with Nesterov momentum and Adagrad, on several machine learning models and datasets.",
+        "claim_b_text": "The agent accumulated a mean ball-tracking reward of 3.74 and a mean ball-catching reward of 1.73 when the noise probability was 0.5.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are measuring different things, with Adam's performance being evaluated on machine learning models and datasets, and the agent's performance being evaluated on a ball-tracking task, making them impossible to directly compare.",
+        "terminology_note": "The terminology used in the two papers is distinct, with 'machine learning' and 'ball-tracking task' being unrelated domains."
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "claim_a_id": "4771fb37",
+        "claim_b_id": "d435f12b",
+        "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different topics, with claim A discussing elastic weight consolidation (EWC) for avoiding catastrophic forgetting, and claim B discussing the Adam optimizer for stochastic optimization.",
+        "terminology_note": "The terminology used in the two claims is distinct, with EWC focusing on neural network weights and Adam focusing on optimization methods."
+      },
+      {
+        "claim_a_id": "f6c48d62",
+        "claim_b_id": "6e9c779c",
+        "claim_a_text": "The EWC algorithm can be combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios, such as Atari 2600 games.",
+        "claim_b_text": "Adam is robust and well-suited to a wide range of non-convex optimization problems in machine learning.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims discuss the application of deep learning techniques to challenging scenarios, with claim A mentioning the use of EWC with deep neural networks for continual learning, and claim B discussing the robustness of Adam for non-convex optimization problems.",
+        "terminology_note": "The terminology used in the two claims is compatible, with both discussing deep learning and neural networks."
+      },
+      {
+        "claim_a_id": "22ac7591",
+        "claim_b_id": "5bb076a4",
+        "claim_a_text": "The Fisher information matrix can be used to estimate the importance of each parameter for a task, and to compute the EWC penalty.",
+        "claim_b_text": "The bias-correction term in Adam is important for preventing large initial steps and divergence, especially when the value of \u03b22 is close to 1.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different aspects of optimization, with claim A discussing the use of the Fisher information matrix for estimating parameter importance, and claim B discussing the bias-correction term in Adam.",
+        "terminology_note": "The terminology used in the two claims is distinct, with the Fisher information matrix being a concept from information theory and the bias-correction term being a component of the Adam optimizer."
+      },
+      {
+        "claim_a_id": "085b6ac1",
+        "claim_b_id": "a06d82fd",
+        "claim_a_text": "The EWC algorithm can be used to protect previously-acquired knowledge in a neural network, while still allowing the network to learn new tasks.",
+        "claim_b_text": "Adam outperforms other stochastic optimization methods, including SGD with Nesterov momentum and Adagrad, on several machine learning models and datasets.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different topics, with claim A discussing the protection of previously-acquired knowledge in neural networks using EWC, and claim B discussing the performance of Adam compared to other optimization methods.",
+        "terminology_note": "The terminology used in the two claims is distinct, with EWC focusing on neural network weights and Adam focusing on optimization methods."
+      },
+      {
+        "claim_a_id": "87449390",
+        "claim_b_id": "f98590fb",
+        "claim_a_text": "The EWC algorithm can be used to improve the performance of a neural network on a set of tasks, by protecting previously-acquired knowledge and allowing the network to learn new tasks.",
+        "claim_b_text": "The regret bound of Adam can be improved by using a decaying learning rate and a decaying first moment running average coefficient.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different aspects of optimization, with claim A discussing the improvement of neural network performance using EWC, and claim B discussing the improvement of the regret bound of Adam using a decaying learning rate and first moment running average coefficient.",
+        "terminology_note": "The terminology used in the two claims is distinct, with EWC focusing on neural network weights and Adam focusing on optimization methods."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "dce84a29",
+        "claim_b_id": "55817523",
+        "claim_a_text": "BERT obtains new state-of-the-art results on eleven natural language processing tasks.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics: BERT's performance on NLP tasks versus the EWC algorithm's ability to prevent catastrophic forgetting. They operate at different scopes and use different methods, making direct comparison challenging.",
+        "terminology_note": "The terminology used in the two claims differs, with BERT focusing on NLP tasks and EWC focusing on continual learning and catastrophic forgetting."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "f3e2051f",
+        "claim_b_id": "d00b055c",
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "Self-attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims emphasize the importance of representation depth for visual recognition tasks and sequence modeling, respectively, highlighting the significance of deep representations in different domains.",
+        "terminology_note": null
+      },
+      {
+        "claim_a_id": "66df296f",
+        "claim_b_id": "a947d0de",
+        "claim_a_text": "Our method shows no optimization difficulty, and this 1202-layer network is able to achieve training error < 0.1%.",
+        "claim_b_text": "The Transformer model can be trained significantly faster than architectures based on recurrent or convolutional layers.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Claim 66df296f discusses the training of a 1202-layer network, while claim a947d0de talks about the training speed of the Transformer model, which is a different architecture; the comparison is not direct due to the difference in model types and training procedures.",
+        "terminology_note": "The terminology used in the two claims differs, with 'training error' and 'training speed' referring to distinct aspects of model performance."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "8e3c4cef",
+        "claim_b_id": "105ddc69",
+        "claim_a_text": "BERT obtains new state-of-the-art results on eleven natural language processing tasks.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims cannot be directly compared due to the different contexts and meanings of 'attention' in the two papers, with Paper 0 referring to a machine learning concept and Paper 1 to a cognitive neuroscience concept.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to the attention mechanism in transformer models in Paper 0 and the cognitive process of selectively focusing on certain stimuli or tasks in Paper 1."
+      },
+      {
+        "claim_a_id": "241037e9",
+        "claim_b_id": "6022f94a",
+        "claim_a_text": "The BERT model can be used for both fine-tuning and feature-based approaches.",
+        "claim_b_text": "The agent trained with an additional resource that was decoupled from the attention window was able to learn to use the additional resource to track its attentional state.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics, with the first discussing the versatility of the BERT model for fine-tuning and feature-based approaches, and the second describing an experiment related to the attention schema in neuroscience, making them incomparable due to their distinct domains and methodologies.",
+        "terminology_note": "The difference in context (machine learning vs. cognitive neuroscience) and methodology makes these claims incommensurable."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "fb251633",
+        "claim_b_id": "9addc5fc",
+        "claim_a_text": "Deeper neural networks are more difficult to train.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Claim fb251633 discusses the difficulty of training deeper neural networks, while claim 9addc5fc introduces the Attention Schema Theory, which operates in a different context and scope, making them incommensurable.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to visual attention in object detection tasks in Paper 0 and cognitive attention in Paper 1."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "622291cf",
+        "claim_b_id": "cec86635",
+        "claim_a_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "claim_b_text": "The Attention Schema Theory suggests that the brain explicitly models its state of attention, termed an attention schema, for its control.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different papers and discuss different topics, with the first focusing on the Adam optimizer and the second on the Attention Schema Theory in neuroscience.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to attention mechanisms in deep learning in Paper 0 and the cognitive process of attention in Paper 1."
+      },
+      {
+        "claim_a_id": "b3d64563",
+        "claim_b_id": "8ef8ab92",
+        "claim_a_text": "Adam outperforms other stochastic optimization methods, including SGD with Nesterov momentum and Adagrad, on several machine learning models and datasets.",
+        "claim_b_text": "The agent accumulated a mean ball-tracking reward of 3.74 and a mean ball-catching reward of 1.73 when the noise probability was 0.5.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are from different papers and discuss different topics, with the first focusing on the performance of the Adam optimizer and the second on the results of an agent in a specific task.",
+        "terminology_note": "The claims operate at different scopes, with the first discussing a general optimization algorithm and the second discussing a specific experiment in neuroscience."
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "claim_a_id": "c3f83233",
+        "claim_b_id": "d7b1e333",
+        "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "claim_b_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in experiments on logistic regression and neural networks.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different topics, with EWC focusing on catastrophic forgetting in sequential learning and Adam focusing on stochastic optimization.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC discussing 'catastrophic forgetting' and Adam discussing 'stochastic optimization', making direct comparison challenging."
+      },
+      {
+        "claim_a_id": "ab4a297a",
+        "claim_b_id": "5399bf05",
+        "claim_a_text": "The EWC algorithm can be grounded in Bayesian approaches to learning, where the network parameters are tempered by a prior which is the posterior distribution on the parameters given data from previous tasks.",
+        "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims operate at different levels, with EWC discussing Bayesian approaches to learning and Adam discussing stochastic optimization methods.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC discussing 'Bayesian approaches' and Adam discussing 'stochastic optimization', making direct comparison challenging."
+      },
+      {
+        "claim_a_id": "c860a1fc",
+        "claim_b_id": "f66dade6",
+        "claim_a_text": "The Fisher information matrix can be used to estimate the importance of each parameter for a task, and to compute the EWC penalty.",
+        "claim_b_text": "Temporal averaging can be used to improve the convergence of Adam by giving higher weight to more recent parameter values.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different aspects of optimization, with EWC focusing on the Fisher information matrix and Adam discussing temporal averaging.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC discussing 'Fisher information matrix' and Adam discussing 'temporal averaging', making direct comparison challenging."
+      },
+      {
+        "claim_a_id": "32f6d3aa",
+        "claim_b_id": "174340db",
+        "claim_a_text": "The EWC algorithm can be combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios, such as Atari 2600 games.",
+        "claim_b_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims discuss the effectiveness of their respective algorithms in challenging learning scenarios, with EWC supporting continual learning in reinforcement learning and Adam being robust for non-convex optimization problems.",
+        "terminology_note": ""
+      },
+      {
+        "claim_a_id": "f8f64155",
+        "claim_b_id": "25bf5d57",
+        "claim_a_text": "EWC allows the network to effectively squeeze in more functionality into a network with fixed capacity, with only modest growth in the error rates.",
+        "claim_b_text": "The bias-correction term in Adam is important for preventing large initial steps and ensuring stable convergence.",
+        "paper_a_title": "catastrophic_forgetting_ml",
+        "paper_b_title": "adam_optimizer",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims address different aspects of learning, with EWC discussing the ability to 'squeeze in more functionality' and Adam discussing the importance of bias-correction for stable convergence.",
+        "terminology_note": "The terminology used in the two papers differs, with EWC discussing 'functionality' and Adam discussing 'bias-correction', making direct comparison challenging."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "d7929e8b",
+        "claim_b_id": "1f341bea",
+        "claim_a_text": "The BERT model uses a masked language model (MLM) pre-training objective, which enables the representation to fuse the left and right context.",
+        "claim_b_text": "The Fisher information matrix can be used to determine which parameters are important for a task.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different aspects of neural network training: BERT's masked language model pre-training objective and EWC's use of the Fisher information matrix. While related to neural networks, they address distinct concepts and cannot be directly compared.",
+        "terminology_note": "The terminology used in the two claims differs, with 'masked language model' and 'Fisher information matrix' referring to distinct concepts in the context of neural network training."
+      },
+      {
+        "claim_a_id": "a0b064ec",
+        "claim_b_id": "5d5a7973",
+        "claim_a_text": "BERT outperforms the previous state-of-the-art results on the GLUE benchmark.",
+        "claim_b_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "catastrophic_forgetting_ml",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different evaluation metrics and tasks: BERT's performance on the GLUE benchmark and EWC's computational complexity. These claims operate at different scopes and cannot be directly compared.",
+        "terminology_note": "The terminology used in the two claims differs, with 'GLUE benchmark' and 'computational complexity' referring to distinct aspects of neural network evaluation and performance."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "a69ab61b",
+        "claim_b_id": "57ddaf38",
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "The Transformer model uses multi-head attention to jointly attend to information from different representation subspaces at different positions.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_is_all_you_need",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Claim a69ab61b discusses the importance of depth in neural networks for visual recognition tasks, while claim 57ddaf38 discusses the use of multi-head attention in the Transformer model, which is a different architecture and task.",
+        "terminology_note": "The term 'depth' in claim a69ab61b refers to the number of layers in a neural network, while claim 57ddaf38 does not use the term 'depth' at all, but instead discusses attention mechanisms."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "21f9b14c",
+        "claim_b_id": "968a5e1b",
+        "claim_a_text": "The next sentence prediction (NSP) task is beneficial for both question answering and natural language inference tasks.",
+        "claim_b_text": "The Attention Schema Theory suggests that the brain explicitly models its state of attention, termed an attention schema, for its control.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different concepts of 'attention', one in natural language processing and the other in neuroscience, making them incommensurable due to terminology drift.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a mechanism in the BERT model and a cognitive process in neuroscience."
+      },
+      {
+        "claim_a_id": "2fd4cfa1",
+        "claim_b_id": "ad6ad43a",
+        "claim_a_text": "Larger models lead to a strict accuracy improvement across all four datasets.",
+        "claim_b_text": "The agent trained with a hard-wired attention schema did not perform significantly better than the agent with a learned attention schema.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are discussing different types of models and their performance, with one focusing on language models and the other on agents in a neuroscience context, making them incommensurable due to differences in scope and methodology.",
+        "terminology_note": "The term 'model' has different meanings in the two papers, referring to a language model in Paper 0 and an agent in Paper 1."
+      },
+      {
+        "claim_a_id": "5fb06317",
+        "claim_b_id": "966ff7bd",
+        "claim_a_text": "BERT outperforms the previous state-of-the-art results on the GLUE benchmark.",
+        "claim_b_text": "The agent trained with an additional resource that contained an attention schema performed better than the agent without the additional resource.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different tasks and benchmarks, one in natural language processing and the other in neuroscience, making them incommensurable due to differences in scope and methodology.",
+        "terminology_note": "The terms 'benchmark' and 'task' have different meanings in the two papers, referring to the GLUE benchmark in Paper 0 and an agent's performance in Paper 1."
+      },
+      {
+        "claim_a_id": "3be1c6d7",
+        "claim_b_id": "a93e9b00",
+        "claim_a_text": "BERT achieves state-of-the-art results on the SQuAD 1.1 and SQuAD 2.0 datasets.",
+        "claim_b_text": "The agent developed a better attention schema when it was useful in performing the task.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are discussing different types of performance and tasks, one in natural language processing and the other in neuroscience, making them incommensurable due to differences in scope and methodology.",
+        "terminology_note": "The term 'task' has different meanings in the two papers, referring to the SQuAD dataset in Paper 0 and an agent's task in Paper 1."
+      },
+      {
+        "claim_a_id": "5280c1ba",
+        "claim_b_id": "ee5dc213",
+        "claim_a_text": "The BERT model uses a masked language model (MLM) pre-training objective, which enables the representation to fuse the left and right context.",
+        "claim_b_text": "The attention schema did not have a 1-to-1 correspondence with the attentional state, but instead provided hints to improve attentional state inference.",
+        "paper_a_title": "bert_devlin",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different concepts of 'schema', one in computer science and the other in neuroscience, making them incommensurable due to terminology drift.",
+        "terminology_note": "The term 'schema' has different meanings in the two papers, referring to a structural organization of data in Paper 0 and the brain's internal model of its attentional state in Paper 1."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "ef215c99",
+        "claim_b_id": "2ac3236d",
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "resnet_he",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different concepts of 'attention', with the first claim referring to the depth of representations in neural networks and the second claim introducing the Attention Schema Theory in neuroscience, making them incommensurable due to differing contexts and definitions of 'attention'.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a concept in neuroscience and a technique in deep learning."
+      }
+    ],
+    [
+      {
+        "claim_a_id": "9f66f5fb",
+        "claim_b_id": "6a9adc18",
+        "claim_a_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+        "claim_b_text": "The agent developed a better attention schema when it was useful in performing the task.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different topics, with Paper 0 discussing the Adam optimization algorithm and Paper 1 discussing the Attention Schema Theory in neuroscience.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a machine learning concept in Paper 0 and a cognitive process in Paper 1."
+      },
+      {
+        "claim_a_id": "6c9ffb3d",
+        "claim_b_id": "d942d97d",
+        "claim_a_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in various experiments.",
+        "claim_b_text": "The agent trained with an additional resource accumulated a mean ball-tracking reward of 3.74 and a mean ball-catching reward of 1.73.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different topics, with Paper 0 discussing the performance of the Adam optimization algorithm and Paper 1 discussing the results of an experiment on the Attention Schema Theory.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a machine learning concept in Paper 0 and a cognitive process in Paper 1."
+      },
+      {
+        "claim_a_id": "ae72d856",
+        "claim_b_id": "8ccdc492",
+        "claim_a_text": "The convergence proof of Adam is based on the online convex optimization framework and uses a regret bound of O(\u221aT).",
+        "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different topics, with Paper 0 discussing the convergence proof of the Adam optimization algorithm and Paper 1 discussing the Attention Schema Theory in neuroscience.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a machine learning concept in Paper 0 and a cognitive process in Paper 1."
+      },
+      {
+        "claim_a_id": "b9ea774b",
+        "claim_b_id": "393dd830",
+        "claim_a_text": "AdaMax, a variant of Adam, is a simple and stable algorithm that uses the infinity norm instead of the L2 norm.",
+        "claim_b_text": "The attention schema emerged in the additional resource, and contained information about the attentional state.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different topics, with Paper 0 discussing a variant of the Adam optimization algorithm and Paper 1 discussing the emergence of an attention schema in an experiment.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a machine learning concept in Paper 0 and a cognitive process in Paper 1."
+      },
+      {
+        "claim_a_id": "5d04479f",
+        "claim_b_id": "f6103672",
+        "claim_a_text": "Temporal averaging can be used to improve the convergence of Adam by averaging the parameters over time.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state, unless attentional state inference is not possible at all from the attended stimulus.",
+        "paper_a_title": "adam_optimizer",
+        "paper_b_title": "attention_schema_neuroscience",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are addressing different topics, with Paper 0 discussing a method to improve the convergence of the Adam optimization algorithm and Paper 1 discussing the properties of an attention schema.",
+        "terminology_note": "The term 'attention' has different meanings in the two papers, referring to a machine learning concept in Paper 0 and a cognitive process in Paper 1."
+      }
+    ]
+  ]
+]

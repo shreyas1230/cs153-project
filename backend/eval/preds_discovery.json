@@ -1,0 +1,530 @@
+[
+  [
+    {
+      "claim_a_id": "f6dbb225",
+      "claim_b_id": "908bf32a",
+      "claim_a_text": "Batch Normalization accelerates the training of deep neural networks by reducing internal covariate shift.",
+      "claim_b_text": "Batch Normalization (BatchNorm) enables faster and more stable training of deep neural networks (DNNs).",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "batchnorm_santurkar",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims agree that Batch Normalization accelerates the training of deep neural networks, although they attribute this to different factors.",
+      "terminology_note": null
+    },
+    {
+      "claim_a_id": "486fde7e",
+      "claim_b_id": "40b2eb30",
+      "claim_a_text": "Batch Normalization makes the distribution of activations more stable and reduces internal covariate shift.",
+      "claim_b_text": "BatchNorm does not reduce internal covariate shift (ICS).",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "batchnorm_santurkar",
+      "relationship": "CONTRADICT",
+      "explanation": "The first claim states that Batch Normalization reduces internal covariate shift, while the second claim states that it does not.",
+      "terminology_note": null
+    },
+    {
+      "claim_a_id": "a74b55d0",
+      "claim_b_id": "c220d134",
+      "claim_a_text": "Internal covariate shift slows down the training of deep neural networks by requiring lower learning rates and careful parameter initialization.",
+      "claim_b_text": "The performance gain of BatchNorm does not stem from controlling internal covariate shift.",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "batchnorm_santurkar",
+      "relationship": "CONTRADICT",
+      "explanation": "The first claim implies that internal covariate shift is a key factor in slowing down the training of deep neural networks, while the second claim states that the performance gain of Batch Normalization does not stem from controlling internal covariate shift.",
+      "terminology_note": null
+    },
+    {
+      "claim_a_id": "650ab7b1",
+      "claim_b_id": "fa9b5c9e",
+      "claim_a_text": "Batch Normalization enables higher learning rates and prevents small changes to parameters from amplifying into larger and suboptimal changes in activations and gradients.",
+      "claim_b_text": "BatchNorm makes the optimization landscape significantly smoother.",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "batchnorm_santurkar",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims agree that Batch Normalization enables higher learning rates and improves the stability of the training process, although they describe the underlying mechanisms differently.",
+      "terminology_note": null
+    },
+    {
+      "claim_a_id": "5dbad661",
+      "claim_b_id": "5fefeba2",
+      "claim_a_text": "The proposed method draws its power from normalizing activations and incorporating this normalization into the network architecture itself.",
+      "claim_b_text": "Other normalization strategies can achieve similar performance to BatchNorm.",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "batchnorm_santurkar",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The first claim discusses the benefits of Batch Normalization, while the second claim compares Batch Normalization to other normalization strategies, making them incommensurable due to different scopes.",
+      "terminology_note": "The term 'Batch Normalization' has different explanations in the two papers, which may contribute to the apparent conflict."
+    }
+  ],
+  [
+    {
+      "claim_a_id": "5ac5af32",
+      "claim_b_id": "e634e6e1",
+      "claim_a_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in experiments on logistic regression and neural networks.",
+      "claim_b_text": "Adaptive optimization methods often find drastically different solutions than gradient descent (GD) or stochastic gradient descent (SGD) for simple overparameterized problems.",
+      "paper_a_title": "adam_optimizer",
+      "paper_b_title": "adaptive_methods_marginal_value",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are addressing different aspects of adaptive optimization methods, with Paper 0 focusing on the performance of Adam in specific experiments and Paper 1 discussing the general behavior of adaptive methods in overparameterized problems.",
+      "terminology_note": "The terminology used in the two papers differs, with Paper 0 focusing on 'stochastic optimization' and Paper 1 discussing 'adaptive optimization methods' in a more general sense."
+    },
+    {
+      "claim_a_id": "ef9e75af",
+      "claim_b_id": "fa6290b6",
+      "claim_a_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+      "claim_b_text": "The solutions found by adaptive methods generalize worse than those found by SGD, even when the adaptive methods achieve the same training loss or lower.",
+      "paper_a_title": "adam_optimizer",
+      "paper_b_title": "adaptive_methods_marginal_value",
+      "relationship": "CONTRADICT",
+      "explanation": "Paper 0 claims that Adam is robust and well-suited for non-convex optimization problems, while Paper 1 states that adaptive methods can converge to a solution with worse out-of-sample error than SGD, implying that Adam may not be the best choice for all problems.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "9ffb673d",
+      "claim_b_id": "d7fae723",
+      "claim_a_text": "Adam combines the advantages of two recently popular methods: the ability of AdaGrad to deal with sparse gradients, and the ability of RMSProp to deal with non-stationary objectives.",
+      "claim_b_text": "The AdaGrad solution has all its components equal to \u00b1\u03c4 for some positive constant \u03c4.",
+      "paper_a_title": "adam_optimizer",
+      "paper_b_title": "adaptive_methods_marginal_value",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are discussing different aspects of adaptive gradient methods, with Paper 0 focusing on the advantages of Adam and Paper 1 analyzing the solution form of AdaGrad.",
+      "terminology_note": "The terminology used in the two papers differs, with Paper 0 discussing 'AdaGrad' as a method that deals with sparse gradients, while Paper 1 analyzes the 'AdaGrad solution' in a specific mathematical form."
+    },
+    {
+      "claim_a_id": "5ac5af32",
+      "claim_b_id": "b5240e1e",
+      "claim_a_text": "Adam outperforms other stochastic optimization methods, such as SGD and Adagrad, in experiments on logistic regression and neural networks.",
+      "claim_b_text": "Adaptive gradient methods can converge to a solution with low \u221e-norm rather than low 2-norm.",
+      "paper_a_title": "adam_optimizer",
+      "paper_b_title": "adaptive_methods_marginal_value",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are addressing different aspects of adaptive optimization methods, with Paper 0 focusing on the performance of Adam in specific experiments and Paper 1 discussing the convergence properties of adaptive gradient methods.",
+      "terminology_note": "The terminology used in the two papers differs, with Paper 0 focusing on 'stochastic optimization' and Paper 1 discussing 'adaptive gradient methods' in a more general sense."
+    },
+    {
+      "claim_a_id": "af54bf25",
+      "claim_b_id": "c3eb3617",
+      "claim_a_text": "The average regret of Adam converges to 0 as T approaches infinity under the assumption of bounded gradients and a convex objective function.",
+      "claim_b_text": "The error of AdaGrad is bounded below by (1-p)(1 - n/N) where p is the probability of a positive label.",
+      "paper_a_title": "adam_optimizer",
+      "paper_b_title": "adaptive_methods_marginal_value",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are discussing different aspects of optimization methods, with Paper 0 analyzing the regret bound of Adam and Paper 1 bounding the error of AdaGrad.",
+      "terminology_note": "The terminology used in the two papers differs, with Paper 0 discussing 'regret bound' and Paper 1 discussing 'error bound', which are related but distinct concepts."
+    }
+  ],
+  [
+    {
+      "claim_a_id": "a23ca989",
+      "claim_b_id": "cfdcb717",
+      "claim_a_text": "Deeper neural networks are more difficult to train.",
+      "claim_b_text": "The optimization of highway networks is virtually independent of depth.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "highway_networks",
+      "relationship": "CONTRADICT",
+      "explanation": "The claims contradict each other as one states that deeper neural networks are more difficult to train, while the other claims that the optimization of highway networks is virtually independent of depth.",
+      "terminology_note": "The term 'optimization' is used differently in the two papers, but in this case, the contradiction is genuine as one paper discusses the general difficulty of training deep networks and the other discusses the specific optimization of highway networks."
+    },
+    {
+      "claim_a_id": "65014127",
+      "claim_b_id": "cfdcb717",
+      "claim_a_text": "Our method shows no optimization difficulty, and this 1202-layer network is able to achieve training error < 0.1%.",
+      "claim_b_text": "The optimization of highway networks is virtually independent of depth.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "highway_networks",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims suggest that deep networks can be optimized effectively, with the first claim stating that a 1202-layer network can achieve a low training error and the second claim stating that the optimization of highway networks is virtually independent of depth.",
+      "terminology_note": "None"
+    },
+    {
+      "claim_a_id": "fd353dd6",
+      "claim_b_id": "a31481a6",
+      "claim_a_text": "The 34-layer plain net has higher training error throughout the whole training procedure, even though the solution space of the 18-layer plain network is a subspace of that of the 34-layer one.",
+      "claim_b_text": "The ability to train extremely deep networks opens up the possibility of studying the impact of depth on complex problems without restrictions.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "highway_networks",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims appear to conflict as one discusses the difficulty of training a 34-layer plain net and the other discusses the ability to train extremely deep networks, but they are operating at different scopes and using different architectures.",
+      "terminology_note": "The term 'optimization' is used differently in the two papers, and the architectures discussed are different (plain net vs highway network)."
+    },
+    {
+      "claim_a_id": "a52b32ab",
+      "claim_b_id": "d96854c1",
+      "claim_a_text": "ResNet-101 has a 6% increase of mAP@[.5, .95] over VGG-16, which is a 28% relative improvement, solely contributed by the features learned by the better network.",
+      "claim_b_text": "The top-5 image classification accuracy on the 1000-class ImageNet dataset has increased from \u223c84% to \u223c95% through the use of ensembles of deeper architectures and smaller receptive fields.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "highway_networks",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims suggest that deeper networks can achieve better performance, with the first claim stating that ResNet-101 has a higher mAP than VGG-16 and the second claim stating that the use of deeper architectures has increased the top-5 image classification accuracy on ImageNet.",
+      "terminology_note": "None"
+    },
+    {
+      "claim_a_id": "076f09f7",
+      "claim_b_id": "baa2b405",
+      "claim_a_text": "Solely due to our extremely deep representations, we obtain a 28% relative improvement on the COCO object detection dataset.",
+      "claim_b_text": "The use of deep networks can offer both computational and statistical efficiency for complex tasks.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "highway_networks",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims suggest that deep networks can achieve better performance, with the first claim stating that a deep residual net achieves a high relative improvement on the COCO object detection dataset and the second claim stating that deep networks can offer computational and statistical efficiency for complex tasks.",
+      "terminology_note": "None"
+    }
+  ],
+  [
+    {
+      "claim_a_id": "b97217a5",
+      "claim_b_id": "47524b12",
+      "claim_a_text": "The Transformer model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+      "claim_b_text": "BERT obtains new state-of-the-art results on eleven natural language processing tasks.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "bert_devlin",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims report state-of-the-art results on machine translation and natural language processing tasks, respectively, indicating progress in the field.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "ab162965",
+      "claim_b_id": "f22f8e01",
+      "claim_a_text": "Self-attention layers are faster than recurrent layers when the sequence length is smaller than the representation dimensionality.",
+      "claim_b_text": "The pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "bert_devlin",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims address different aspects of model performance: speed of self-attention layers versus the effectiveness of pre-trained models for fine-tuning.",
+      "terminology_note": "Different evaluation metrics and contexts (sequence length vs. task performance)"
+    },
+    {
+      "claim_a_id": "a63149e8",
+      "claim_b_id": "624bfdcb",
+      "claim_a_text": "The Transformer model can be trained significantly faster than architectures based on recurrent or convolutional layers.",
+      "claim_b_text": "The BERT model can be used for both fine-tuning and feature-based approaches.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "bert_devlin",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims highlight the efficiency and versatility of their respective models, the Transformer and BERT, in terms of training speed and applicability to various tasks.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "c0d41cbf",
+      "claim_b_id": "49dc8305",
+      "claim_a_text": "The Transformer model performs surprisingly well on English constituency parsing, yielding better results than all previously reported models with the exception of the Recurrent Neural Network Grammar.",
+      "claim_b_text": "The BERT model performs competitively with state-of-the-art methods on the CoNLL-2003 Named Entity Recognition task.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "bert_devlin",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims demonstrate the strong performance of their models on specific NLP tasks, English constituency parsing and Named Entity Recognition, respectively.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "298ab7e0",
+      "claim_b_id": "335a0574",
+      "claim_a_text": "The Transformer model can be extended to problems involving input and output modalities other than text, such as images, audio, and video.",
+      "claim_b_text": "The BERT model uses a masked language model (MLM) pre-training objective, which enables the representation to fuse the left and right context.",
+      "paper_a_title": "attention_is_all_you_need",
+      "paper_b_title": "bert_devlin",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims discuss different model capabilities: the extension of the Transformer to non-text modalities versus BERT's pre-training objectives.",
+      "terminology_note": "Different model design focuses (multimodal vs. pre-training strategies)"
+    }
+  ],
+  [
+    {
+      "claim_a_id": "a67e422e",
+      "claim_b_id": "bc5c89ba",
+      "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+      "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims address different topics, with EWC focusing on avoiding catastrophic forgetting in neural networks and Adam discussing stochastic optimization methods.",
+      "terminology_note": "The terminology used in the two papers differs, with EWC focusing on 'catastrophic forgetting' and Adam discussing 'stochastic optimization'."
+    },
+    {
+      "claim_a_id": "a355ba51",
+      "claim_b_id": "516ac259",
+      "claim_a_text": "The EWC algorithm can be used to protect previously-acquired knowledge in neural networks, and to support continual learning in a variety of domains.",
+      "claim_b_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims discuss the effectiveness of their respective algorithms in supporting learning and optimization in various domains.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "000118d5",
+      "claim_b_id": "bc5c89ba",
+      "claim_a_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+      "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims mention the low computational complexity of their respective algorithms, making them suitable for large-scale learning systems.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "b53aa348",
+      "claim_b_id": "2673e61a",
+      "claim_a_text": "The EWC algorithm can be combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios, such as Atari 2600 games.",
+      "claim_b_text": "Adam can efficiently solve practical deep learning problems, including logistic regression, multilayer neural networks, and convolutional neural networks.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims discuss the application of their respective algorithms in deep learning scenarios, such as Atari 2600 games and convolutional neural networks.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "a1e6b28d",
+      "claim_b_id": "4ad8f1ef",
+      "claim_a_text": "The Fisher information matrix can be used to estimate the importance of each parameter for a task, and to compute the EWC penalty.",
+      "claim_b_text": "The bias-correction term in Adam is important for preventing large initial steps and ensuring stable convergence.",
+      "paper_a_title": "catastrophic_forgetting_ml",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims address different aspects of their respective algorithms, with EWC discussing the use of the Fisher information matrix and Adam discussing the bias-correction term.",
+      "terminology_note": "The terminology used in the two papers differs, with EWC focusing on 'Fisher information matrix' and Adam discussing 'bias-correction term'."
+    }
+  ],
+  [
+    {
+      "claim_a_id": "d5c0fe2a",
+      "claim_b_id": "2773292e",
+      "claim_a_text": "BERT obtains new state-of-the-art results on eleven natural language processing tasks.",
+      "claim_b_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+      "paper_a_title": "bert_devlin",
+      "paper_b_title": "catastrophic_forgetting_ml",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims address different topics, with BERT focusing on natural language processing tasks and EWC addressing the problem of catastrophic forgetting in sequential learning.",
+      "terminology_note": "The terminology used in the two papers differs, with BERT focusing on 'state-of-the-art results' and EWC discussing 'catastrophic forgetting' and 'continual learning'."
+    },
+    {
+      "claim_a_id": "41b9a179",
+      "claim_b_id": "e91b97d2",
+      "claim_a_text": "The pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+      "claim_b_text": "EWC allows the network to effectively squeeze in more functionality into a network with fixed capacity, with only modest growth in the error rates.",
+      "paper_a_title": "bert_devlin",
+      "paper_b_title": "catastrophic_forgetting_ml",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims operate at different scopes, with BERT discussing fine-tuning for specific tasks and EWC addressing the general problem of retaining knowledge across tasks.",
+      "terminology_note": "The terms 'fine-tuning' and 'continual learning' have different meanings in the context of the two papers."
+    },
+    {
+      "claim_a_id": "d6ecab13",
+      "claim_b_id": "173226a5",
+      "claim_a_text": "The BERT model achieves a score of 80.5 on the GLUE leaderboard.",
+      "claim_b_text": "The EWC algorithm has a low computational complexity, making it suitable for large-scale learning systems.",
+      "paper_a_title": "bert_devlin",
+      "paper_b_title": "catastrophic_forgetting_ml",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims use different metrics, with BERT reporting a score on the GLUE leaderboard and EWC discussing computational complexity.",
+      "terminology_note": "The terminology used to describe performance and efficiency differs between the two papers."
+    },
+    {
+      "claim_a_id": "1961cb9d",
+      "claim_b_id": "a082781f",
+      "claim_a_text": "The BERT model achieves a +5.1 F1 improvement over the previous best system on the SQuAD 2.0 task.",
+      "claim_b_text": "The use of EWC allows the agent to learn many games in sequence without suffering from catastrophic forgetting, but does not reach the score that would have been obtained by training separate DQNs.",
+      "paper_a_title": "bert_devlin",
+      "paper_b_title": "catastrophic_forgetting_ml",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims address different tasks, with BERT discussing the SQuAD 2.0 task and EWC addressing Atari 2600 games.",
+      "terminology_note": "The terminology used to describe tasks and performance differs between the two papers."
+    },
+    {
+      "claim_a_id": "75a456bf",
+      "claim_b_id": "bec4e815",
+      "claim_a_text": "The BERT model performs competitively with state-of-the-art methods on the CoNLL-2003 Named Entity Recognition task.",
+      "claim_b_text": "The EWC algorithm can be used to support continual learning in a variety of domains, including supervised learning and reinforcement learning.",
+      "paper_a_title": "bert_devlin",
+      "paper_b_title": "catastrophic_forgetting_ml",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims discuss the ability of their respective models to perform competitively with state-of-the-art methods, suggesting that both BERT and EWC can achieve strong results in their respective domains.",
+      "terminology_note": null
+    }
+  ],
+  [
+    {
+      "claim_a_id": "eb607e9e",
+      "claim_b_id": "67ff5eb7",
+      "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+      "claim_b_text": "The Transformer model uses multi-head attention, which allows the model to jointly attend to information from different representation subspaces at different positions.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims emphasize the importance of depth in representations, with claim eb607e9e stating it's central for visual recognition tasks and claim 67ff5eb7 highlighting the use of multi-head attention to attend to different representation subspaces.",
+      "terminology_note": ""
+    },
+    {
+      "claim_a_id": "cc516d51",
+      "claim_b_id": "c1d57a14",
+      "claim_a_text": "Our 152-layer residual net is the deepest network ever presented on ImageNet, while still having lower complexity than VGG nets.",
+      "claim_b_text": "The Transformer model can be trained significantly faster than architectures based on recurrent or convolutional layers.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "Claim cc516d51 discusses the complexity of ResNet-101, while claim c1d57a14 talks about the training speed of the Transformer model; these are different aspects of neural network architectures.",
+      "terminology_note": "Different metrics and aspects of neural networks are being compared."
+    },
+    {
+      "claim_a_id": "2c1f4b91",
+      "claim_b_id": "5ae44ae6",
+      "claim_a_text": "The 34-layer plain net has higher training error throughout the whole training procedure, even though the solution space of the 18-layer plain network is a subspace of that of the 34-layer one.",
+      "claim_b_text": "The Transformer model allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as 12 hours on 8 P100 GPUs.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "Claim 2c1f4b91 discusses the training error of plain nets, while claim 5ae44ae6 talks about the parallelization and training time of the Transformer model; these are different aspects of neural network training.",
+      "terminology_note": "Different metrics and aspects of neural networks are being compared."
+    },
+    {
+      "claim_a_id": "8824806c",
+      "claim_b_id": "aa66ce47",
+      "claim_a_text": "ResNet-101 has a 6% increase of mAP@[.5, .95] over VGG-16, which is a 28% relative improvement, solely contributed by the features learned by the better network.",
+      "claim_b_text": "The Transformer model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "attention_is_all_you_need",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "Claim 8824806c discusses the performance of ResNet-101 on object detection tasks, while claim aa66ce47 talks about the performance of the Transformer model on machine translation tasks; these are different tasks and datasets.",
+      "terminology_note": "Different tasks and datasets are being compared."
+    }
+  ],
+  [
+    {
+      "claim_a_id": "ff47bd2d",
+      "claim_b_id": "0f3fd658",
+      "claim_a_text": "Batch Normalization accelerates the training of deep neural networks by reducing internal covariate shift.",
+      "claim_b_text": "Adam outperforms other stochastic optimization methods, including SGD with Nesterov momentum and Adagrad, on several machine learning models and datasets.",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims discuss the acceleration of training in deep neural networks, with Batch Normalization and Adam optimizer contributing to faster convergence.",
+      "terminology_note": null
+    },
+    {
+      "claim_a_id": "04de8aae",
+      "claim_b_id": "195bbe4d",
+      "claim_a_text": "Batch Normalization allows for higher learning rates and reduces the need for careful parameter initialization.",
+      "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "SUPPORT",
+      "explanation": "Batch Normalization allows for higher learning rates, and Adam optimizer is a method for efficient stochastic optimization, which can take advantage of these higher learning rates.",
+      "terminology_note": null
+    },
+    {
+      "claim_a_id": "616e38e7",
+      "claim_b_id": "6fc66f05",
+      "claim_a_text": "The proposed method achieves state-of-the-art performance on the ImageNet classification task.",
+      "claim_b_text": "Adam can efficiently solve practical deep learning problems, including logistic regression, multilayer neural networks, and convolutional neural networks.",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "SUPPORT",
+      "explanation": "Both claims discuss achieving state-of-the-art performance on image classification tasks, with Batch Normalization and Adam optimizer contributing to this success.",
+      "terminology_note": null
+    },
+    {
+      "claim_a_id": "562844bc",
+      "claim_b_id": "0242bb62",
+      "claim_a_text": "Batch Normalization regularizes the model and reduces overfitting.",
+      "claim_b_text": "Adam is a robust and well-suited algorithm for a wide range of non-convex optimization problems in machine learning.",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "SUPPORT",
+      "explanation": "Batch Normalization regularizes the model and reduces overfitting, while Adam optimizer is a robust algorithm for non-convex optimization problems, which can also help prevent overfitting.",
+      "terminology_note": null
+    },
+    {
+      "claim_a_id": "563b3e56",
+      "claim_b_id": "68739b04",
+      "claim_a_text": "The BN transform is a differentiable transformation that introduces normalized activations into the network.",
+      "claim_b_text": "Temporal averaging can be used to improve the convergence of Adam by giving higher weight to more recent parameter values.",
+      "paper_a_title": "batchnorm_ioffe",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The BN transform and temporal averaging in Adam are different techniques for improving convergence, operating at different levels of the optimization process.",
+      "terminology_note": "The terminology used in the two papers differs, with 'BN transform' referring to a specific normalization technique, while 'temporal averaging' refers to a method for improving the convergence of Adam."
+    }
+  ],
+  [
+    {
+      "claim_a_id": "7966d7cf",
+      "claim_b_id": "57295f3b",
+      "claim_a_text": "The next sentence prediction (NSP) task is beneficial for both QA and NLI tasks.",
+      "claim_b_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+      "paper_a_title": "bert_devlin",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "While both claims discuss aspects of 'attention', they operate in entirely different domains (NLP vs. neuroscience) and contexts, making direct comparison challenging.",
+      "terminology_note": "The term 'attention' is used differently in NLP (e.g., attention mechanisms in neural networks) and neuroscience (e.g., the Attention Schema Theory)."
+    },
+    {
+      "claim_a_id": "4773a732",
+      "claim_b_id": "fc63400f",
+      "claim_a_text": "The BERT model uses a masked language model (MLM) pre-training objective, which enables the representation to fuse the left and right context.",
+      "claim_b_text": "The agent can improve knowledge of its attentional state by using the attention schema in the additional resource.",
+      "paper_a_title": "bert_devlin",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "These claims discuss learning and representation mechanisms but in vastly different fields (NLP and neuroscience), with the NLP claim focusing on a masked language model and the neuroscience claim on an attention schema.",
+      "terminology_note": "The concepts of 'learning' and 'representation' are applied differently in machine learning models (like BERT) and neuroscience theories (like the Attention Schema Theory)."
+    },
+    {
+      "claim_a_id": "d004876a",
+      "claim_b_id": "8bfa2b2c",
+      "claim_a_text": "BERT outperforms the previous state-of-the-art results on the GLUE benchmark.",
+      "claim_b_text": "The agent trained with an additional resource accumulated a mean ball-tracking reward of 3.74 and a mean ball-catching reward of 1.73, which was not significantly higher than the agent trained without the additional resource.",
+      "paper_a_title": "bert_devlin",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "These claims discuss performance metrics but in unrelated tasks and fields (NLP benchmarks like GLUE vs. agent performance in a neuroscience context), making direct comparison impossible.",
+      "terminology_note": "Performance metrics and tasks are specific to their respective domains and cannot be directly compared without a common framework."
+    }
+  ],
+  [
+    {
+      "claim_a_id": "a0b68f81",
+      "claim_b_id": "1e1aed0f",
+      "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+      "claim_b_text": "The Attention Schema Theory suggests that the brain explicitly models its state of attention, termed an attention schema, for its control.",
+      "paper_a_title": "resnet_he",
+      "paper_b_title": "attention_schema_neuroscience",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "Claim a0b68f81 discusses the importance of depth in neural networks for visual recognition tasks, while claim 1e1aed0f talks about the brain's internal modeling of attentional state, making them incommensurable due to different contexts and scopes.",
+      "terminology_note": "The term 'attention' has different meanings in the two papers, referring to visual attention in object detection and attentional state in cognitive neuroscience, respectively."
+    },
+    {
+      "claim_a_id": "22875869",
+      "claim_b_id": "10f9de57",
+      "claim_a_text": "The usefulness of the attention schema is dependent on factors such as network size and memory.",
+      "claim_b_text": "Our 152-layer ResNet is the deepest network ever presented on ImageNet, while still having lower complexity than VGG nets.",
+      "paper_a_title": "attention_schema_neuroscience",
+      "paper_b_title": "resnet_he",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "Claim 22875869 discusses the dependence of attention schema usefulness on factors like network size and memory in the context of cognitive neuroscience, while claim 10f9de57 talks about the complexity of ResNet models in the context of deep learning, making them incommensurable due to different domains and terminology.",
+      "terminology_note": "The term 'network' has different meanings in the two papers, referring to cognitive networks and neural networks, respectively."
+    }
+  ],
+  [
+    {
+      "claim_a_id": "73fc5483",
+      "claim_b_id": "2ec42203",
+      "claim_a_text": "The Attention Schema Theory proposes that the brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+      "claim_b_text": "Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement.",
+      "paper_a_title": "attention_schema_neuroscience",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are from different domains, with the first claim discussing the Attention Schema Theory in neuroscience and the second claim discussing the Adam optimization algorithm in machine learning.",
+      "terminology_note": "The term 'attention' has different meanings in the two papers, referring to the cognitive process in Paper 1 and the attention mechanism in machine learning in Paper 0 (although not explicitly mentioned)."
+    },
+    {
+      "claim_a_id": "f20fed90",
+      "claim_b_id": "467f432b",
+      "claim_a_text": "The agent relied on its additional resource to perform its task, and used the additional resource to track attention.",
+      "claim_b_text": "Adam outperforms other stochastic optimization methods, including SGD with Nesterov momentum and Adagrad, on several machine learning models and datasets.",
+      "paper_a_title": "attention_schema_neuroscience",
+      "paper_b_title": "adam_optimizer",
+      "relationship": "INCOMMENSURABLE",
+      "explanation": "The claims are from different domains, with the first claim discussing the agent's reliance on an additional resource in a neuroscience context, and the second claim discussing the performance of the Adam optimization algorithm in machine learning.",
+      "terminology_note": "The concepts and terminology used in the two claims are not directly comparable due to the difference in domains."
+    }
+  ]
+]

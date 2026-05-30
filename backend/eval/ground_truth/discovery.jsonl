@@ -1,0 +1,11 @@
+{"paper_files": ["batchnorm_ioffe.pdf", "batchnorm_santurkar.pdf"], "question": "Why does batch normalization improve neural network training?", "conflicts": []}
+{"paper_files": ["adam_optimizer.pdf", "adaptive_methods_marginal_value.pdf"], "question": "Are adaptive gradient methods better than SGD?", "conflicts": []}
+{"paper_files": ["resnet_he.pdf", "highway_networks.pdf"], "question": "How can very deep neural networks be trained effectively?", "conflicts": []}
+{"paper_files": ["attention_is_all_you_need.pdf", "bert_devlin.pdf"], "question": "How effective are self-attention and Transformer architectures?", "conflicts": []}
+{"paper_files": ["catastrophic_forgetting_ml.pdf", "adam_optimizer.pdf"], "question": "How do neural networks learn and optimize?", "conflicts": []}
+{"paper_files": ["bert_devlin.pdf", "catastrophic_forgetting_ml.pdf"], "question": "How do neural networks acquire and retain knowledge?", "conflicts": []}
+{"paper_files": ["resnet_he.pdf", "attention_is_all_you_need.pdf"], "question": "What architectural choices improve deep learning models?", "conflicts": []}
+{"paper_files": ["batchnorm_ioffe.pdf", "adam_optimizer.pdf"], "question": "How is neural network training stabilized and optimized?", "conflicts": []}
+{"paper_files": ["bert_devlin.pdf", "attention_schema_neuroscience.pdf"], "question": "What is attention and how is it represented?", "conflicts": []}
+{"paper_files": ["resnet_he.pdf", "attention_schema_neuroscience.pdf"], "question": "How do deep and biological networks process information?", "conflicts": []}
+{"paper_files": ["adam_optimizer.pdf", "attention_schema_neuroscience.pdf"], "question": "How do learning and attention work across artificial and biological systems?", "conflicts": []}

@@ -1,0 +1,1262 @@
+[
+  [
+    [
+      {
+        "claim_a_text": "Attention is a process through which the brain selects, and preferentially processes, parts of externally-driven or internally-generated information relevant to its behavior.",
+        "claim_b_text": "Attentionmechanismshavebecomeanintegralpartofcompellingsequencemodelingandtransduc-tionmodelsinvarioustasks,allowingmodelingofdependencieswithoutregardtotheirdistanceintheinputoroutputsequences",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of attention in processing relevant information, whether in the brain or in sequence modeling tasks."
+      },
+      {
+        "claim_a_text": "TheAttentionSchemaTheoryproposes that the brain controls its attention by building a descriptive and predictive model of attention",
+        "claim_b_text": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both claims discuss attention, they operate at different scopes and levels of abstraction, making them incommensurable."
+      },
+      {
+        "claim_a_text": "The agent learned to use the additional resource to track the location of its attentional state better",
+        "claim_b_text": "The Transformer uses multi-head attention in three different ways, allowing each position in the decoder to attend to all positions in the input sequence",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of attention mechanisms in improving performance, whether in tracking attentional state or in sequence modeling tasks."
+      },
+      {
+        "claim_a_text": "The attention schema does not need to be a perfect copy of the attentional state but only needs to provide hints that improve attentional state inference",
+        "claim_b_text": "We employ h = 8 parallel attention layers, or heads, to jointly attend to information from different representation subspaces at different positions",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both claims discuss attention mechanisms, they differ in their specific implementations and goals, making them incommensurable."
+      },
+      {
+        "claim_a_text": "The usefulness of the attention schema is maximal for intermediate noise probabilities",
+        "claim_b_text": "The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims operate at different levels of abstraction and discuss different aspects of attention mechanisms, making them incommensurable."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The Transformer model, which relies entirely on self-attention mechanisms, can achieve state-of-the-art results in machine translation tasks.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows neural networks to learn multiple tasks sequentially without suffering from catastrophic forgetting.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are addressing different problems in neural networks: the Transformer model is focused on sequence-to-sequence tasks, while EWC is focused on continual learning and avoiding catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "Self-attention mechanisms can be used to draw global dependencies between input and output sequences.",
+        "claim_b_text": "EWC uses a quadratic penalty to protect previously learned tasks by constraining important parameters to stay close to their old values.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different techniques for improving neural network performance: self-attention is used for sequence-to-sequence tasks, while EWC is used for continual learning."
+      },
+      {
+        "claim_a_text": "The Transformer model can be parallelized more easily than recurrent neural networks, making it more efficient for long sequences.",
+        "claim_b_text": "EWC can be used to train neural networks on multiple tasks sequentially, allowing for more efficient use of network capacity.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of efficient use of network capacity and parallelization, although they are addressing different problems."
+      },
+      {
+        "claim_a_text": "The Transformer model uses multi-head attention to jointly attend to information from different representation subspaces at different positions.",
+        "claim_b_text": "EWC uses the Fisher information matrix to determine the importance of parameters for previously learned tasks.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different techniques for improving neural network performance: multi-head attention is used for sequence-to-sequence tasks, while the Fisher information matrix is used for continual learning."
+      },
+      {
+        "claim_a_text": "The Transformer model achieves state-of-the-art results in machine translation tasks, including English-to-German and English-to-French translation.",
+        "claim_b_text": "EWC allows neural networks to learn multiple Atari 2600 games sequentially without suffering from catastrophic forgetting.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are addressing different applications of neural networks: machine translation and Atari 2600 games."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "claim_b_text": "Elastic weight consolidation allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Both papers discuss learning and attention, but they operate at different levels of abstraction and focus on different aspects of the problem. Paper A focuses on artificial neural networks, while Paper B discusses biological attention mechanisms."
+      },
+      {
+        "claim_a_text": "The attention schema is essential in controlling attention and performing the task.",
+        "claim_b_text": "EWC allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that some form of internal model or schema is necessary for effective learning and attentional control, whether in biological or artificial systems."
+      },
+      {
+        "claim_a_text": "The attention schema does not need to be a perfect copy of the attentional state but only needs to provide hints that improve attentional state inference.",
+        "claim_b_text": "EWC protects the performance on task A by constraining the parameters to stay in a region of low error for task A centered around \u03b8\u2217.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that the internal model or schema does not need to be a perfect representation of the external world, but rather a useful approximation that facilitates learning and inference."
+      },
+      {
+        "claim_a_text": "The usefulness of the attention schema is maximal for intermediate noise probabilities.",
+        "claim_b_text": "EWC allows the network to effectively squeeze in more functionality into a network with fixed capacity, with only modest growth in the error rates.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different aspects of learning and attention, with Paper A focusing on the effect of noise on attentional control and Paper B discussing the capacity of artificial neural networks."
+      },
+      {
+        "claim_a_text": "The agent can improve knowledge of its attentional state by using the attention schema in the additional resource.",
+        "claim_b_text": "The Fisher information matrix can be used to determine which parameters are important for task A and to constrain the parameters to stay close to their old values.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that internal models or schemas can be used to improve inference and learning, whether in biological or artificial systems."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Batch Normalization reduces internal covariate shift, which slows down the training by requiring lower learning rates and careful parameter initialization.",
+        "claim_b_text": "The effectiveness of BatchNorm does not stem from reducing internal covariate shift.",
+        "relationship": "CONTRADICT",
+        "explanation": "The two papers have opposing views on the role of internal covariate shift in Batch Normalization. Paper A claims that reducing internal covariate shift is the key to Batch Normalization's success, while Paper B argues that this is not the case."
+      },
+      {
+        "claim_a_text": "Batch Normalization allows us to use much higher learning rates and be less careful about initialization.",
+        "claim_b_text": "BatchNorm enables the use of a broader range of learning rates and makes the training less sensitive to hyperparameter choices.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that Batch Normalization enables the use of higher learning rates and reduces the sensitivity to hyperparameter choices, although they may explain it through different mechanisms."
+      },
+      {
+        "claim_a_text": "Batch Normalization makes the optimization landscape more smooth, which improves the training speed and stability.",
+        "claim_b_text": "BatchNorm makes the optimization landscape significantly more smooth, which induces a more predictive and stable behavior of the gradients.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that Batch Normalization has a smoothening effect on the optimization landscape, although Paper B provides more detailed analysis and evidence for this claim."
+      },
+      {
+        "claim_a_text": "The change in the distributions of internal nodes of a deep network, in the course of training, is referred to as Internal Covariate Shift.",
+        "claim_b_text": "Internal covariate shift (ICS) is defined as the difference between the gradients of each layer before and after updates to the previous layers.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two papers define internal covariate shift differently, with Paper A focusing on the change in distributions of internal nodes and Paper B defining it in terms of gradient differences. These definitions are not directly comparable."
+      },
+      {
+        "claim_a_text": "Batch Normalization prevents small changes to the parameters from amplifying into larger and suboptimal changes in activations and gradients.",
+        "claim_b_text": "BatchNorm prevents exploding or vanishing gradients and makes the training less sensitive to the choice of the learning rate and initialization.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that Batch Normalization has a stabilizing effect on the training process, although they may describe it in different terms."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Adam is a stochastic optimization method that adapts the learning rate for each parameter based on the magnitude of the gradient.",
+        "claim_b_text": "Adaptive optimization methods, which perform local optimization with a metric constructed from the history of iterates, are becoming increasingly popular for training deep neural networks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers discuss the use of adaptive optimization methods, including Adam, for training deep neural networks."
+      },
+      {
+        "claim_a_text": "Adam has a regret bound of O(\u221aT) in the online convex optimization framework.",
+        "claim_b_text": "The generalization and out-of-sample behavior of adaptive gradient methods remains poorly understood.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The first paper discusses the theoretical regret bound of Adam, while the second paper discusses the empirical generalization behavior of adaptive methods, which are related but distinct concepts."
+      },
+      {
+        "claim_a_text": "Adam converges faster than SGD with momentum on some deep learning problems.",
+        "claim_b_text": "SGD and SGD with momentum outperform adaptive methods on the development/test set across all evaluated models and tasks.",
+        "relationship": "CONTRADICT",
+        "explanation": "The first paper presents empirical results showing Adam converging faster than SGD with momentum, while the second paper presents results showing SGD and SGD with momentum outperforming adaptive methods."
+      },
+      {
+        "claim_a_text": "Adam is suitable for non-stationary objectives and problems with very noisy and/or sparse gradients.",
+        "claim_b_text": "Adaptive methods tend to give undue influence to spurious features that have no effect on out-of-sample generalization.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The first paper discusses the suitability of Adam for certain types of problems, while the second paper discusses the potential drawbacks of adaptive methods in terms of generalization."
+      },
+      {
+        "claim_a_text": "The hyper-parameters of Adam have intuitive interpretations and typically require little tuning.",
+        "claim_b_text": "Tuning the initial learning rate and decay scheme for Adam yields significant improvements over its default settings in all cases.",
+        "relationship": "CONTRADICT",
+        "explanation": "The first paper suggests that Adam's hyper-parameters require little tuning, while the second paper presents results showing that tuning is necessary for good performance."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deeper neural networks are more difficult to train.",
+        "claim_b_text": "Network training becomes more difficult with increasing depth and training of very deep networks remains an open problem.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that deeper neural networks are more challenging to train, highlighting the difficulty of optimizing very deep networks."
+      },
+      {
+        "claim_a_text": "The residual learning framework can ease the training of networks that are substantially deeper than those used previously.",
+        "claim_b_text": "Highway networks are novel neural network architectures which enable the training of extremely deep networks using simple SGD.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers propose novel architectures (residual learning and highway networks) that facilitate the training of very deep networks, addressing the challenge of training deep models."
+      },
+      {
+        "claim_a_text": "The degradation problem is not caused by overfitting, and adding more layers to a suitably deep model leads to higher training error.",
+        "claim_b_text": "Very deep plain networks become difficult to optimize even if using the variance-preserving initialization scheme, while highway networks do not suffer from an increase in depth.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers discuss the degradation problem in deep networks, where adding more layers leads to higher training error, and propose solutions (residual learning and highway networks) to address this issue."
+      },
+      {
+        "claim_a_text": "The residual learning framework can help to precondition the problem, making it easier to find the optimal solution.",
+        "claim_b_text": "Highway networks use a learned gating mechanism to regulate information flow, which helps to optimize the network.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers propose mechanisms (residual learning and gating mechanisms) that help to precondition or regulate the optimization process, making it easier to train deep networks."
+      },
+      {
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "Depth of neural networks is a crucial ingredient for their success, and the use of deep networks has led to significant improvements in image classification tasks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers emphasize the importance of depth in neural networks for achieving good performance in visual recognition tasks, such as image classification."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The Transformer model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+        "claim_b_text": "BERT obtains a score of 80.5 on the GLUE benchmark, compared to OpenAI GPT, which obtains 72.8 as of the date of writing.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of Transformer-based architectures in achieving state-of-the-art results in different NLP tasks, such as machine translation and language understanding."
+      },
+      {
+        "claim_a_text": "Self-attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences.",
+        "claim_b_text": "BERT uses a masked language model to enable pre-trained deep bidirectional representations, which allows the representation to fuse the left and right context.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of self-attention mechanisms in modeling dependencies and capturing context in sequence modeling tasks."
+      },
+      {
+        "claim_a_text": "The Transformer model is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution.",
+        "claim_b_text": "BERT is the first fine-tuning based representation model that achieves state-of-the-art performance on a large suite of sentence-level and token-level tasks, outperforming many task-specific architectures.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of self-attention based architectures in achieving state-of-the-art results in different NLP tasks."
+      },
+      {
+        "claim_a_text": "The Transformer model uses multi-head attention to jointly attend to information from different representation subspaces at different positions.",
+        "claim_b_text": "BERT uses bidirectional self-attention, while the GPT Transformer uses constrained self-attention where every token can only attend to context to its left.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are discussing different aspects of self-attention mechanisms, with the first claim focusing on multi-head attention and the second claim comparing bidirectional and constrained self-attention."
+      },
+      {
+        "claim_a_text": "The Transformer model achieves better results than previous state-of-the-art models on the English-to-German and English-to-French translation tasks at a fraction of the training cost.",
+        "claim_b_text": "BERT significantly outperforms BERT_BASE across all tasks, especially those with very little training data.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of Transformer-based architectures in achieving state-of-the-art results while reducing training costs or improving performance on tasks with limited data."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "claim_b_text": "Adam updates parameters using a running average of first and second moment of the gradient, which helps in adapting to the geometry of the data.",
+        "relationship": "SUPPORT",
+        "explanation": "Both EWC and Adam aim to improve the learning process in neural networks, with EWC focusing on protecting previous knowledge and Adam adapting to the data geometry."
+      },
+      {
+        "claim_a_text": "Catastrophic forgetting occurs when a neural network is trained sequentially on multiple tasks, causing the weights important for previous tasks to be changed to meet the objectives of the new task.",
+        "claim_b_text": "Adam's update rule is designed to combine the advantages of AdaGrad and RMSProp, which are suitable for sparse gradients and non-stationary objectives, respectively.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both papers discuss challenges in neural network training, catastrophic forgetting is a specific problem addressed by EWC, whereas Adam's update rule is a more general optimization technique."
+      },
+      {
+        "claim_a_text": "EWC can be effectively combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios, such as Atari 2600 games.",
+        "claim_b_text": "Adam can efficiently solve practical deep learning problems, including logistic regression, multi-layer neural networks, and convolutional neural networks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers demonstrate the effectiveness of their proposed methods in various deep learning applications, including reinforcement learning and supervised learning tasks."
+      },
+      {
+        "claim_a_text": "The Fisher information matrix is used in EWC to estimate the importance of weights for previous tasks.",
+        "claim_b_text": "Adam's second moment estimate is an approximation to the diagonal of the Fisher information matrix, which helps in adapting to the geometry of the data.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers utilize the Fisher information matrix, with EWC using it to estimate weight importance and Adam using it to adapt to the data geometry."
+      },
+      {
+        "claim_a_text": "EWC has a low computational complexity, making it suitable for large-scale machine learning problems.",
+        "claim_b_text": "Adam has little memory requirements and is computationally efficient, making it suitable for large-scale machine learning problems.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers highlight the efficiency and scalability of their proposed methods, making them suitable for large-scale machine learning applications."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "BERT uses masked language models to enable pre-trained deep bidirectional representations.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural network training, with BERT focusing on pre-training and EWC focusing on continual learning and avoiding catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "The pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+        "claim_b_text": "EWC can be effectively combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the effectiveness of their respective methods in achieving state-of-the-art results, with BERT's fine-tuning and EWC's continual learning both demonstrating impressive performance."
+      },
+      {
+        "claim_a_text": "Standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training.",
+        "claim_b_text": "Catastrophic forgetting occurs when the network is trained sequentially on multiple tasks because the weights in the network that are important for task A are changed to meet the objectives of task B.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different issues in neural network training, with the first claim focusing on the limitations of standard language models and the second claim focusing on the problem of catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "BERT advances the state of the art for eleven NLP tasks, including pushing the GLUE score to 80.5%.",
+        "claim_b_text": "EWC allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural network performance, with BERT focusing on its state-of-the-art results on NLP tasks and EWC focusing on its ability to avoid catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "The BERT model uses a masked language model pre-training objective, which enables the representation to fuse the left and right context.",
+        "claim_b_text": "EWC uses a quadratic penalty to approximate the importance of weights for previously learned tasks.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different technical details of their respective methods, with BERT's masked language model and EWC's quadratic penalty serving distinct purposes."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deeper neural networks are more difficult to train.",
+        "claim_b_text": "Recurrent models typically factor computation along the symbol positions of the input and output sequences.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural networks, with the first claim focusing on the difficulty of training deeper networks and the second claim describing the computational structure of recurrent models."
+      },
+      {
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "Learning long-range dependencies is a key challenge in many sequence transduction tasks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of depth or long-range dependencies in different tasks, suggesting that deeper representations or models can capture more complex patterns and relationships."
+      },
+      {
+        "claim_a_text": "We present a deep residual learning framework to ease the training of networks that are substantially deeper than those used previously.",
+        "claim_b_text": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are proposing different architectures to address different challenges, with the first claim focusing on easing the training of deep networks and the second claim introducing a new architecture for sequence transduction tasks."
+      },
+      {
+        "claim_a_text": "The degradation problem suggests that the solvers may have difficulties in approximating identity mappings by multiple nonlinear layers.",
+        "claim_b_text": "Self-attention could yield more interpretable models.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural networks, with the first claim focusing on the degradation problem in deep networks and the second claim highlighting the potential benefits of self-attention for interpretability."
+      },
+      {
+        "claim_a_text": "Our residual learning framework can easily enjoy accuracy gains from greatly increased depth, producing results substantially better than previous networks.",
+        "claim_b_text": "The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French translation tasks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of their proposed architectures in achieving state-of-the-art results, with the first claim showing the benefits of residual learning for image recognition and the second claim highlighting the performance of the Transformer for machine translation."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "BERT uses a masked language model to enable pre-trained deep bidirectional representations.",
+        "claim_b_text": "The brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different concepts of attention, one in the context of natural language processing and the other in the context of cognitive neuroscience."
+      },
+      {
+        "claim_a_text": "The pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+        "claim_b_text": "An attention schema is essential for attentional control when the environment has a high level of noise.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different types of attention and control, one in the context of machine learning and the other in the context of cognitive neuroscience."
+      },
+      {
+        "claim_a_text": "BERT's model architecture is a multi-layer bidirectional Transformer encoder based on the original implementation described in Vaswani et al. (2017).",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state but only needs to provide hints that improve attentional state inference.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different concepts of attention and representation, one in the context of machine learning and the other in the context of cognitive neuroscience."
+      },
+      {
+        "claim_a_text": "The attention mechanism in the Transformer allows BERT to model many downstream tasks by swapping out the appropriate inputs and outputs.",
+        "claim_b_text": "The emergent attention schema contains information that can provide hints to the agent to improve the attentional state inference.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different types of attention mechanisms, one in the context of machine learning and the other in the context of cognitive neuroscience."
+      },
+      {
+        "claim_a_text": "BERT advances the state of the art for eleven NLP tasks, including pushing the GLUE score to 80.5%.",
+        "claim_b_text": "The usefulness of the attention schema is dependent on the noise in the environment.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different concepts of performance and evaluation, one in the context of machine learning and the other in the context of cognitive neuroscience."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deep residual learning can ease the training of deep neural networks by reformulating the layers as learning residual functions with reference to the layer inputs.",
+        "claim_b_text": "An attention schema can emerge in a learning system to aid in attentional control, especially when the environment is noisy and the attentional state cannot be inferred solely from the attended stimulus.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers discuss the importance of auxiliary mechanisms (residual learning and attention schema) in improving the performance of deep learning systems, particularly in situations where the input data is complex or noisy."
+      },
+      {
+        "claim_a_text": "The degradation problem in deep neural networks, where increasing depth leads to higher training error, can be addressed by using residual learning.",
+        "claim_b_text": "The usefulness of an attention schema is maximal in environments with intermediate noise probabilities, where the attentional state cannot be easily inferred from the attended stimulus.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different aspects of deep learning systems, with the first claim focusing on the degradation problem and the second claim focusing on the usefulness of an attention schema in noisy environments."
+      },
+      {
+        "claim_a_text": "Residual learning can help to precondition the optimization problem, making it easier to find the optimal solution.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state, but rather provides partial information that improves attentional state inference.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that auxiliary mechanisms (residual learning and attention schema) can provide useful information that aids in the optimization or inference process, even if they do not perfectly capture the underlying state."
+      },
+      {
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks, and deeper networks can lead to better performance.",
+        "claim_b_text": "The attention schema is more useful when the inference of the attentional state solely from the attended stimulus is harder.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different aspects of deep learning systems, with the first claim focusing on the importance of depth for visual recognition tasks and the second claim focusing on the usefulness of an attention schema in attentional control."
+      },
+      {
+        "claim_a_text": "Identity shortcut connections can help to ease the training of deep residual networks by providing a path for the gradient to flow through.",
+        "claim_b_text": "The emergent attention schema does not have a 1-to-1 correspondence with the attentional state, but rather provides hints that improve attentional state inference.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims discuss the importance of auxiliary mechanisms (identity shortcut connections and attention schema) in improving the performance of deep learning systems, particularly in situations where the input data is complex or noisy."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Adam is a stochastic optimization method that adapts the learning rate for each parameter based on the magnitude of the gradient.",
+        "claim_b_text": "The brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains, one from machine learning and the other from neuroscience, and are answering different questions."
+      },
+      {
+        "claim_a_text": "The Adam optimization method is designed to combine the advantages of AdaGrad and RMSProp.",
+        "claim_b_text": "An attention schema is essential for controlling visuospatial attention in a noisy environment.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different fields and are addressing different problems, making them incommensurable."
+      },
+      {
+        "claim_a_text": "The Adam method uses a bias correction term to counteract the initialization bias of the moment estimates.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state, but only needs to provide hints that improve attentional state inference.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains and are addressing different concepts, making them incommensurable."
+      },
+      {
+        "claim_a_text": "The Adam method is suitable for large-scale high-dimensional machine learning problems.",
+        "claim_b_text": "The usefulness of the attention schema is dependent on the noise in the environment.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different fields and are addressing different problems, making them incommensurable."
+      },
+      {
+        "claim_a_text": "The Adam method has a regret bound of O(\u221aT) in the online convex optimization framework.",
+        "claim_b_text": "The attention schema emerges through learning, given additional resources, and does not need to be hard-wired.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains and are addressing different concepts, making them incommensurable."
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "claim_a_text": "Attention is a process through which the brain selects, and preferentially processes, parts of externally-driven or internally-generated information relevant to its behavior.",
+        "claim_b_text": "Attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of attention in processing and selecting relevant information, whether in the context of brain function or sequence modeling."
+      },
+      {
+        "claim_a_text": "The Attention Schema Theory suggests that the brain controls its attention by building a descriptive and predictive model of attention, termed an 'attention schema'.",
+        "claim_b_text": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both claims relate to attention, they operate at different levels of abstraction and scope, with the first claim focusing on brain function and the second on a specific neural network architecture."
+      },
+      {
+        "claim_a_text": "The agent learned to use the additional resource to track the location of its attentional state better, and the schema did not need to be a copy of the attentional state but only provide hints that improve attentional state inference.",
+        "claim_b_text": "The Transformer uses multi-head attention in three different ways, including encoder-decoder attention, self-attention in the encoder, and self-attention in the decoder.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different aspects of attention, with the first claim focusing on the emergence of an attention schema in an agent and the second on the architecture of the Transformer model."
+      },
+      {
+        "claim_a_text": "The usefulness of the attention schema was maximal for intermediate noise probabilities, where the additional resource added the most information to the stimulus in inferring the attentional state.",
+        "claim_b_text": "Self-attention layers are faster than recurrent layers when the sequence length is smaller than the representation dimensionality, which is most often the case with sentence representations used by state-of-the-art models in machine translation.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different aspects of attention, with the first claim focusing on the usefulness of an attention schema in a specific task and the second on the computational efficiency of self-attention layers."
+      },
+      {
+        "claim_a_text": "The attention schema does not need to be a perfect copy of the attentional state, unless attentional state inference, as required by the task, is not possible at all from the attended stimulus.",
+        "claim_b_text": "The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different aspects of attention, with the first claim focusing on the properties of an attention schema and the second on the mechanism of attention in the Transformer model."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The Transformer model, which relies entirely on self-attention, can achieve state-of-the-art results in machine translation tasks.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows neural networks to learn multiple tasks sequentially without suffering from catastrophic forgetting.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are addressing different problems in deep learning: the Transformer model is focused on sequence-to-sequence tasks, while EWC is focused on continual learning and avoiding catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "Self-attention layers can be more efficient and effective than recurrent or convolutional layers in sequence transduction tasks.",
+        "claim_b_text": "EWC can be used to protect previously learned tasks by constraining the parameters to stay close to their old values.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural network architecture and training: self-attention layers are a type of layer, while EWC is a regularization technique."
+      },
+      {
+        "claim_a_text": "The Transformer model can be trained in parallel, making it more efficient than sequential models like recurrent neural networks.",
+        "claim_b_text": "EWC can be used to train neural networks on multiple tasks sequentially, allowing for continual learning.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of efficient and effective training methods for deep learning models, with the Transformer model enabling parallel training and EWC enabling sequential training on multiple tasks."
+      },
+      {
+        "claim_a_text": "Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.",
+        "claim_b_text": "EWC uses a quadratic penalty to protect previously learned tasks, which can be seen as a form of attention to the important weights.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are using similar terminology (attention) to describe different concepts: multi-head attention is a type of layer, while EWC's quadratic penalty is a regularization technique."
+      },
+      {
+        "claim_a_text": "The Transformer model achieves state-of-the-art results in machine translation tasks, outperforming other models like ByteNet and ConvS2S.",
+        "claim_b_text": "EWC can be used to improve the performance of neural networks on multiple tasks, allowing for better transfer learning.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different models and tasks: the Transformer model is focused on machine translation, while EWC is focused on continual learning and transfer learning."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "claim_b_text": "Elastic weight consolidation allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Both papers discuss learning and attention, but they operate at different levels of abstraction and focus on different aspects of the problem. Paper A focuses on artificial neural networks, while Paper B discusses biological attention mechanisms."
+      },
+      {
+        "claim_a_text": "The attention schema is essential in controlling attention and performing the task.",
+        "claim_b_text": "EWC allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that some form of internal model or schema is necessary for effective learning and attention. In Paper A, EWC protects previous knowledge, while in Paper B, the attention schema is essential for controlling attention."
+      },
+      {
+        "claim_a_text": "The agent can improve knowledge of its attentional state by using the attention schema in the additional resource.",
+        "claim_b_text": "EWC can be effectively combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both claims discuss the importance of internal models for learning, they differ in their context and scope. Paper A focuses on attentional control, while Paper B discusses continual learning in reinforcement learning."
+      },
+      {
+        "claim_a_text": "The attention schema does not need to be a perfect copy of the attentional state but only needs to provide hints that improve attentional state inference.",
+        "claim_b_text": "EWC protects the performance on task A by constraining the parameters to stay in a region of low error for task A centered around \u03b8\u2217.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that internal models or schemas can be effective even if they are not perfect or exact representations of the underlying state. In Paper A, the attention schema provides hints, while in Paper B, EWC constrains parameters to a region of low error."
+      },
+      {
+        "claim_a_text": "The usefulness of the attention schema is dependent on the noise in the environment.",
+        "claim_b_text": "The performance of the EWC agent is affected by the number of tasks and the complexity of the environment.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both claims discuss the impact of environmental factors on learning, they differ in their specific context and focus. Paper A discusses attentional control, while Paper B focuses on continual learning in reinforcement learning."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Batch Normalization reduces internal covariate shift, which slows down the training by requiring lower learning rates and careful parameter initialization.",
+        "claim_b_text": "The effectiveness of BatchNorm does not stem from reducing internal covariate shift.",
+        "relationship": "CONTRADICT",
+        "explanation": "Paper A claims that Batch Normalization reduces internal covariate shift, while Paper B argues that this is not the primary reason for its effectiveness."
+      },
+      {
+        "claim_a_text": "Batch Normalization allows for higher learning rates and reduces the need for careful initialization.",
+        "claim_b_text": "BatchNorm enables the use of a broader range of learning rates and makes the training less sensitive to hyperparameter choices.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that Batch Normalization has a positive effect on the training process, allowing for higher learning rates and reducing the need for careful initialization."
+      },
+      {
+        "claim_a_text": "Internal covariate shift is a major obstacle in training deep neural networks.",
+        "claim_b_text": "The connection between internal covariate shift and training performance is tenuous at best.",
+        "relationship": "CONTRADICT",
+        "explanation": "Paper A presents internal covariate shift as a significant problem, while Paper B questions its importance in relation to training performance."
+      },
+      {
+        "claim_a_text": "Batch Normalization makes the optimization landscape more smooth, which improves the training process.",
+        "claim_b_text": "BatchNorm reparametrizes the underlying optimization problem to make its landscape significantly more smooth.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that Batch Normalization has a smoothing effect on the optimization landscape, which improves the training process."
+      },
+      {
+        "claim_a_text": "Batch Normalization is essential for preventing exploding or vanishing gradients.",
+        "claim_b_text": "BatchNorm\u2019s reparametrization makes the gradients more reliable and predictive.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers highlight the importance of Batch Normalization in improving the behavior of gradients during training."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Adam is a versatile algorithm that scales to large-scale high-dimensional machine learning problems.",
+        "claim_b_text": "Adaptive methods often find solutions that generalize worse than those found by non-adaptive methods.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of adaptive methods like Adam, with Paper A focusing on its scalability and Paper B discussing its generalization capabilities."
+      },
+      {
+        "claim_a_text": "Adam converges faster than Adagrad and SGD with momentum on logistic regression and multilayer neural networks.",
+        "claim_b_text": "Adaptive methods tend to display faster initial progress on the training set, but their performance quickly plateaus on the development/test set.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that adaptive methods like Adam can converge faster initially, but may not always generalize well."
+      },
+      {
+        "claim_a_text": "Adam has a regret bound of O(\u221aT) and is comparable to the best known results under the online convex optimization framework.",
+        "claim_b_text": "The solutions found by adaptive methods can have worse out-of-sample error than SGD.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of adaptive methods, with Paper A focusing on its theoretical regret bound and Paper B discussing its empirical generalization capabilities."
+      },
+      {
+        "claim_a_text": "Adam is invariant to diagonal rescaling of the gradients and is well-suited for problems with sparse gradients.",
+        "claim_b_text": "Adaptive methods can overfit to spurious features and fail to generalize well.",
+        "relationship": "CONTRADICT",
+        "explanation": "The two claims seem to contradict each other, as Paper A suggests that Adam is well-suited for problems with sparse gradients, while Paper B suggests that adaptive methods can overfit to such features."
+      },
+      {
+        "claim_a_text": "Adam's hyper-parameters have intuitive interpretations and typically require little tuning.",
+        "claim_b_text": "Tuning the initial learning rate and decay scheme for Adam yields significant improvements over its default settings.",
+        "relationship": "CONTRADICT",
+        "explanation": "The two claims seem to contradict each other, as Paper A suggests that Adam's hyper-parameters require little tuning, while Paper B suggests that tuning is necessary for significant improvements."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deeper neural networks are more difficult to train.",
+        "claim_b_text": "Network training becomes more difficult with increasing depth and training of very deep networks remains an open problem.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that deeper neural networks are more challenging to train, highlighting the difficulty of optimizing very deep networks."
+      },
+      {
+        "claim_a_text": "The residual learning framework can ease the training of networks that are substantially deeper than those used previously.",
+        "claim_b_text": "Highway networks are novel neural network architectures which enable the training of extremely deep networks using simple SGD.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers propose novel architectures that facilitate the training of very deep networks, with the residual learning framework and highway networks being two different approaches to address this challenge."
+      },
+      {
+        "claim_a_text": "The degradation problem is not caused by overfitting, and adding more layers to a suitably deep model leads to higher training error.",
+        "claim_b_text": "Very deep plain networks become difficult to optimize even if using the variance-preserving initialization scheme.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers discuss the degradation problem in deep networks, with the first paper identifying it as a distinct issue from overfitting, and the second paper highlighting the optimization difficulties in very deep plain networks."
+      },
+      {
+        "claim_a_text": "The residual learning framework can help to precondition the problem, making it easier to optimize.",
+        "claim_b_text": "Highway networks use a learned gating mechanism to regulate information flow, which helps to ease the optimization of very deep networks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers propose that their respective architectures can help to precondition or regulate the optimization process, making it easier to train very deep networks."
+      },
+      {
+        "claim_a_text": "The residual learning framework is generic and can be applicable to other vision and non-vision problems.",
+        "claim_b_text": "The ability to train extremely deep networks opens up the possibility of studying the impact of depth on complex problems without restrictions.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers suggest that their proposed architectures have broader applicability and can be used to explore the effects of depth in various problem domains."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The Transformer model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+        "claim_b_text": "BERT obtains a score of 80.5 on the GLUE benchmark, compared to OpenAI GPT, which obtains 72.8 as of the date of writing.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of Transformer-based models in achieving state-of-the-art results in different NLP tasks, such as machine translation and language understanding."
+      },
+      {
+        "claim_a_text": "Self-attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences.",
+        "claim_b_text": "BERT uses masked language models to enable pre-trained deep bidirectional representations, which allows the representation to fuse the left and right context, enabling the model to understand sentence relationships.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of self-attention mechanisms in modeling dependencies and understanding sentence relationships, which is a key aspect of both Transformer and BERT models."
+      },
+      {
+        "claim_a_text": "The Transformer model is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution.",
+        "claim_b_text": "BERT is the first fine-tuning based representation model that achieves state-of-the-art performance on a large suite of sentence-level and token-level tasks, outperforming many task-specific architectures.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims emphasize the novelty and effectiveness of the Transformer and BERT models in achieving state-of-the-art results in various NLP tasks, highlighting their potential to replace traditional architectures."
+      },
+      {
+        "claim_a_text": "The Transformer model uses multi-head attention, which allows the model to jointly attend to information from different representation subspaces at different positions.",
+        "claim_b_text": "BERT uses a multi-layer bidirectional Transformer encoder based on the original implementation described in Vaswani et al. (2017), which allows the model to capture complex contextual relationships.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims describe the use of multi-head attention and multi-layer bidirectional Transformer encoders, which enable the models to capture complex contextual relationships and achieve state-of-the-art results."
+      },
+      {
+        "claim_a_text": "The Transformer model is more parallelizable and requires significantly less time to train compared to traditional sequence-to-sequence models.",
+        "claim_b_text": "Fine-tuning BERT is relatively inexpensive and can be done in at most 1 hour on a single Cloud TPU, or a few hours on a GPU, starting from the exact same pre-trained model.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the efficiency and parallelizability of the Transformer and BERT models, which enables faster training and fine-tuning times compared to traditional models."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "claim_b_text": "Adam updates parameters using a running average of first and second moment of the gradient, which helps in adapting to the geometry of the data.",
+        "relationship": "SUPPORT",
+        "explanation": "Both EWC and Adam aim to improve the learning process in neural networks, with EWC focusing on protecting previous knowledge and Adam adapting to the data geometry."
+      },
+      {
+        "claim_a_text": "Catastrophic forgetting occurs when a neural network is trained sequentially on multiple tasks, causing the weights important for previous tasks to be changed to meet the objectives of the new task.",
+        "claim_b_text": "Adam's update rule is designed to combine the advantages of AdaGrad and RMSProp, which are suitable for sparse gradients and non-stationary objectives, respectively.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both papers discuss challenges in neural network training, catastrophic forgetting is a specific problem addressed by EWC, whereas Adam's update rule is a more general optimization technique."
+      },
+      {
+        "claim_a_text": "EWC can be effectively combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios, such as Atari 2600 games.",
+        "claim_b_text": "Adam can efficiently solve practical deep learning problems, including logistic regression, multi-layer neural networks, and convolutional neural networks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers demonstrate the effectiveness of their proposed methods in various deep learning applications, including reinforcement learning and computer vision tasks."
+      },
+      {
+        "claim_a_text": "The Fisher information matrix is used in EWC to estimate the importance of weights for previous tasks.",
+        "claim_b_text": "Adam's second moment estimate is an approximation to the diagonal of the Fisher information matrix, which helps in adapting to the geometry of the data.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers utilize the Fisher information matrix, with EWC using it to estimate weight importance and Adam using it to adapt to the data geometry."
+      },
+      {
+        "claim_a_text": "EWC has a low computational complexity, making it suitable for large-scale machine learning problems.",
+        "claim_b_text": "Adam has little memory requirements and is computationally efficient, making it suitable for large-scale machine learning problems.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers highlight the efficiency and scalability of their proposed methods, making them suitable for large-scale machine learning applications."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "BERT uses masked language models to enable pre-trained deep bidirectional representations.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural network training, with BERT focusing on pre-training and EWC focusing on continual learning and avoiding catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "The pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+        "claim_b_text": "EWC can be effectively combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the effectiveness of their respective methods in achieving state-of-the-art results, with BERT's fine-tuning and EWC's continual learning both demonstrating impressive performance."
+      },
+      {
+        "claim_a_text": "Standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training.",
+        "claim_b_text": "Catastrophic forgetting occurs when the weights in the network that are important for task A are changed to meet the objectives of task B.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different issues in neural network training, with the first claim focusing on language model limitations and the second claim focusing on catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "BERT's unified architecture across different tasks allows for straightforward fine-tuning.",
+        "claim_b_text": "EWC uses a soft, quadratic constraint to protect previously learned tasks by selectively decreasing the plasticity of weights.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural network training, with BERT focusing on architecture and EWC focusing on continual learning."
+      },
+      {
+        "claim_a_text": "The BERT model achieves state-of-the-art performance on a large suite of sentence-level and token-level tasks.",
+        "claim_b_text": "EWC allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the effectiveness of their respective methods in achieving impressive performance, with BERT's state-of-the-art results and EWC's ability to avoid catastrophic forgetting both demonstrating the power of their approaches."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deep residual learning framework can ease the training of networks that are substantially deeper than those used previously.",
+        "claim_b_text": "The Transformer model, based solely on attention mechanisms, can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of deep learning models, with the first claim focusing on the training of deep networks and the second claim focusing on the performance of a specific model architecture."
+      },
+      {
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "Learning long-range dependencies is a key challenge in many sequence transduction tasks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of depth or long-range dependencies in different tasks, suggesting that deeper models or models that can capture long-range dependencies are more effective."
+      },
+      {
+        "claim_a_text": "The degradation problem, where the accuracy of the network degrades as the depth increases, is not caused by overfitting.",
+        "claim_b_text": "The Transformer model can achieve better results than previous state-of-the-art models at a fraction of the training cost.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different issues, with the first claim focusing on the degradation problem in deep networks and the second claim focusing on the performance of a specific model architecture."
+      },
+      {
+        "claim_a_text": "Residual learning can help to precondition the optimization problem, making it easier to find the optimal solution.",
+        "claim_b_text": "Self-attention layers can be more parallelizable and require less computation than recurrent layers.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that certain techniques, such as residual learning or self-attention, can improve the optimization or computation of deep learning models."
+      },
+      {
+        "claim_a_text": "The use of shortcut connections can help to address the degradation problem and improve the optimization of deep networks.",
+        "claim_b_text": "The Transformer model uses multi-head attention, which allows the model to jointly attend to information from different representation subspaces at different positions.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different techniques, with the first claim focusing on shortcut connections and the second claim focusing on multi-head attention."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "BERT uses a masked language model to enable pre-trained deep bidirectional representations.",
+        "claim_b_text": "The Attention Schema Theory suggests that the brain controls its attention by building a descriptive and predictive model of attention.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different concepts of attention, one in the context of natural language processing and the other in the context of cognitive neuroscience."
+      },
+      {
+        "claim_a_text": "BERT's pre-trained model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+        "claim_b_text": "An attention schema is essential for attentional control when the environment has a high level of noise.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different types of tasks and environments, one in the context of natural language processing and the other in the context of visuospatial attention."
+      },
+      {
+        "claim_a_text": "The attention mechanism in the Transformer allows BERT to model many downstream tasks by swapping out the appropriate inputs and outputs.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state but only needs to provide hints that improve attentional state inference.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different concepts of attention mechanisms, one in the context of natural language processing and the other in the context of cognitive neuroscience."
+      },
+      {
+        "claim_a_text": "BERT uses bidirectional self-attention, while the GPT Transformer uses constrained self-attention where every token can only attend to context to its left.",
+        "claim_b_text": "The emergent attention schema does not have a 1-to-1 correspondence with the attentional state.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different types of attention mechanisms and their properties, one in the context of natural language processing and the other in the context of cognitive neuroscience."
+      },
+      {
+        "claim_a_text": "BERT advances the state of the art for eleven NLP tasks, including pushing the GLUE score to 80.5%.",
+        "claim_b_text": "The usefulness of the attention schema is dependent on the noise in the environment.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different types of tasks and performance metrics, one in the context of natural language processing and the other in the context of visuospatial attention."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deep residual learning can ease the training of deep neural networks by reformulating the layers as learning residual functions with reference to the layer inputs.",
+        "claim_b_text": "An attention schema is essential for controlling visuospatial attention in a noisy environment.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are addressing different aspects of neural networks and attention, with the first claim focusing on the training of deep neural networks and the second claim focusing on the control of visuospatial attention."
+      },
+      {
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "The attentional state cannot be inferred solely from the attended stimulus due to noise in the environment.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of considering the complexity of the input data and the need for additional information to improve performance in visual recognition tasks."
+      },
+      {
+        "claim_a_text": "Identity mapping is sufficient for addressing the degradation problem in deep neural networks.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state, but only needs to provide hints that improve attentional state inference.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that a simplified or approximate representation can be sufficient for improving performance in certain tasks, rather than requiring a perfect or exact representation."
+      },
+      {
+        "claim_a_text": "The residual learning framework can help to precondition the optimization problem, making it easier to find the optimal solution.",
+        "claim_b_text": "The attention schema is more useful when the inference of the attentional state solely from the attended stimulus is harder.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of using additional information or representations to improve the optimization or inference process in certain tasks."
+      },
+      {
+        "claim_a_text": "Deep residual nets can easily enjoy accuracy gains from greatly increased depth, producing results substantially better than previous networks.",
+        "claim_b_text": "The agent can improve knowledge of its attentional state by using the attention schema in the additional resource.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that the use of additional information or representations can lead to improved performance in certain tasks, such as image recognition and attentional control."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Adam is a stochastic optimization method that adapts the learning rate for each parameter based on the magnitude of the gradient.",
+        "claim_b_text": "The brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains, one from machine learning and the other from neuroscience, and are answering different questions."
+      },
+      {
+        "claim_a_text": "Adam's convergence is guaranteed with a regret bound of O(\u221aT) under certain conditions.",
+        "claim_b_text": "The attention schema is essential for controlling visuospatial attention in noisy environments.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different fields and are addressing different problems, making it difficult to compare them directly."
+      },
+      {
+        "claim_a_text": "The Adam optimizer uses a bias correction term to improve its performance.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state, but rather provides hints that improve attentional state inference.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that having an approximate or imperfect model can still be beneficial, whether it's a bias correction term in Adam or an attention schema in the brain."
+      },
+      {
+        "claim_a_text": "Adam is suitable for large-scale machine learning problems with high-dimensional parameter spaces.",
+        "claim_b_text": "The attention schema is more useful when the inference of the attentional state solely from the attended stimulus is harder.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains and are addressing different challenges, making it difficult to compare them directly."
+      },
+      {
+        "claim_a_text": "The Adam optimizer has a trust region around the current parameter value, beyond which the current gradient estimate does not provide sufficient information.",
+        "claim_b_text": "The attention schema provides partial information about the attentional state, which is sufficient for the agent as the attended stimulus also provides some information.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that having a limited or partial understanding of the current state can still be useful, whether it's a trust region in Adam or an attention schema in the brain."
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "claim_a_text": "Attention is a process through which the brain selects, and preferentially processes, parts of externally-driven or internally-generated information relevant to its behavior.",
+        "claim_b_text": "Attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of attention in processing relevant information, whether in the context of brain function or sequence modeling."
+      },
+      {
+        "claim_a_text": "The Attention Schema Theory suggests that the brain controls its attention by building a descriptive and predictive model of attention, termed an 'attention schema'.",
+        "claim_b_text": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both claims relate to attention, they operate at different scopes: the Attention Schema Theory focuses on brain function, whereas the Transformer is a neural network architecture."
+      },
+      {
+        "claim_a_text": "The agent learned to use the additional resource to track the location of its attentional state better, and the schema did not need to be a copy of the attentional state but only provide hints about the location of the attentional state.",
+        "claim_b_text": "Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of attention mechanisms in improving performance, whether in the context of an agent learning to track its attentional state or a neural network model attending to different representation subspaces."
+      },
+      {
+        "claim_a_text": "The usefulness of the attention schema was maximal for intermediate noise probabilities, where the additional resource added the most information to the stimulus in inferring the attentional state.",
+        "claim_b_text": "Self-attention layers are faster than recurrent layers when the sequence length is smaller than the representation dimensionality, which is most often the case with sentence representations used by state-of-the-art models in machine translation.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both claims relate to attention, they address different aspects: the usefulness of an attention schema in a specific task versus the computational efficiency of self-attention layers in sequence modeling."
+      },
+      {
+        "claim_a_text": "The attention schema does not need to be a perfect copy of the attentional state, unless attentional state inference, as required by the task, is not possible at all from the attended stimulus.",
+        "claim_b_text": "The Transformer uses multi-head attention in three different ways: encoder-decoder attention, self-attention layers in the encoder, and self-attention layers in the decoder.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Both claims discuss attention mechanisms, but they differ in context: the attention schema in the context of brain function and attentional state inference, versus the Transformer's use of multi-head attention in sequence modeling."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The Transformer model, which relies entirely on self-attention, can achieve state-of-the-art results in machine translation tasks.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows neural networks to learn multiple tasks sequentially without suffering from catastrophic forgetting.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are addressing different problems in neural networks: the Transformer model is focused on sequence-to-sequence tasks, while EWC is focused on continual learning and avoiding catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "Self-attention mechanisms can be used to draw global dependencies between input and output sequences.",
+        "claim_b_text": "EWC uses a quadratic penalty to protect previously learned tasks from being forgotten when learning new tasks.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different techniques for improving neural network performance: self-attention is a mechanism for modeling dependencies, while EWC is a method for preventing catastrophic forgetting."
+      },
+      {
+        "claim_a_text": "The Transformer model can be parallelized more easily than recurrent neural networks, making it more efficient for long sequences.",
+        "claim_b_text": "EWC can be used to train neural networks on multiple tasks sequentially, allowing for more efficient use of network capacity.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the benefits of their respective approaches in terms of efficiency and parallelization, suggesting that they could be complementary techniques for improving neural network performance."
+      },
+      {
+        "claim_a_text": "The Transformer model uses multi-head attention to jointly attend to information from different representation subspaces at different positions.",
+        "claim_b_text": "EWC uses the Fisher information matrix to determine the importance of each parameter for previously learned tasks.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different techniques for modeling complex dependencies: multi-head attention is a mechanism for attending to multiple subspaces, while the Fisher information matrix is used in EWC to determine parameter importance."
+      },
+      {
+        "claim_a_text": "The Transformer model achieves state-of-the-art results on machine translation tasks, including English-to-German and English-to-French translation.",
+        "claim_b_text": "EWC allows neural networks to learn multiple tasks sequentially without suffering from catastrophic forgetting, as demonstrated on the permuted MNIST task.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are reporting results on different tasks and datasets: the Transformer model is focused on machine translation, while EWC is demonstrated on a sequential learning task."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "claim_b_text": "Elastic weight consolidation allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "Both papers discuss learning and attention, but they operate at different levels of abstraction and focus on different aspects of the problem. Paper A focuses on artificial neural networks, while Paper B discusses biological attention mechanisms."
+      },
+      {
+        "claim_a_text": "The attention schema is essential in controlling attention and performing the task.",
+        "claim_b_text": "EWC allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that some form of internal model or schema is necessary for effective learning and attentional control, whether in biological or artificial systems."
+      },
+      {
+        "claim_a_text": "The attention schema does not need to be a perfect copy of the attentional state but only needs to provide hints that improve attentional state inference.",
+        "claim_b_text": "EWC protects the performance on task A by constraining the parameters to stay in a region of low error for task A centered around \u03b8\u2217.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that the internal model or schema does not need to be a perfect representation of the external world, but rather a useful approximation that facilitates learning and inference."
+      },
+      {
+        "claim_a_text": "The usefulness of the attention schema is maximal for intermediate noise probabilities.",
+        "claim_b_text": "EWC allows the network to effectively squeeze in more functionality into a network with fixed capacity, with only modest growth in the error rates.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different aspects of learning and attention, with Paper A focusing on the effect of noise on attentional control and Paper B discussing the capacity of artificial neural networks."
+      },
+      {
+        "claim_a_text": "The agent can improve knowledge of its attentional state by using the attention schema in the additional resource.",
+        "claim_b_text": "The Fisher information matrix is used to determine which parameters are important for task A and to constrain the parameters to stay close to their old values.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims discuss different methods for improving attentional control and learning, with Paper A focusing on the use of an attention schema and Paper B discussing the use of the Fisher information matrix."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Batch Normalization reduces internal covariate shift, which is the change in the distribution of network activations due to the change in network parameters during training.",
+        "claim_b_text": "The effectiveness of BatchNorm does not stem from reducing internal covariate shift, but rather from making the optimization landscape smoother.",
+        "relationship": "CONTRADICT",
+        "explanation": "The two papers have different explanations for why Batch Normalization is effective. Paper A claims it reduces internal covariate shift, while Paper B argues that it makes the optimization landscape smoother."
+      },
+      {
+        "claim_a_text": "Batch Normalization allows for higher learning rates and faster training by reducing the dependence of gradients on the scale of parameters or their initial values.",
+        "claim_b_text": "BatchNorm makes the optimization landscape significantly more smooth, allowing for a broader range of learning rates and faster network convergence.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that Batch Normalization enables faster training and allows for higher learning rates, although they provide different explanations for why this is the case."
+      },
+      {
+        "claim_a_text": "Internal covariate shift is a major obstacle to training deep neural networks, and reducing it is essential for improving training speed and accuracy.",
+        "claim_b_text": "The connection between internal covariate shift and training performance is tenuous, and BatchNorm's success cannot be attributed to reducing internal covariate shift.",
+        "relationship": "CONTRADICT",
+        "explanation": "The two papers have different views on the importance of internal covariate shift in training deep neural networks. Paper A sees it as a major obstacle, while Paper B argues that its connection to training performance is tenuous."
+      },
+      {
+        "claim_a_text": "Batch Normalization regularizes the model and reduces the need for Dropout.",
+        "claim_b_text": "BatchNorm has a regularizing effect on the model, but its impact on the optimization landscape is more fundamental.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that Batch Normalization has a regularizing effect, although Paper B provides a more detailed explanation of its impact on the optimization landscape."
+      },
+      {
+        "claim_a_text": "The BN transform is a differentiable transformation that introduces normalized activations into the network.",
+        "claim_b_text": "BatchNorm reparametrizes the underlying optimization problem to make its landscape significantly more smooth.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that Batch Normalization introduces a transformation that affects the network's behavior, although Paper B provides a more abstract explanation of its impact on the optimization landscape."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Adam is a versatile algorithm that scales to large-scale high-dimensional machine learning problems.",
+        "claim_b_text": "Adaptive methods often find solutions that generalize worse than those found by non-adaptive methods.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of adaptive methods like Adam, with Paper A focusing on its scalability and Paper B on its generalization capabilities."
+      },
+      {
+        "claim_a_text": "Adam converges faster than Adagrad and SGD with momentum on logistic regression and multilayer neural networks.",
+        "claim_b_text": "Adaptive methods tend to display faster initial progress on the training set, but their performance quickly plateaus on the development/test set.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims suggest that adaptive methods like Adam can converge faster initially, but may not always generalize well."
+      },
+      {
+        "claim_a_text": "Adam has a regret bound of O(\u221aT) and is comparable to the best known results under the online convex optimization framework.",
+        "claim_b_text": "The choice of algorithm can strongly influence the set of minimizers that any batch size will ever see, and help explain why adaptive methods were unable to find solutions that generalized particularly well.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of optimization algorithms, with Paper A focusing on theoretical regret bounds and Paper B on the impact of algorithm choice on generalization."
+      },
+      {
+        "claim_a_text": "Adam is invariant to diagonal rescaling of the gradients and is well-suited for problems that are large in terms of data and/or parameters.",
+        "claim_b_text": "Adaptive methods can find solutions with low \u221e-norm rather than low 2-norm, which can lead to poor generalization.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different properties of adaptive methods, with Paper A focusing on its invariance to rescaling and Paper B on its potential to find solutions with poor generalization."
+      },
+      {
+        "claim_a_text": "Adam outperforms other stochastic optimization methods on several deep learning models and datasets.",
+        "claim_b_text": "SGD and HB outperform adaptive methods on several deep learning tasks, even when the adaptive methods achieve the same training loss or lower.",
+        "relationship": "CONTRADICT",
+        "explanation": "The two claims are making opposite statements about the performance of Adam and other optimization methods, with Paper A suggesting Adam outperforms others and Paper B suggesting SGD and HB outperform adaptive methods."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deeper neural networks are more difficult to train.",
+        "claim_b_text": "Network training becomes more difficult with increasing depth and training of very deep networks remains an open problem.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers agree that deeper neural networks are more challenging to train, which is a fundamental problem in the field."
+      },
+      {
+        "claim_a_text": "The residual learning framework can ease the training of networks that are substantially deeper than those used previously.",
+        "claim_b_text": "Highway networks are novel neural network architectures which enable the training of extremely deep networks using simple SGD.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers propose new architectures (residual learning and highway networks) that facilitate the training of very deep neural networks."
+      },
+      {
+        "claim_a_text": "The degradation problem is not caused by overfitting, and adding more layers to a suitably deep model leads to higher training error.",
+        "claim_b_text": "Very deep plain networks become difficult to optimize even if using the variance-preserving initialization scheme.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers discuss the degradation problem and optimization difficulties in deep neural networks, although they propose different solutions."
+      },
+      {
+        "claim_a_text": "The residual learning framework can help to precondition the problem, making it easier to find the optimal solution.",
+        "claim_b_text": "Highway networks use a learned gating mechanism to regulate information flow, which helps to optimize deep networks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers propose mechanisms (residual learning and gating) that help to precondition or regulate the optimization process in deep neural networks."
+      },
+      {
+        "claim_a_text": "The 34-layer residual net has lower training error and is more generalizable to the validation data than the 34-layer plain net.",
+        "claim_b_text": "Highway networks with hundreds of layers can be trained directly using stochastic gradient descent and achieve similar or better accuracy than shallower networks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers demonstrate the effectiveness of their proposed architectures (residual nets and highway networks) in achieving good performance and generalizability."
+      },
+      {
+        "claim_a_text": "The residual learning framework is generic and can be applied to other vision and non-vision problems.",
+        "claim_b_text": "The ability to train extremely deep networks opens up the possibility of studying the impact of depth on complex problems without restrictions.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers suggest that their proposed architectures (residual learning and highway networks) have broader applications and can be used to study the effects of depth in various problems."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "The Transformer model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+        "claim_b_text": "BERT obtains a score of 80.5 on the GLUE benchmark, compared to OpenAI GPT, which obtains 72.8 as of the date of writing.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of Transformer-based models in achieving state-of-the-art results in different NLP tasks, such as machine translation and language understanding."
+      },
+      {
+        "claim_a_text": "Self-attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences.",
+        "claim_b_text": "BERT uses a masked language model (MLM) pre-training objective, which enables the representation to fuse the left and right context, allowing for deep bidirectional representations.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of self-attention mechanisms in modeling dependencies and capturing context in sequence modeling and transduction tasks."
+      },
+      {
+        "claim_a_text": "The Transformer model relies entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution.",
+        "claim_b_text": "BERT uses a multi-layer bidirectional Transformer encoder based on the original implementation described in Vaswani et al. (2017).",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims describe the use of self-attention mechanisms in Transformer-based models, with the Transformer model relying entirely on self-attention and BERT using a bidirectional Transformer encoder."
+      },
+      {
+        "claim_a_text": "The Transformer model is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution.",
+        "claim_b_text": "BERT is the first fine-tuning based representation model that achieves state-of-the-art performance on a large suite of sentence-level and token-level tasks, outperforming many task-specific architectures.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The claims are related to different aspects of the models, with the Transformer model focusing on its novel architecture and BERT focusing on its fine-tuning capabilities and performance on various tasks."
+      },
+      {
+        "claim_a_text": "The Transformer model achieves a BLEU score of 41.8 on the WMT 2014 English-to-French translation task, outperforming all previously published single models at less than 1/4th the training cost of the previous state-of-the-art model.",
+        "claim_b_text": "BERT obtains a score of 93.2 on the SQuAD v1.1 question answering test F1, which is a 1.5 point absolute improvement over the previous state-of-the-art result.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims demonstrate the effectiveness of Transformer-based models in achieving state-of-the-art results in different NLP tasks, such as machine translation and question answering."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Elastic weight consolidation (EWC) allows neural networks to learn multiple tasks sequentially without forgetting previous tasks.",
+        "claim_b_text": "Adam, a stochastic optimization method, adapts the learning rate for each parameter based on the magnitude of the gradient.",
+        "relationship": "SUPPORT",
+        "explanation": "Both EWC and Adam aim to improve the learning process of neural networks, with EWC focusing on preventing catastrophic forgetting and Adam on efficient stochastic optimization."
+      },
+      {
+        "claim_a_text": "Catastrophic forgetting occurs when a neural network forgets previously learned tasks after being trained on new tasks.",
+        "claim_b_text": "Adam's update rule is designed to handle non-stationary objectives and sparse gradients, which can be related to the concept of catastrophic forgetting.",
+        "relationship": "SUPPORT",
+        "explanation": "Catastrophic forgetting is a challenge in neural network learning, and Adam's design can help mitigate this issue by adapting to changing objectives and gradients."
+      },
+      {
+        "claim_a_text": "EWC uses a quadratic penalty to protect previously learned tasks, which is similar to the concept of regularization in optimization.",
+        "claim_b_text": "Adam uses a bias-correction term to improve the accuracy of its estimates, which can be seen as a form of regularization.",
+        "relationship": "SUPPORT",
+        "explanation": "Both EWC and Adam employ techniques that can be viewed as regularization methods to improve the learning process and prevent overfitting or forgetting."
+      },
+      {
+        "claim_a_text": "EWC is designed for sequential learning, where tasks are presented one after another.",
+        "claim_b_text": "Adam is designed for stochastic optimization, which can be applied to various learning scenarios, including sequential learning.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "While both papers discuss learning and optimization, they focus on different aspects and scenarios, making their claims not directly comparable."
+      },
+      {
+        "claim_a_text": "The Fisher information matrix is used in EWC to estimate the importance of weights for each task.",
+        "claim_b_text": "Adam uses the diagonal of the Fisher information matrix to adapt the learning rate for each parameter.",
+        "relationship": "SUPPORT",
+        "explanation": "Both papers utilize the Fisher information matrix, although in different contexts, to improve the learning process and adapt to the data."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "BERT uses masked language models to enable pre-trained deep bidirectional representations.",
+        "claim_b_text": "Standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims discuss the limitations of traditional language models and the benefits of using bidirectional representations, with BERT's approach supporting the idea that unidirectional models are limited."
+      },
+      {
+        "claim_a_text": "BERT advances the state of the art for eleven NLP tasks.",
+        "claim_b_text": "Elastic weight consolidation (EWC) allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different topics, with BERT focusing on achieving state-of-the-art results in NLP tasks and EWC focusing on preventing catastrophic forgetting in neural networks."
+      },
+      {
+        "claim_a_text": "The pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+        "claim_b_text": "EWC can be effectively combined with deep neural networks to support continual learning in challenging reinforcement learning scenarios.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different topics, with BERT focusing on fine-tuning pre-trained models and EWC focusing on continual learning in reinforcement learning scenarios."
+      },
+      {
+        "claim_a_text": "BERT uses a masked language model to predict the original vocabulary id of the masked word based only on its context.",
+        "claim_b_text": "EWC uses a quadratic penalty to approximate the importance of each weight for previously learned tasks.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different techniques, with BERT using a masked language model for pre-training and EWC using a quadratic penalty for protecting previously learned tasks."
+      },
+      {
+        "claim_a_text": "BERT's unified architecture across different tasks allows it to model many downstream tasks by swapping out the appropriate inputs and outputs.",
+        "claim_b_text": "EWC allows knowledge of previous tasks to be protected during new learning, thereby avoiding catastrophic forgetting of old abilities.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims discuss different topics, with BERT focusing on its unified architecture and EWC focusing on preventing catastrophic forgetting."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deeper neural networks are more difficult to train.",
+        "claim_b_text": "Recurrent models typically factor computation along the symbol positions of the input and output sequences.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural networks, with the first claim focusing on the training difficulty of deep networks and the second claim describing the computational structure of recurrent models."
+      },
+      {
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "Learning long-range dependencies is a key challenge in many sequence transduction tasks.",
+        "relationship": "SUPPORT",
+        "explanation": "Both claims highlight the importance of capturing complex patterns or dependencies in data, whether it's through depth in visual recognition tasks or long-range dependencies in sequence transduction tasks."
+      },
+      {
+        "claim_a_text": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+        "claim_b_text": "We present a deep residual learning framework to ease the training of networks that are substantially deeper than those used previously.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are proposing different architectural approaches to improve neural network performance, with the first claim focusing on attention mechanisms and the second claim focusing on residual learning."
+      },
+      {
+        "claim_a_text": "The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs.",
+        "claim_b_text": "Our 152-layer residual net is the deepest network ever presented on ImageNet, while still having lower complexity than VGG nets.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different models and their achievements, with the first claim focusing on the Transformer's parallelization and translation quality, and the second claim focusing on the depth and complexity of the residual net."
+      },
+      {
+        "claim_a_text": "We argue that this optimization difficulty is unlikely to be caused by vanishing gradients.",
+        "claim_b_text": "Recurrent models are inherently sequential, which precludes parallelization within training examples.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different aspects of neural networks, with the first claim focusing on optimization difficulties and the second claim describing the sequential nature of recurrent models."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "BERT uses a masked language model to enable pre-trained deep bidirectional representations.",
+        "claim_b_text": "The Attention Schema Theory suggests that the brain controls its attention by building a descriptive and predictive model of attention.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different concepts of attention, one in the context of natural language processing and the other in the context of cognitive neuroscience, making them incommensurable."
+      },
+      {
+        "claim_a_text": "BERT's pre-trained model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks.",
+        "claim_b_text": "The agent learned to use the additional resources to track its attentional state better, and the schema did not need to be a copy of the attentional state but only provide hints that improve attentional state inference.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different types of learning and attention, one in the context of machine learning and the other in the context of cognitive neuroscience, making them incommensurable."
+      },
+      {
+        "claim_a_text": "The attention mechanism in the Transformer allows BERT to model many downstream tasks by swapping out the appropriate inputs and outputs.",
+        "claim_b_text": "The agent's behavior indicated that the black square in the additional resource did not move exactly like the attention window did, i.e., the attention schema was not an exact copy of the attention location.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different types of attention mechanisms, one in the context of machine learning and the other in the context of cognitive neuroscience, making them incommensurable."
+      },
+      {
+        "claim_a_text": "BERT uses bidirectional self-attention, while the GPT Transformer uses constrained self-attention where every token can only attend to context to its left.",
+        "claim_b_text": "The attention schema is essential in attentional control when the environment has a noise probability of 0.5.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different types of attention mechanisms and their applications, one in the context of machine learning and the other in the context of cognitive neuroscience, making them incommensurable."
+      },
+      {
+        "claim_a_text": "BERT's unified architecture across different tasks allows it to achieve state-of-the-art performance on a wide range of tasks.",
+        "claim_b_text": "The emergent attention schema does not have a 1-to-1 correspondence with the attentional state, but instead contains information that can provide hints to the agent to improve the attentional state inference.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different concepts of attention and learning, one in the context of machine learning and the other in the context of cognitive neuroscience, making them incommensurable."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Deeper neural networks are more difficult to train.",
+        "claim_b_text": "The brain controls its attention by building a descriptive and predictive model of attention, termed 'attention schema'.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different topics, one related to deep learning and the other to cognitive science and attention."
+      },
+      {
+        "claim_a_text": "The residual learning framework can ease the training of deeper networks.",
+        "claim_b_text": "An attention schema is essential for controlling visuospatial attention in noisy environments.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different topics, one related to deep learning and the other to cognitive science and attention."
+      },
+      {
+        "claim_a_text": "The depth of representations is of central importance for many visual recognition tasks.",
+        "claim_b_text": "The attention schema does not need to be a perfect copy of the attentional state but only needs to provide hints that improve attentional state inference.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different topics, one related to deep learning and the other to cognitive science and attention."
+      },
+      {
+        "claim_a_text": "Identity mapping is easier to optimize than a non-residual mapping.",
+        "claim_b_text": "The attention schema is more useful when the inference of the attentional state solely from the attended stimulus is harder.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different topics, one related to deep learning and the other to cognitive science and attention."
+      },
+      {
+        "claim_a_text": "The residual learning framework can help to precondition the optimization problem.",
+        "claim_b_text": "The attention schema can emerge through learning, given additional resources.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are discussing different topics, one related to deep learning and the other to cognitive science and attention."
+      }
+    ],
+    [
+      {
+        "claim_a_text": "Adam is a stochastic optimization method that adapts the learning rate for each parameter based on the magnitude of the gradient.",
+        "claim_b_text": "The brain controls its attention by building a descriptive and predictive model of attention, termed an attention schema.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains, one from machine learning and the other from neuroscience, and are answering different questions."
+      },
+      {
+        "claim_a_text": "Adam's update rule is designed to combine the advantages of AdaGrad and RMSProp, and it has a bias-correction term to handle sparse gradients.",
+        "claim_b_text": "The attention schema is essential for attentional control, and it can be learned through reinforcement learning.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains, one from machine learning and the other from neuroscience, and are answering different questions."
+      },
+      {
+        "claim_a_text": "The effectiveness of Adam in deep learning tasks is due to its ability to adapt the learning rate for each parameter based on the magnitude of the gradient.",
+        "claim_b_text": "The usefulness of the attention schema is dependent on the noise in the environment, and it is more useful when the attentional state cannot be inferred solely from the attended stimulus.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains, one from machine learning and the other from neuroscience, and are answering different questions."
+      },
+      {
+        "claim_a_text": "Adam has a regret bound of O(\u221aT) in the online convex optimization framework.",
+        "claim_b_text": "The attention schema can emerge through learning, given additional resources, and it does not need to be a perfect copy of the attentional state.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains, one from machine learning and the other from neuroscience, and are answering different questions."
+      },
+      {
+        "claim_a_text": "The convergence of Adam is guaranteed under certain conditions, such as bounded gradients and a decaying learning rate.",
+        "claim_b_text": "The attention schema is useful when the inference of the attentional state solely from the attended stimulus is harder.",
+        "relationship": "INCOMMENSURABLE",
+        "explanation": "The two claims are from different domains, one from machine learning and the other from neuroscience, and are answering different questions."
+      }
+    ]
+  ]
+]

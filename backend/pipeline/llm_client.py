@@ -71,7 +71,9 @@ async def chat(
                 return await _chat_openrouter(messages, system, json_mode, temperature)
             else:
                 return await _chat_cloudflare(messages, system, json_mode, temperature)
-        except (ValueError, json.JSONDecodeError) as e:
+        except (ValueError, json.JSONDecodeError, httpx.HTTPError) as e:
+            # httpx.HTTPError covers transient provider failures (429 rate limits,
+            # 5xx, timeouts, connection resets) as well as malformed JSON responses.
             if attempt == max_retries - 1:
                 raise
             await asyncio.sleep(2 ** attempt)

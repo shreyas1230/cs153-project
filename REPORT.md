@@ -6,7 +6,7 @@
 
 ## Abstract
 
-Existing LLM-based literature tools synthesize papers into confident summaries that flatten the disagreements researchers most need to see. This project takes the opposite approach: a three-stage pipeline that makes disagreement and definitional drift *first-class outputs*. Given a user question and a set of uploaded PDFs, the system extracts atomic claims per paper, builds a cross-paper terminology glossary, and detects pairs of claims that contradict each other, support each other, or are *incommensurable* — appearing to conflict only because each field uses the same word differently. The output is an interactive claim map in a web app. Evaluated on three paper pairs spanning machine learning and neuroscience, the system achieves an aggregate F1 of **0.68** on INCOMMENSURABLE conflict detection, with a clear pattern: cross-domain pairs (F1 = 0.67–0.80) outperform same-domain pairs (F1 = 0.57).
+Existing LLM-based literature tools synthesize papers into confident summaries that flatten the disagreements researchers most need to see. This project takes the opposite approach: a three-stage pipeline that makes disagreement and definitional drift *first-class outputs*. Given a user question and a set of uploaded PDFs, the system extracts atomic claims per paper, builds a cross-paper terminology glossary, and detects pairs of claims that contradict each other, support each other, or are *incommensurable* — appearing to conflict only because each field uses the same word differently. The output is an interactive claim map in a web app. The system is evaluated on an expanded benchmark of **13 paper pairs across 10 papers**, with ground truth for the CONTRADICT and SUPPORT categories drawn from *known relationships in the literature* (e.g. the documented dispute over whether batch normalization works by reducing internal covariate shift), so those labels do not depend on the model's own output. Across five independent runs, the three-stage pipeline reaches an overall **F1 of 0.35 ± 0.04**, versus **0.24 ± 0.02** for a monolithic single-prompt baseline — an advantage driven entirely by precision (0.30 vs 0.17) at equal recall. All three relationship types are now exercised: the system labels known CONTRADICT pairs correctly in 9 of 10 runs and known SUPPORT pairs in 5 of 10. We also report two findings that the original single-point evaluation could not surface: run-to-run variance is substantial even at temperature 0 (overall F1 ranges ±0.10 across runs), and naively conditioning extraction on the user's question *lowers* benchmark F1 (0.35 → 0.24) because the benchmark rewards recovering all canonical relationships rather than question-relevant ones. Reported numbers are lower than an earlier self-derived evaluation (F1 = 0.68) not because the system regressed but because the benchmark is harder and no longer circular.
 
 ---
 
@@ -19,6 +19,20 @@ Current LLM-based tools such as Perplexity or NotebookLM synthesize papers into 
 **The central insight of this project is that incommensurability — not direct contradiction — is the dominant failure mode in cross-domain scientific reading.** Two researchers who both study "attention" may disagree in ways that are invisible unless you know that the ML paper uses "attention" to mean a scaled dot-product weighting mechanism, and the neuroscience paper uses "attention" to mean a selective cognitive phenomenon controlled by a brain-internal model. No amount of summarization exposes this; it requires deliberately tracking how each paper defines its own key terms and flagging the divergences.
 
 The goal of this system is to make these three categories of relationship explicit: **SUPPORT** (claims that mutually reinforce each other), **CONTRADICT** (genuine logical or empirical conflicts), and **INCOMMENSURABLE** (apparent conflicts that dissolve once terminology drift is explained).
+
+The term *incommensurable* is used here in a sense adapted from Kuhn's *The Structure of Scientific Revolutions* (1962): two claims are incommensurable when there is no shared standard against which they can be directly compared, typically because each is embedded in a different conceptual framework that assigns different meaning to shared vocabulary, or because they operate at different levels of analysis or scope. This is deliberately a stronger and more specific notion than "topically unrelated." The cleanest case is shared-vocabulary drift (two fields both saying "attention" but meaning different mechanisms); a secondary case is scope mismatch (claims that are each true but about different regimes, so no single measure adjudicates them). Section 4.5 returns to whether the system's detections meet this stricter bar or merely flag topical disjointness.
+
+### 1.1 Related Work
+
+This system sits at the intersection of several established lines of work, and its contribution is best understood by contrast with them.
+
+**Natural language inference (NLI).** Datasets such as SNLI (Bowman et al., 2015) and MultiNLI (Williams et al., 2018) frame sentence-pair relationships as *entailment*, *contradiction*, or *neutral*. The taxonomy here maps loosely onto that — SUPPORT ≈ entailment, CONTRADICT ≈ contradiction — but the INCOMMENSURABLE category is precisely a refinement of the overloaded "neutral" label: NLI's "neutral" lumps together "unrelated," "underdetermined," and "incomparable due to terminology drift," and it is that last case this project tries to name and explain rather than discard.
+
+**Scientific claim verification.** SciFact (Wadden et al., 2020) and related fact-verification work classify whether an abstract *supports* or *refutes* a given claim, with rationale selection. That task assumes a shared frame of reference (the claim and the evidence are about the same thing); this project targets the prior question of *whether two claims are even commensurable*, which verification pipelines presuppose.
+
+**Contradiction detection and citation analysis.** de Marneffe et al. (2008) studied finding contradictions in text, and a body of "citance"/citation-sentiment work (e.g., Athar, 2011) classifies whether one paper agrees or disagrees with another. These operate at the citation or sentence level and assume direct comparability; they do not model the case where an apparent disagreement is an artifact of divergent definitions.
+
+**LLM-based literature tools.** Consumer systems (Perplexity, NotebookLM, Elicit) optimize for fluent synthesis. As argued in Section 1, synthesis is exactly the operation that erases incommensurability. The novelty of this project is not the underlying NLI-style classification — which is well studied — but (a) elevating terminology drift to a first-class, explained output, and (b) the three-stage decomposition (extract → normalize → detect) that makes the terminology glossary an explicit input to relationship classification.
 
 ---
 
@@ -106,79 +120,93 @@ The frontend is a Next.js 16 app deployed on Cloudflare Pages. It has two pages.
 
 ### 4.1 Methodology
 
-A custom evaluation harness (`eval/harness.py`) measures precision and recall against hand-labeled ground truth stored in JSONL format. Each ground truth entry specifies two paper files, a question, and a list of known conflict pairs with their relationship type.
+A custom evaluation harness (`eval/harness.py`) measures precision, recall, and F1 against hand-labeled ground truth stored in JSONL format. Each ground truth entry specifies two paper files, a question, and a list of known relationship pairs with their type.
 
-Matching between predicted pairs and ground truth pairs uses token overlap: a predicted pair matches a ground truth pair if both `claim_a` texts share ≥25% token overlap AND both `claim_b` texts share ≥25% token overlap (order-independent). This threshold is intentionally lenient to account for paraphrase — the same underlying claim expressed in slightly different words on different pipeline runs. This metric ignores word frequency (overlap is computed over distinct tokens) and is normalized by the ground-truth length, so very short ground-truth claims can match on minimal lexical overlap; we mitigate this by requiring both claims in a pair to match independently.
+**Two ground-truth regimes.** An earlier version of this evaluation derived ground truth from model output — running the pipeline, manually verifying each predicted pair as genuine, and recording it as ground truth. That measures *consistency* (does the model reliably reproduce relationships it is capable of finding?) rather than *correctness*, and it is circular: the model is graded against its own output. The current evaluation keeps a verified-prediction set for the INCOMMENSURABLE category (where what counts as "the same word used differently" is a judgment call that benefits from seeing the model's framing), but for the **CONTRADICT and SUPPORT categories it uses literature-grounded ground truth**: paper pairs were chosen specifically because their real-world relationship is documented, and the expected label is fixed by that documented relationship *independent of model output*. For example, Santurkar et al. (2018) explicitly refute Ioffe & Szegedy's (2015) claim that batch normalization works by reducing internal covariate shift — a CONTRADICT that exists in the literature regardless of what the model produces. This removes the circularity for the two categories the original evaluation could not test at all.
 
-**A key methodological challenge:** LLM outputs are non-deterministic in practice even at `temperature=0`, because OpenRouter routes to different providers across calls, and different provider backends (e.g. Nebius vs Parasail) produce slightly different claim phrasings. Ground truth written to match one run's exact phrasing will fail to match a different run's paraphrase of the same claim. The solution is a `--save-preds` / `--load-preds` flag on the harness: predictions are saved from one reference run, manually verified as correct, and used as the stable ground truth baseline. All reported numbers use this approach.
+**Matching.** A predicted pair matches a ground-truth pair if both claim texts share ≥25% token overlap (order-independent). The threshold is intentionally lenient to absorb paraphrase across runs. The metric ignores word frequency (overlap is over distinct tokens) and is normalized by ground-truth length, so short ground-truth claims can match on minimal lexical overlap; we mitigate this by requiring both claims in a pair to match independently. For the **confusion matrix** the matcher is type-aware: when several predicted pairs share enough tokens with one ground-truth pair (these papers often yield near-duplicate pairs), a correctly-typed prediction is preferred, so a mislabel is reported only when no correctly-typed prediction matches.
 
-Ground truth was constructed by:
-1. Running `eval/diagnose.py` on each paper pair to inspect all predicted pairs
-2. Manually verifying each predicted pair as a genuine, meaningful conflict
-3. Writing the ground truth JSONL using the actual claim text from the reference run
+**What is compared.** Each reported run is an *independent* pipeline execution scored against the fixed ground truth — the evaluated predictions are never the same artifact as the ground truth. Because LLM output is non-deterministic in practice even at `temperature=0` (provider routing and backend differences perturb phrasings; the system now pins OpenRouter to a single provider to reduce but not eliminate this), **all headline numbers are reported as mean ± standard deviation over five independent runs** rather than a single point. The harness supports this directly via a `--runs N` flag, alongside `--save-preds` / `--load-preds` for reproducing a frozen run for free.
 
-This means ground truth is derived from model output rather than pre-written. This is appropriate here because the task is not "find the conflicts we already know about" but "consistently find the conflicts the model is capable of finding." Future work could add human-expert-labeled ground truth for a more rigorous upper-bound evaluation.
+### 4.2 Benchmark
 
-### 4.2 Paper Pairs
+The benchmark was expanded from 3 pairs (3 papers) to **13 pairs across 10 papers**, chosen to exercise all three relationship types and both domain relationships:
 
-Three paper pairs were evaluated:
-
-| Set | Paper A | Paper B | Domain Relationship |
+| Category | # pairs | Ground-truth source | Example pair |
 |---|---|---|---|
-| Set 1 | Attention Is All You Need (Vaswani et al., 2017) | Attention Schema in Visuospatial Attention (Webb et al., 2024) | Cross-domain (ML vs. Neuroscience) |
-| Set 2 | Overcoming Catastrophic Forgetting (Kirkpatrick et al., 2017) | Attention Is All You Need | Same-domain (ML vs. ML) |
-| Set 3 | Overcoming Catastrophic Forgetting | Attention Schema in Visuospatial Attention | Cross-domain (ML vs. Neuroscience) |
+| INCOMMENSURABLE, cross-domain | 5 | verified prediction | Transformer attention vs. neuroscience attention schema |
+| INCOMMENSURABLE, same-domain | 4 | verified prediction | EWC continual learning vs. Adam optimization |
+| CONTRADICT | 2 | literature-grounded | BatchNorm reduces covariate shift (Ioffe) vs. it does not (Santurkar); Adam is well-suited (Kingma & Ba) vs. adaptive methods generalize worse (Wilson) |
+| SUPPORT | 2 | literature-grounded | ResNet vs. Highway Networks (skip/gating enables very deep nets); Transformer vs. BERT (self-attention is highly effective) |
+
+The 7 added papers (BatchNorm/Ioffe, BatchNorm/Santurkar, Adam, Wilson et al., ResNet, Highway Networks, BERT) are all open-access arXiv papers; download IDs are in Section 10.
 
 ### 4.3 Results
 
-| Paper Pair | Type | P | R | F1 | GT Pairs | Pred Pairs |
-|---|---|---|---|---|---|---|
-| Set 1: ML Attention vs. Neuro Attention | Cross-domain | 0.75 | 0.60 | **0.67** | 5 | 4 |
-| Set 2: Catastrophic Forgetting vs. ML Attention | Same-domain | 0.40 | 1.00 | **0.57** | 2 | 5 |
-| Set 3: Catastrophic Forgetting vs. Neuro Attention | Cross-domain | 0.80 | 0.80 | **0.80** | 5 | 5 |
-| **Aggregate** | | **0.65** | **0.80** | **0.68** | | |
+All numbers are mean ± standard deviation over **5 independent runs** (3 for the baseline), on the full 13-pair benchmark.
 
-All detected pairs across all three sets are of type INCOMMENSURABLE. No CONTRADICT or SUPPORT pairs were detected. This is discussed in Section 4.5.
+**Overall, and against the monolithic baseline:**
+
+| Configuration | Precision | Recall | F1 |
+|---|---|---|---|
+| Monolithic single-prompt baseline | 0.17 ± 0.02 | 0.62 ± 0.04 | 0.24 ± 0.02 |
+| **Three-stage pipeline (question-blind)** | **0.30 ± 0.03** | **0.62 ± 0.07** | **0.35 ± 0.04** |
+| Three-stage pipeline (question-aware, as shipped) | 0.19 ± 0.04 | 0.55 ± 0.04 | 0.24 ± 0.04 |
+
+The three-stage pipeline beats the monolithic baseline by **+0.11 F1, an advantage that comes entirely from precision** (0.30 vs 0.17) at identical recall (0.62). The question-aware row is discussed as an ablation in Section 4.5.
+
+**Label accuracy by type** (counts summed over 5 runs; "instances" = pairs × runs), three-stage question-blind:
+
+| Ground-truth type | Instances | Correct | Mislabeled | Missed | Detection accuracy |
+|---|---|---|---|---|---|
+| CONTRADICT | 10 | 9 | 1 → INCOMM | 0 | **9/10** |
+| SUPPORT | 10 | 5 | 3 → INCOMM | 2 | 5/10 |
+| INCOMMENSURABLE | 90 | 58 | 3 → SUPPORT | 29 | 58/90 |
+
+When the model *finds* a CONTRADICT pair it labels it correctly almost always; the harder error is recall (missed pairs), not mislabeling. SUPPORT is the noisiest category — three of ten SUPPORT instances were called INCOMMENSURABLE, reflecting genuine ambiguity (two papers proposing different architectures that both "enable very deep networks" sit near the SUPPORT/INCOMMENSURABLE boundary).
+
+**Per-category F1** (question-aware configuration, as shipped, 5 runs):
+
+| Category | F1 |
+|---|---|
+| INCOMMENSURABLE (original Sets 1–3) | 0.32 ± 0.14 |
+| CONTRADICT (curated) | 0.32 ± 0.08 |
+| SUPPORT (curated) | 0.26 ± 0.08 |
+| INCOMMENSURABLE (new same- + cross-domain) | 0.18 ± 0.04 |
 
 ### 4.4 Example Detections
 
-**Set 1 — "Attention Is All You Need" vs. "Attention Schema Theory"**
+**INCOMMENSURABLE — "Attention Is All You Need" vs. "Attention Schema Theory"** (the canonical case):
 
 > **[INCOMMENSURABLE]** "Scaled dot-product attention computes compatibility between a query and a set of key-value pairs" vs. "The brain controls its attention by building a descriptive and predictive model of attention, termed the attention schema."
 >
-> *Terminology note:* "Attention" in the ML paper refers to a mathematical weighting mechanism over sequence positions. "Attention" in the neuroscience paper refers to a selective cognitive resource controlled by a brain-internal model. The papers are not making competing claims; they are using identical vocabulary for entirely different phenomena.
+> *Terminology note:* "Attention" in the ML paper refers to a mathematical weighting mechanism over sequence positions. "Attention" in the neuroscience paper refers to a selective cognitive resource controlled by a brain-internal model. The papers use identical vocabulary for entirely different phenomena.
 
-**Set 2 — "Overcoming Catastrophic Forgetting" vs. "Attention Is All You Need"**
+**CONTRADICT — "Batch Normalization" (Ioffe & Szegedy) vs. "How Does Batch Normalization Help Optimization?" (Santurkar et al.)** (literature-grounded):
 
-> **[INCOMMENSURABLE]** "Elastic weight consolidation (EWC) can overcome catastrophic forgetting in neural networks" vs. "The Transformer model uses self-attention mechanisms to draw global dependencies between input and output."
+> **[CONTRADICT]** "Batch Normalization makes the distribution of activations more stable and reduces internal covariate shift" vs. "BatchNorm does not reduce internal covariate shift; its performance gain does not stem from controlling it."
 >
-> *Terminology note:* Both papers address neural network "learning" and "weights," but the catastrophic forgetting paper addresses sequential multi-task learning, while the Transformer paper assumes fixed-dataset joint training. The EWC claim about weight protection has no bearing on Transformer training, which never encounters the sequential-task scenario.
+> This is a real, documented disagreement in the deep-learning literature about the *mechanism* by which the same technique works — exactly the kind of genuine empirical conflict the CONTRADICT label is meant to capture. The system recovered it in 9 of 10 runs.
 
-**Set 3 — "Overcoming Catastrophic Forgetting" vs. "Attention Schema Theory"**
+**SUPPORT — "Deep Residual Learning" (ResNet) vs. "Highway Networks"** (literature-grounded):
 
-> **[INCOMMENSURABLE]** "Catastrophic forgetting is an inevitable feature of connectionist models" vs. "The brain controls its attention by building a descriptive and predictive model of attention."
+> **[SUPPORT]** "Extremely deep residual networks show no optimization difficulty and can be trained to high accuracy" vs. "The optimization of highway networks is virtually independent of depth."
 >
-> *Terminology note:* The ML paper identifies catastrophic forgetting as a fundamental problem in artificial neural networks and proposes a solution (EWC). The neuroscience paper makes no claims about artificial neural networks — it describes biological attention control mechanisms. The apparent juxtaposition disappears once domains are disambiguated.
+> Two independent architectures making the convergent claim that their respective skip/gating mechanism removes the depth barrier to training — mutually reinforcing rather than conflicting.
 
 ### 4.5 Analysis
 
-**Cross-domain pairs score higher precision (0.75, 0.80) than same-domain (0.40).** When two papers are from clearly different fields, the model is more confident in its INCOMMENSURABLE classifications and produces fewer spurious pairs. When both papers are ML papers (Set 2), the model finds more pairs (5 vs. 2–4 in the ground truth), lowering precision, because the shared vocabulary creates more surface-level apparent conflicts that the model flags.
+**The three-stage design's advantage is precision, not detection.** Contrary to the earlier (anecdotal) baseline discussion, the monolithic single-prompt baseline *does* detect CONTRADICT and SUPPORT — it labeled known CONTRADICT pairs correctly in 5 of 6 runs and SUPPORT in 6 of 6. What separates the three-stage pipeline is precision (0.30 vs 0.17): the monolith over-generates pairs and mislabels INCOMMENSURABLE pairs as SUPPORT, while decomposition into extract → normalize → detect produces fewer spurious pairs and cleaner labels. The honest claim is therefore narrower than the original report's — decomposition improves *discipline*, not raw capability.
 
-**Same-domain recall is perfect (1.00).** For Set 2, the model finds every ground truth pair, plus three additional ones not in the ground truth. Those additional pairs are plausible (e.g., "EWC has low computational complexity" vs. "Transformer training is significantly faster than recurrent architectures") — they may represent valid INCOMMENSURABLE pairs that were simply not included in the hand-labeled set. This is a limitation of the ground truth construction methodology.
+**All three relationship types are now validated.** The original evaluation reported that "no CONTRADICT or SUPPORT pairs were detected" and argued this was correct because the three original papers happened not to disagree. With deliberately chosen papers that *do* stand in known CONTRADICT/SUPPORT relationships, the system recovers those relationships with the correct label (CONTRADICT 9/10, SUPPORT 5–8/10 depending on configuration). The taxonomy is not vestigial; it was simply never exercised by the original three-paper set.
 
-**No CONTRADICT or SUPPORT pairs were detected.** This is correct behavior, not a failure. The three paper pairs used for evaluation are all addressing different problems or different levels of analysis. None of the papers make opposing claims about the same phenomenon. The system prompt is deliberately conservative on CONTRADICT: "only flag genuine contradictions, not mere emphasis differences." To evaluate CONTRADICT detection, one would need paper pairs with known empirical disagreements — for example, papers from a replication crisis context, or papers making opposing claims about the same intervention.
+**Run-to-run variance is substantial and must be reported.** Even pinned to a single provider at `temperature=0`, overall F1 varies by roughly ±0.10 across runs (e.g. the question-blind configuration ranged 0.28–0.39 over five runs). A single-point F1 — as in the original report — is not a reliable summary, which is why every number here carries a standard deviation. This is itself a finding: claim phrasing, and therefore which pairs cross the matching threshold, is genuinely stochastic.
 
-**The INCOMMENSURABLE category is the novel contribution.** Tools like Perplexity produce summaries that would implicitly collapse all three of the above detected pairs into either apparent agreement or apparent contradiction, losing the terminological explanation. The value of this system is precisely that it surfaces the *reason* two papers cannot be directly compared, rather than forcing a binary support/contradict judgment.
+**Wiring the user's question into the pipeline lowers benchmark F1 (0.35 → 0.24) — an instructive negative result.** The user's research question was previously accepted but unused; it now conditions claim extraction and conflict detection. On this benchmark that *hurts*, because the benchmark rewards recovering all canonical relationships in a pair, whereas question-conditioning narrows extraction toward question-relevant claims and drops others (INCOMMENSURABLE recall fell from 58/90 to 44/90). Notably it *improved* SUPPORT labeling (5/10 → 8/10), suggesting the question helps the model commit to a relationship. The deeper issue is that this benchmark *cannot* fairly reward question-relevance, because its ground truth is fixed independent of the question; a question-sensitive benchmark would be required to measure the feature's intended benefit. The question is wired in because a literature tool that silently ignores the user's question is broken as a product, but we report transparently that on a question-agnostic benchmark it trades recall for label commitment.
 
-### 4.6 Baseline Comparison: Three-Stage vs. Monolithic Prompt
+**Reported precision is a lower bound.** Ground truth lists only the *canonical* expected relationship(s) per pair, so the additional valid pairs the system surfaces (e.g. "EWC has low computational complexity" vs. "Transformer trains faster than recurrent architectures") count as false positives even when they are legitimate. Recall and the confusion matrix are the more meaningful signals here; absolute precision would rise substantially under exhaustive labeling.
 
-To validate the three-stage design, the pipeline was informally compared against a simpler single-prompt baseline: passing all paper text directly to the model with a single instruction to "identify any conflicting claims between these papers." The single-prompt approach produced two failure modes:
-
-1. **Claim hallucination anchored to conflicts.** The model would decide a conflict existed first, then generate claims that fit the conflict rather than grounding them in the actual text. The verbatim `source_passage` field — only present in the structured three-stage output — makes this failure visible and catchable.
-
-2. **No terminology explanation.** Without a dedicated normalization stage, the model collapsed INCOMMENSURABLE pairs into either SUPPORT or CONTRADICT, losing the explanation that the papers are using the same word differently. On the attention ML vs. neuro pair, the monolithic prompt labeled the papers as "in conflict about how attention works" — a misleading and technically incorrect conclusion. The three-stage pipeline correctly identifies this as INCOMMENSURABLE with a specific terminology note.
-
-No formal precision/recall numbers were computed for the baseline because the failure mode is qualitative (wrong relationship labels) rather than quantitative (missing pairs), but the structured output from Stage 1 makes evaluation tractable in a way that the monolithic approach does not.
+**Why the numbers are lower than the original 0.68.** The original aggregate F1 of 0.68 was measured on 3 pairs with model-derived ground truth and lenient matching — the model graded largely against its own output. The current 0.24–0.35 is measured on a 4× larger benchmark, with non-circular literature-grounded labels for two of three categories, averaged over five runs with error bars. The drop reflects a more honest and more difficult evaluation, not a regression in the system.
 
 ---
 
@@ -243,16 +271,26 @@ Even at temperature=0, OpenRouter's provider routing causes different claim phra
 
 Initial claim extraction runs produced generic paraphrases rather than atomic claims grounded in evidence. Adding `domain_signals` and `key_terms` fields to the required output schema improved extraction quality: forcing the model to tag what domain a claim belongs to and what technical terms it depends on caused it to extract more specific, field-aware claims. These tags also feed directly into Stage 2 (terminology normalization), which uses `key_terms` to identify divergent terminology across papers.
 
+### 6.7 Robustness Pass: Benchmark Expansion, Variance, Baseline, and Question Wiring
+
+A later hardening pass addressed the weakest parts of the evaluation. (1) The benchmark was expanded from 3 to 13 pairs over 10 papers, adding literature-grounded CONTRADICT and SUPPORT pairs so all three relationship types are tested with labels independent of model output (Section 4.1–4.2). (2) The harness gained a `--runs N` flag and now reports mean ± standard deviation over five runs, exposing the substantial run-to-run variance a single-point F1 had hidden. (3) A `--baseline` mode runs a monolithic single-prompt predictor through the *same* scoring harness, converting the previously anecdotal three-stage-vs-monolithic comparison into measured numbers (the three-stage advantage is precision, not detection). (4) A type-aware confusion matrix was added to measure label discrimination. (5) The pipeline's `question` parameter, discovered to be accepted but never used, was wired into extraction, normalization, and detection; the resulting ablation (Section 4.5) showed this lowers benchmark F1 — an instructive negative result kept in the system because a tool that ignores the user's question is broken as a product. (6) The LLM client's retry path was broadened to cover transient HTTP errors (429/5xx) in addition to malformed JSON, so long evaluation sweeps survive provider hiccups.
+
 ---
 
 ## 8. Limitations and Future Work
 
 
-**Ground truth construction is circular.** The current eval derives ground truth from model output and verifies it manually, rather than pre-labeling ground truth from human expert reading. This measures consistency (does the model reliably find the same pairs?) more than correctness (does the model find all the real conflicts?). Expert-labeled ground truth across a broader paper set would give a more rigorous upper bound.
+**Ground truth is only partly non-circular.** The CONTRADICT and SUPPORT categories now use literature-grounded ground truth (the expected label is fixed by a documented real-world relationship, independent of model output). The INCOMMENSURABLE category still uses verified model predictions, so for that category the evaluation measures consistency more than correctness. Fully expert-labeled INCOMMENSURABLE ground truth — ideally with a second annotator and an inter-annotator agreement score — remains future work; all labeling here was done by a single author.
 
-**CONTRADICT and SUPPORT are untested.** The evaluation only covers INCOMMENSURABLE detection because the selected paper pairs do not produce the other relationship types. Evaluating CONTRADICT and SUPPORT would require curating paper pairs with known empirical disagreements or convergences — a valuable but time-consuming addition.
+**Ground truth is non-exhaustive, so precision is a lower bound.** Each pair lists only its canonical expected relationship(s); valid additional pairs the system finds are scored as false positives. Exhaustive labeling would raise measured precision but is labor-intensive.
 
-**Provider non-determinism.** OpenRouter routes to different backend providers across calls. Even at temperature=0, this means claim phrasing varies run-to-run. The `--save-preds` mechanism mitigates this for evaluation but does not solve the underlying issue. A deployed system should pin to a specific provider or use a direct API.
+**The benchmark cannot evaluate question-relevance.** Ground truth is fixed independent of the user's question, so the question-aware configuration is penalized for narrowing toward question-relevant claims (Section 4.5). Measuring whether question-conditioning helps real users requires a question-sensitive benchmark — e.g. relevance-judged pairs per (paper-pair, question) — which this evaluation does not have.
+
+**Single model.** All results use Llama 3.3 70B. Since the central contribution is the three-stage *architecture*, confirming that the precision advantage over the monolithic baseline holds on a second model (e.g. GPT-4-class or Claude) would strengthen the generality claim.
+
+**Scale.** 13 pairs over 10 papers is far larger than the original 3 pairs, but still small for strong claims about, e.g., cross- vs. same-domain differences; those comparisons are reported descriptively, not as significant findings.
+
+**Provider non-determinism.** OpenRouter routes to different backend providers across calls. Even at temperature=0, claim phrasing varies run-to-run; the system now pins to a single provider (Nebius) to reduce this, and all numbers are averaged over five runs with standard deviations, but the underlying stochasticity remains. A deployed system should pin a provider or use a direct API.
 
 **Long paper handling.** Papers are currently truncated at 50,000 characters. A 30-page ML paper is typically well within this limit, but longer documents (review articles, dissertations) would require chunked extraction and claim merging.
 
@@ -272,6 +310,7 @@ This project was built with significant assistance from Claude Code (claude-sonn
 - Drafting and iterating on the three LLM system prompts
 - Writing the evaluation harness and ground truth files
 - Debugging the OpenRouter integration (`response_format` / tool-call issue)
+- The robustness pass in Section 6.7: expanding the benchmark, adding variance/baseline/confusion-matrix support to the harness, curating literature-grounded CONTRADICT/SUPPORT pairs, wiring in the previously-unused `question` parameter, and running the evaluation sweeps
 - Writing this report
 
 All code was reviewed and understood by the author. The prompting strategy, architecture decisions, and evaluation methodology were designed by the author with Claude Code's input. The intellectual contributions — the anti-synthesis framing, the three-way relationship taxonomy, the decision to use terminology normalization as a preprocessing step for conflict detection — are the author's own.
@@ -301,21 +340,41 @@ npm run dev -- --port 3003
 ```bash
 cd backend && source .venv/bin/activate
 
-# Save predictions (runs pipeline, costs ~$0.01 total)
-python -m eval.harness --ground-truth eval/ground_truth/set1.jsonl \
-  --papers-dir test_papers --preds-file eval/preds_set1.json --save-preds
+# Full benchmark, 5 independent runs with mean +/- std (runs pipeline, ~$1-2 total)
+python -m eval.harness --ground-truth eval/ground_truth/all_pairs.jsonl \
+  --papers-dir test_papers --preds-file eval/preds_qaware_5runs.json --save-preds --runs 5
 
-# Evaluate from saved predictions (free, reproducible)
-python -m eval.harness --ground-truth eval/ground_truth/set1.jsonl \
-  --papers-dir test_papers --preds-file eval/preds_set1.json
+# Re-score from saved predictions (free, reproducible)
+python -m eval.harness --ground-truth eval/ground_truth/all_pairs.jsonl \
+  --papers-dir test_papers --preds-file eval/preds_qaware_5runs.json
+
+# Monolithic single-prompt baseline, same scoring harness
+python -m eval.harness --ground-truth eval/ground_truth/all_pairs.jsonl \
+  --papers-dir test_papers --preds-file eval/preds_baseline_3runs.json --save-preds --runs 3 --baseline
 ```
 
-Test papers (arXiv): 1706.03762, 2402.01056, 1612.00796. Download with `wget https://arxiv.org/pdf/<id>.pdf`.
+Test papers (arXiv): 1706.03762, 2402.01056, 1612.00796, 1502.03167, 1805.11604, 1412.6980, 1705.08292, 1512.03385, 1505.00387, 1810.04805. Download with `wget https://arxiv.org/pdf/<id>.pdf`.
 
 ---
 
 ## References
 
+*Primary papers (the evaluation corpus):*
 - Vaswani et al. (2017). *Attention Is All You Need.* arXiv:1706.03762
 - Kirkpatrick et al. (2017). *Overcoming Catastrophic Forgetting in Neural Networks.* PNAS.
 - Webb et al. (2024). *Attention Schema in Visuospatial Attention.* arXiv:2402.01056
+- Ioffe & Szegedy (2015). *Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift.* arXiv:1502.03167
+- Santurkar et al. (2018). *How Does Batch Normalization Help Optimization?* arXiv:1805.11604
+- Kingma & Ba (2014). *Adam: A Method for Stochastic Optimization.* arXiv:1412.6980
+- Wilson et al. (2017). *The Marginal Value of Adaptive Gradient Methods in Machine Learning.* arXiv:1705.08292
+- He et al. (2015). *Deep Residual Learning for Image Recognition.* arXiv:1512.03385
+- Srivastava et al. (2015). *Highway Networks.* arXiv:1505.00387
+- Devlin et al. (2018). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.* arXiv:1810.04805
+
+*Methods and positioning (Section 1.1):*
+- Kuhn (1962). *The Structure of Scientific Revolutions.* University of Chicago Press.
+- Bowman et al. (2015). *A large annotated corpus for learning natural language inference (SNLI).* EMNLP.
+- Williams et al. (2018). *A Broad-Coverage Challenge Corpus for Sentence Understanding through Inference (MultiNLI).* NAACL.
+- Wadden et al. (2020). *Fact or Fiction: Verifying Scientific Claims (SciFact).* EMNLP.
+- de Marneffe et al. (2008). *Finding Contradictions in Text.* ACL.
+- Athar (2011). *Sentiment Analysis of Citations using Sentence Structure-Based Features.* ACL Student Session.

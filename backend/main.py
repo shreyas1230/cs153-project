@@ -114,7 +114,7 @@ async def _run_pipeline(session_id: str, texts: list[str], titles: list[str], qu
         _save(result)
 
         tasks = [
-            extract_claims(text, title, idx)
+            extract_claims(text, title, idx, question)
             for idx, (text, title) in enumerate(zip(texts, titles))
         ]
         all_claims_nested = await asyncio.gather(*tasks)
@@ -123,12 +123,12 @@ async def _run_pipeline(session_id: str, texts: list[str], titles: list[str], qu
         # Stage 2: normalize terminology
         result.status = "normalizing"
         _save(result)
-        result.term_conflicts = await normalize_terminology(result.claims)
+        result.term_conflicts = await normalize_terminology(result.claims, question)
 
         # Stage 3: detect conflicts
         result.status = "detecting"
         _save(result)
-        result.claim_pairs = await detect_conflicts(result.claims, result.term_conflicts)
+        result.claim_pairs = await detect_conflicts(result.claims, result.term_conflicts, question)
 
         result.usage = UsageSummary(
             total_tokens=sum(u["tokens"] for u in usage_records),

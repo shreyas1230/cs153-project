@@ -39,11 +39,12 @@ Return a JSON object with this exact schema:
 async def detect_conflicts(
     claims: list[Claim],
     term_conflicts: list[TermConflict],
+    question: str = "",
 ) -> list[ClaimPair]:
     if len(claims) < 2:
         return []
 
-    payload = _build_payload(claims, term_conflicts)
+    payload = _build_payload(claims, term_conflicts, question)
     raw = await chat(
         messages=[{"role": "user", "content": payload}],
         system=SYSTEM_PROMPT,
@@ -77,8 +78,15 @@ async def detect_conflicts(
     return pairs
 
 
-def _build_payload(claims: list[Claim], term_conflicts: list[TermConflict]) -> str:
-    parts = ["CLAIMS (grouped by paper):\n"]
+def _build_payload(claims: list[Claim], term_conflicts: list[TermConflict], question: str = "") -> str:
+    parts = []
+    if question.strip():
+        parts.append(
+            f'USER QUESTION: "{question.strip()}"\n'
+            "Surface the relationships most relevant to this question first, but still report "
+            "any other meaningful cross-paper relationships you find.\n"
+        )
+    parts.append("CLAIMS (grouped by paper):\n")
     by_paper: dict[int, list[Claim]] = {}
     for c in claims:
         by_paper.setdefault(c.paper_index, []).append(c)

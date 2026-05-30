@@ -37,9 +37,17 @@ async def extract_claims(
     text: str,
     paper_title: str,
     paper_index: int,
+    question: str = "",
 ) -> list[Claim]:
+    focus = ""
+    if question.strip():
+        focus = (
+            f'\n\nThe reader is investigating this question: "{question.strip()}"\n'
+            "Give priority to claims that bear on this question, but still extract the paper's "
+            "major results and assertions so cross-paper comparison remains possible."
+        )
     user_msg = (
-        f"Paper title: {paper_title}\n\n"
+        f"Paper title: {paper_title}{focus}\n\n"
         f"Full text:\n{text[:50000]}"  # guard against extreme length
     )
     raw = await chat(
