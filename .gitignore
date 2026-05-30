@@ -10,8 +10,14 @@ dist/
 # Sessions (runtime data)
 backend/sessions/
 
+# Paper library cache (runtime data — generated from uploads)
+backend/papers/
+
 # Test papers (PDFs not committed — re-download with arXiv IDs in README)
 backend/test_papers/
+
+# Course/personal PDFs at repo root (not committed)
+/*.pdf
 
 # Node
 node_modules/

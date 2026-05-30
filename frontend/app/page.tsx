@@ -226,7 +226,7 @@ export default function HomePage() {
                 <div className="mb-2 flex items-center gap-2">
                   <Library className="h-4 w-4 text-violet-500" />
                   <span className="text-sm font-medium text-slate-700">My Papers</span>
-                  <span className="text-xs text-slate-400">— click to select, no re-upload needed</span>
+                  <span className="text-xs text-slate-400">— select from library, upload new ones below, or both</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {savedPapers.map((p) => {
@@ -263,6 +263,15 @@ export default function HomePage() {
                     {files.length > 0 ? ` + ${files.length} new upload${files.length > 1 ? "s" : ""}` : ""}
                   </p>
                 )}
+              </div>
+            )}
+
+            {/* Divider shown only when library is present */}
+            {savedPapers.length > 0 && (
+              <div className="flex items-center gap-3">
+                <div className="h-px flex-1 bg-slate-200" />
+                <span className="text-xs text-slate-400">+ add new papers</span>
+                <div className="h-px flex-1 bg-slate-200" />
               </div>
             )}
 
