@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { CheckCircle2, Loader2, Layers, FileText, Search, ArrowLeft, AlertCircle } from "lucide-react";
 import ClaimMap from "@/components/ClaimMap";
 
@@ -29,8 +29,8 @@ const STEPS = [
   },
 ];
 
-export default function ResultsPage() {
-  const { id } = useParams<{ id: string }>();
+function ResultsView() {
+  const id = useSearchParams().get("id");
   const router = useRouter();
   const [status, setStatus] = useState<Status | null>(null);
   const [result, setResult] = useState<Record<string, unknown> | null>(null);
@@ -192,4 +192,19 @@ export default function ResultsPage() {
   }
 
   return <ClaimMap result={result} />;
+}
+
+export default function ResultsPage() {
+  // useSearchParams requires a Suspense boundary in a static export / prerendered build.
+  return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-slate-50">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+        </main>
+      }
+    >
+      <ResultsView />
+    </Suspense>
+  );
 }

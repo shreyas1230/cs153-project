@@ -85,7 +85,7 @@ export default function HomePage() {
       setRecent(updated);
       // Refresh saved papers list (new uploads are now cached)
       fetch(`${API_BASE}/api/papers`).then((r) => r.json()).then(setSavedPapers).catch(() => { });
-      router.push(`/results/${session_id}`);
+      router.push(`/results?id=${session_id}`);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Unknown error");
       setLoading(false);
@@ -377,7 +377,7 @@ export default function HomePage() {
                 {recent.map((r) => (
                   <a
                     key={r.id}
-                    href={`/results/${r.id}`}
+                    href={`/results?id=${r.id}`}
                     className="flex items-start justify-between gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm hover:border-blue-300 hover:shadow-sm transition-all"
                   >
                     <div className="min-w-0">
