@@ -34,6 +34,8 @@ Full technical details in [REPORT.md](REPORT.md).
 
 Evaluated on a **13-pair benchmark across 10 papers**, exercising all three relationship types. Ground truth for the CONTRADICT and SUPPORT categories is drawn from *documented relationships in the literature* (e.g. Santurkar et al. refuting the internal-covariate-shift explanation of batch normalization), so those labels do not depend on the model's own output. All numbers are **mean ± std over 5 independent runs**:
 
+Two configurations are compared: a *monolithic baseline* that does extraction, normalization, and detection in a single LLM prompt (a reference point only), and the *three-stage pipeline* — separate extract → normalize → detect stages — which is what the app actually runs out of the box ("shipped default").
+
 | Configuration (13 pairs) | Precision | Recall | F1 |
 |---|---|---|---|
 | Monolithic single-prompt baseline | 0.17 ± 0.02 | 0.62 ± 0.04 | 0.24 ± 0.02 |
