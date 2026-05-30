@@ -101,34 +101,45 @@ def _extract_text(pdf_bytes: bytes) -> tuple[str, int | None]:
 
 # ---------- background pipeline ----------
 
-async def _run_pipeline(session_id: str, texts: list[str], titles: list[str], question: str) -> None:
+async def _run_pipeline(
+    session_id: str,
+    texts: list[str],
+    titles: list[str],
+    question: str,
+    use_question: bool = False,
+) -> None:
     result = _load(session_id)
     if result is None:
         return
 
+    # The question only steers Stage 3 (detection), and only when the user opts in.
+    # Extraction and normalization stay question-blind so the full claim pool and
+    # terminology glossary are preserved. See docs/question-steering.md.
+    detect_question = question if use_question else ""
+
     usage_records: list = []
     token = set_usage_tracker(usage_records)
     try:
-        # Stage 1: extract claims from each paper in parallel
+        # Stage 1: extract claims from each paper in parallel (question-blind)
         result.status = "extracting"
         _save(result)
 
         tasks = [
-            extract_claims(text, title, idx, question)
+            extract_claims(text, title, idx)
             for idx, (text, title) in enumerate(zip(texts, titles))
         ]
         all_claims_nested = await asyncio.gather(*tasks)
         result.claims = [c for nested in all_claims_nested for c in nested]
 
-        # Stage 2: normalize terminology
+        # Stage 2: normalize terminology (question-blind)
         result.status = "normalizing"
         _save(result)
-        result.term_conflicts = await normalize_terminology(result.claims, question)
+        result.term_conflicts = await normalize_terminology(result.claims)
 
-        # Stage 3: detect conflicts
+        # Stage 3: detect conflicts (steered by the question only when opted in)
         result.status = "detecting"
         _save(result)
-        result.claim_pairs = await detect_conflicts(result.claims, result.term_conflicts, question)
+        result.claim_pairs = await detect_conflicts(result.claims, result.term_conflicts, detect_question)
 
         result.usage = UsageSummary(
             total_tokens=sum(u["tokens"] for u in usage_records),
@@ -154,6 +165,7 @@ async def analyze(
     question: str = Form(...),
     files: list[UploadFile] = File(default=[]),
     paper_names: list[str] = Form(default=[]),
+    use_question: bool = Form(default=False),
 ):
     session_id = str(uuid.uuid4())
     texts: list[str] = []
@@ -197,7 +209,7 @@ async def analyze(
     )
     _save(result)
 
-    background_tasks.add_task(_run_pipeline, session_id, texts, titles, question)
+    background_tasks.add_task(_run_pipeline, session_id, texts, titles, question, use_question)
     return {"session_id": session_id}
 
 

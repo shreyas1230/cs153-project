@@ -110,7 +110,7 @@ The LLM provider is abstracted behind a single `llm_client.py` module. Switching
 
 The frontend is a Next.js 16 app deployed on Cloudflare Pages. It has two pages.
 
-**Upload page:** Drag-and-drop PDF zone, a text input for the research question, and an "Analyze" button that POSTs to `/api/analyze` and then polls `/api/status` with a progress bar that advances through the three pipeline stages.
+**Upload page:** Drag-and-drop PDF zone, a text input for the research question, an optional **"Focus on my question"** checkbox (off by default — when on, the question steers the detection stage; see Section 4.5), and an "Analyze" button that POSTs to `/api/analyze` and then polls `/api/status` with a progress bar that advances through the three pipeline stages.
 
 **Results page:** A split-panel layout. The left panel (45%) lists terminology divergences and conflict pairs, each as a color-coded card: green for SUPPORT, red for CONTRADICT, yellow for INCOMMENSURABLE. Each card shows the truncated claim texts and a one-line explanation. The right panel (55%) activates on click and shows the full verbatim source passage from the original paper, the key terms highlighted, and the terminology note if the pair is INCOMMENSURABLE.
 
@@ -150,10 +150,11 @@ All numbers are mean ± standard deviation over **5 independent runs** (3 for th
 | Configuration | Precision | Recall | F1 |
 |---|---|---|---|
 | Monolithic single-prompt baseline | 0.17 ± 0.02 | 0.62 ± 0.04 | 0.24 ± 0.02 |
-| **Three-stage pipeline (question-blind)** | **0.30 ± 0.03** | **0.62 ± 0.07** | **0.35 ± 0.04** |
-| Three-stage pipeline (question-aware, as shipped) | 0.19 ± 0.04 | 0.55 ± 0.04 | 0.24 ± 0.04 |
+| **Three-stage pipeline, question-blind (shipped default)** | **0.30 ± 0.03** | **0.62 ± 0.07** | **0.35 ± 0.04** |
+| Three-stage, question at detection only (opt-in steering) | 0.20 ± 0.02 | 0.61 ± 0.09 | 0.27 ± 0.03 |
+| Three-stage, question in all stages (rejected design) | 0.19 ± 0.04 | 0.55 ± 0.04 | 0.24 ± 0.04 |
 
-The three-stage pipeline beats the monolithic baseline by **+0.11 F1, an advantage that comes entirely from precision** (0.30 vs 0.17) at identical recall (0.62). The question-aware row is discussed as an ablation in Section 4.5.
+The three-stage pipeline beats the monolithic baseline by **+0.11 F1, an advantage that comes entirely from precision** (0.30 vs 0.17) at identical recall (0.62). The system **ships question-blind by default**; the two question-steering rows are ablations over *where* the user's question is injected, analyzed in Section 4.5.
 
 **Label accuracy by type** (counts summed over 5 runs; "instances" = pairs × runs), three-stage question-blind:
 
@@ -165,14 +166,16 @@ The three-stage pipeline beats the monolithic baseline by **+0.11 F1, an advanta
 
 When the model *finds* a CONTRADICT pair it labels it correctly almost always; the harder error is recall (missed pairs), not mislabeling. SUPPORT is the noisiest category — three of ten SUPPORT instances were called INCOMMENSURABLE, reflecting genuine ambiguity (two papers proposing different architectures that both "enable very deep networks" sit near the SUPPORT/INCOMMENSURABLE boundary).
 
-**Per-category F1** (question-aware configuration, as shipped, 5 runs):
+**Per-category F1** (shipped default = question-blind, 5 runs):
 
 | Category | F1 |
 |---|---|
-| INCOMMENSURABLE (original Sets 1–3) | 0.32 ± 0.14 |
-| CONTRADICT (curated) | 0.32 ± 0.08 |
-| SUPPORT (curated) | 0.26 ± 0.08 |
-| INCOMMENSURABLE (new same- + cross-domain) | 0.18 ± 0.04 |
+| INCOMMENSURABLE (original Sets 1–3) | 0.43 ± 0.07 |
+| CONTRADICT (curated) | 0.30 ± 0.08 |
+| SUPPORT (curated) | 0.17 ± 0.11 |
+| INCOMMENSURABLE (new same- + cross-domain) | 0.38 ± 0.05 |
+
+(SUPPORT scores lowest here because three of ten SUPPORT instances were labeled INCOMMENSURABLE; interestingly, opt-in detection-only steering fixes this — see Section 4.5.)
 
 ### 4.4 Example Detections
 
@@ -202,7 +205,17 @@ When the model *finds* a CONTRADICT pair it labels it correctly almost always; t
 
 **Run-to-run variance is substantial and must be reported.** Even pinned to a single provider at `temperature=0`, overall F1 varies by roughly ±0.10 across runs (e.g. the question-blind configuration ranged 0.28–0.39 over five runs). A single-point F1 — as in the original report — is not a reliable summary, which is why every number here carries a standard deviation. This is itself a finding: claim phrasing, and therefore which pairs cross the matching threshold, is genuinely stochastic.
 
-**Wiring the user's question into the pipeline lowers benchmark F1 (0.35 → 0.24) — an instructive negative result.** The user's research question was previously accepted but unused; it now conditions claim extraction and conflict detection. On this benchmark that *hurts*, because the benchmark rewards recovering all canonical relationships in a pair, whereas question-conditioning narrows extraction toward question-relevant claims and drops others (INCOMMENSURABLE recall fell from 58/90 to 44/90). Notably it *improved* SUPPORT labeling (5/10 → 8/10), suggesting the question helps the model commit to a relationship. The deeper issue is that this benchmark *cannot* fairly reward question-relevance, because its ground truth is fixed independent of the question; a question-sensitive benchmark would be required to measure the feature's intended benefit. The question is wired in because a literature tool that silently ignores the user's question is broken as a product, but we report transparently that on a question-agnostic benchmark it trades recall for label commitment.
+**Where the user's question is injected matters — and the right answer is "detection only, opt-in."** The user's research question was originally accepted by the API but never used. Wiring it in raised a design question — *which* of the three stages should it influence? — that the ablation answers cleanly:
+
+| Configuration | Recall | F1 | SUPPORT labeled correctly |
+|---|---|---|---|
+| Question-blind (default) | 0.62 | **0.35** | 5/10 |
+| Question at **detection only** (opt-in) | 0.61 | 0.27 | **10/10** |
+| Question in all stages (extract + normalize + detect) | 0.55 | 0.24 | 8/10 |
+
+Injecting the question into **extraction** is destructive: extraction runs per-paper and builds the claim pool, so telling it to "prioritize question-relevant claims" permanently drops claims that detection can then never pair — recall fell from 0.62 to 0.55 and INCOMMENSURABLE recall from 58/90 to 44/90. Moving the question to **detection only** (leaving extraction and normalization question-blind) recovers essentially all of that recall (0.61) because the full claim pool survives and the question merely reorders which pairs are surfaced; it also *improves* label commitment most of all (SUPPORT 10/10). Overall F1 still sits below question-blind (0.27 vs 0.35) because steering detection surfaces more pairs, lowering precision against the canonical-only ground truth.
+
+Crucially, this benchmark *cannot* fairly reward question-relevance: its ground truth is fixed independent of the question, so a system that correctly narrows to question-relevant pairs is penalized for "missing" the rest. Measuring the feature's real benefit needs a question-sensitive benchmark (see Limitations and `docs/question-steering.md`). Given all this, the system **ships question-blind by default** — its core value is surfacing drift the user did not think to ask about — and exposes question steering (detection-only) as an explicit **"Focus on my question" opt-in** in the UI, for users who want a targeted answer. A literature tool that silently ignores the user's question is broken as a product; this design honors the question without the recall cost of naive conditioning.
 
 **Reported precision is a lower bound.** Ground truth lists only the *canonical* expected relationship(s) per pair, so the additional valid pairs the system surfaces (e.g. "EWC has low computational complexity" vs. "Transformer trains faster than recurrent architectures") count as false positives even when they are legitimate. Recall and the confusion matrix are the more meaningful signals here; absolute precision would rise substantially under exhaustive labeling.
 
@@ -273,7 +286,7 @@ Initial claim extraction runs produced generic paraphrases rather than atomic cl
 
 ### 6.7 Robustness Pass: Benchmark Expansion, Variance, Baseline, and Question Wiring
 
-A later hardening pass addressed the weakest parts of the evaluation. (1) The benchmark was expanded from 3 to 13 pairs over 10 papers, adding literature-grounded CONTRADICT and SUPPORT pairs so all three relationship types are tested with labels independent of model output (Section 4.1–4.2). (2) The harness gained a `--runs N` flag and now reports mean ± standard deviation over five runs, exposing the substantial run-to-run variance a single-point F1 had hidden. (3) A `--baseline` mode runs a monolithic single-prompt predictor through the *same* scoring harness, converting the previously anecdotal three-stage-vs-monolithic comparison into measured numbers (the three-stage advantage is precision, not detection). (4) A type-aware confusion matrix was added to measure label discrimination. (5) The pipeline's `question` parameter, discovered to be accepted but never used, was wired into extraction, normalization, and detection; the resulting ablation (Section 4.5) showed this lowers benchmark F1 — an instructive negative result kept in the system because a tool that ignores the user's question is broken as a product. (6) The LLM client's retry path was broadened to cover transient HTTP errors (429/5xx) in addition to malformed JSON, so long evaluation sweeps survive provider hiccups.
+A later hardening pass addressed the weakest parts of the evaluation. (1) The benchmark was expanded from 3 to 13 pairs over 10 papers, adding literature-grounded CONTRADICT and SUPPORT pairs so all three relationship types are tested with labels independent of model output (Section 4.1–4.2). (2) The harness gained a `--runs N` flag and now reports mean ± standard deviation over five runs, exposing the substantial run-to-run variance a single-point F1 had hidden. (3) A `--baseline` mode runs a monolithic single-prompt predictor through the *same* scoring harness, converting the previously anecdotal three-stage-vs-monolithic comparison into measured numbers (the three-stage advantage is precision, not detection). (4) A type-aware confusion matrix was added to measure label discrimination. (5) The pipeline's `question` parameter, discovered to be accepted but never used, was wired in; an ablation over *where* to inject it (Section 4.5) showed that conditioning extraction destroys recall, so the question now steers **detection only** and is exposed as an opt-in "Focus on my question" toggle in the UI, off by default (rationale recorded in `docs/question-steering.md`). (6) The LLM client's retry path was broadened to cover transient HTTP errors (429/5xx) in addition to malformed JSON, so long evaluation sweeps survive provider hiccups.
 
 ---
 
@@ -284,7 +297,7 @@ A later hardening pass addressed the weakest parts of the evaluation. (1) The be
 
 **Ground truth is non-exhaustive, so precision is a lower bound.** Each pair lists only its canonical expected relationship(s); valid additional pairs the system finds are scored as false positives. Exhaustive labeling would raise measured precision but is labor-intensive.
 
-**The benchmark cannot evaluate question-relevance.** Ground truth is fixed independent of the user's question, so the question-aware configuration is penalized for narrowing toward question-relevant claims (Section 4.5). Measuring whether question-conditioning helps real users requires a question-sensitive benchmark — e.g. relevance-judged pairs per (paper-pair, question) — which this evaluation does not have.
+**The benchmark cannot evaluate question-relevance.** Ground truth is fixed independent of the user's question, so the opt-in question-steering configuration is penalized for narrowing toward question-relevant pairs (Section 4.5). Measuring whether question steering helps real users requires a question-sensitive benchmark — e.g. relevance-judged pairs per (paper-pair, question), scored with a ranking metric since steering reorders rather than filters. The design rationale and options are recorded in `docs/question-steering.md`.
 
 **Single model.** All results use Llama 3.3 70B. Since the central contribution is the three-stage *architecture*, confirming that the precision advantage over the monolithic baseline holds on a second model (e.g. GPT-4-class or Claude) would strengthen the generality claim.
 

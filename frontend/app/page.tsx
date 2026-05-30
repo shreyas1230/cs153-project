@@ -16,6 +16,7 @@ export default function HomePage() {
   const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
   const [question, setQuestion] = useState("");
+  const [useQuestion, setUseQuestion] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -30,7 +31,7 @@ export default function HomePage() {
     fetch(`${API_BASE}/api/papers`)
       .then((r) => r.json())
       .then(setSavedPapers)
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const togglePaper = (name: string) =>
@@ -71,6 +72,7 @@ export default function HomePage() {
     try {
       const form = new FormData();
       form.append("question", question.trim());
+      form.append("use_question", String(useQuestion));
       files.forEach((f) => form.append("files", f));
       selectedPapers.forEach((name) => form.append("paper_names", name));
       const res = await fetch(`${API_BASE}/api/analyze`, { method: "POST", body: form });
@@ -82,7 +84,7 @@ export default function HomePage() {
       localStorage.setItem("recent_analyses", JSON.stringify(updated));
       setRecent(updated);
       // Refresh saved papers list (new uploads are now cached)
-      fetch(`${API_BASE}/api/papers`).then((r) => r.json()).then(setSavedPapers).catch(() => {});
+      fetch(`${API_BASE}/api/papers`).then((r) => r.json()).then(setSavedPapers).catch(() => { });
       router.push(`/results/${session_id}`);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Unknown error");
@@ -151,15 +153,22 @@ export default function HomePage() {
         {/* Floating stats */}
         <div className="mx-auto mt-14 max-w-2xl grid grid-cols-3 gap-4 text-center">
           {[
-            { value: "3", label: "Pipeline stages" },
-            { value: "F1 = 0.68", label: "Aggregate accuracy" },
-            { value: "$0.003", label: "Avg. cost / analysis" },
-          ].map(({ value, label }) => (
-            <div key={label} className="rounded-xl border border-slate-700 bg-slate-800/60 px-4 py-4">
-              <p className="text-xl font-bold text-white">{value}</p>
-              <p className="mt-0.5 text-xs text-slate-400">{label}</p>
-            </div>
-          ))}
+            { value: "3", label: "Pipeline stages", href: "#how-it-works" },
+            { value: "F1 = 0.35", label: "Benchmark F1", href: undefined },
+            { value: "$0.003", label: "Avg. cost / analysis", href: undefined },
+          ].map(({ value, label, href }) => {
+            const cls = "rounded-xl border border-slate-700 bg-slate-800/60 px-4 py-4" +
+              (href ? " block cursor-pointer transition-colors hover:border-blue-500" : "");
+            const inner = (
+              <>
+                <p className="text-xl font-bold text-white">{value}</p>
+                <p className="mt-0.5 text-xs text-slate-400">{label}</p>
+              </>
+            );
+            return href
+              ? <a key={label} href={href} className={cls}>{inner}</a>
+              : <div key={label} className={cls}>{inner}</div>;
+          })}
         </div>
       </section>
 
@@ -236,11 +245,10 @@ export default function HomePage() {
                         key={p.name}
                         type="button"
                         onClick={() => togglePaper(p.name)}
-                        className={`group flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs transition-all ${
-                          selected
-                            ? "border-violet-400 bg-violet-50 text-violet-700"
-                            : "border-slate-200 bg-white text-slate-600 hover:border-violet-300 hover:bg-violet-50"
-                        }`}
+                        className={`group flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs transition-all ${selected
+                          ? "border-violet-400 bg-violet-50 text-violet-700"
+                          : "border-slate-200 bg-white text-slate-600 hover:border-violet-300 hover:bg-violet-50"
+                          }`}
                       >
                         {selected
                           ? <CheckCircle2 className="h-3.5 w-3.5 text-violet-500" />
@@ -281,9 +289,8 @@ export default function HomePage() {
               onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
               onDragLeave={() => setDragging(false)}
               onClick={() => inputRef.current?.click()}
-              className={`cursor-pointer rounded-xl border-2 border-dashed p-10 text-center transition-colors ${
-                dragging ? "border-blue-500 bg-blue-50" : "border-slate-200 bg-slate-50 hover:border-blue-300 hover:bg-blue-50/30"
-              }`}
+              className={`cursor-pointer rounded-xl border-2 border-dashed p-10 text-center transition-colors ${dragging ? "border-blue-500 bg-blue-50" : "border-slate-200 bg-slate-50 hover:border-blue-300 hover:bg-blue-50/30"
+                }`}
             >
               <Upload className="mx-auto mb-3 h-8 w-8 text-slate-400" />
               <p className="font-medium text-slate-700">Drop PDFs here or click to upload</p>
@@ -320,9 +327,19 @@ export default function HomePage() {
                 placeholder='e.g. "What is attention and how does it work?" or "Does regularization prevent overfitting?"'
                 className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
               />
-              <p className="mt-1 text-xs text-slate-400">
-                Each analysis is question-specific. Start a new analysis to explore a different angle.
-              </p>
+              <label className="mt-2 flex cursor-pointer items-start gap-2 text-xs text-slate-500">
+                <input
+                  type="checkbox"
+                  checked={useQuestion}
+                  onChange={(e) => setUseQuestion(e.target.checked)}
+                  className="mt-0.5 h-3.5 w-3.5 cursor-pointer rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                />
+                <span>
+                  <span className="font-medium text-slate-600">Focus on my question</span> — prioritize relationships
+                  relevant to the question above.<b> Off by default:</b> the system surfaces <em>all </em> cross-paper
+                  contradictions and terminology drift, including ones you didn&apos;t think to ask about.
+                </span>
+              </label>
             </div>
 
             {error && (

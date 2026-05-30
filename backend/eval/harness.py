@@ -59,11 +59,13 @@ async def _run_one(paper_files: list[Path], question: str) -> list[dict]:
     texts = [_load_pdf_text(p) for p in paper_files]
     titles = [p.stem for p in paper_files]
 
+    # Extraction and normalization are question-blind; the question steers only
+    # detection (Stage 3). See docs/question-steering.md.
     all_claims_nested = await asyncio.gather(
-        *[extract_claims(t, title, idx, question) for idx, (t, title) in enumerate(zip(texts, titles))]
+        *[extract_claims(t, title, idx) for idx, (t, title) in enumerate(zip(texts, titles))]
     )
     claims = [c for nested in all_claims_nested for c in nested]
-    term_conflicts = await normalize_terminology(claims, question)
+    term_conflicts = await normalize_terminology(claims)
     pairs = await detect_conflicts(claims, term_conflicts, question)
     return [p.model_dump() for p in pairs]
 
