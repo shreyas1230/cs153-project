@@ -254,21 +254,21 @@ Crucially, this benchmark *cannot* fairly reward question-relevance: its ground 
 
 The final system reflects several significant pivots from the initial design. This section documents the meaningful failures and the changes they drove.
 
-### 6.1 LLM Provider: Cloudflare → OpenRouter
+### 7.1 LLM Provider: Cloudflare → OpenRouter
 
 The original design used Cloudflare Workers AI as the free-tier LLM provider. In practice, the free tier is limited to 10,000 neurons/day — roughly 10,000 tokens total, which a single two-paper analysis consumes entirely. One pipeline run on "Attention Is All You Need" + the neuroscience attention paper exhausted the daily quota. The system was migrated to OpenRouter, which provides the same Llama 3.3 70B model at approximately $0.40/million tokens with no daily cap. At that rate, $20 in credits covers hundreds of full analyses.
 
-### 6.2 OpenRouter JSON Mode: Tool-Call Misrouting Bug
+### 7.2 OpenRouter JSON Mode: Tool-Call Misrouting Bug
 
 After switching to OpenRouter, all pipeline runs failed with `"expected string or bytes-like object, got 'NoneType'"`. The root cause was that OpenRouter routes requests to different backend providers (Nebius, Parasail) depending on availability. Some of these providers' vLLM backends interpret `response_format: {"type": "json_object"}` as a tool-calling directive. The model would respond with `finish_reason: "tool_calls"` and `content: null`, which the pipeline's `re.sub` call could not handle.
 
 The fix was to remove `response_format` entirely from OpenRouter requests and rely on the system prompt's JSON schema instruction plus a bracket-matching JSON extractor (`_extract_json`) that strips markdown code fences — which the model produces when `response_format` is absent. This fix also made the JSON extraction more robust against other malformed responses.
 
-### 6.3 Within-Paper Pair Contamination
+### 7.3 Within-Paper Pair Contamination
 
 Early pipeline runs returned claim pairs where both claims came from the same paper — the model ignored the instruction to only compare cross-paper pairs. Rather than re-prompting, a post-processing filter was added in `detect.py` to discard any pair where `claim_a.paper_index == claim_b.paper_index`. This was more reliable than relying on prompt compliance and costs nothing at inference time.
 
-### 6.4 Eval Ground Truth: Hand-Crafted vs. Pipeline-Derived
+### 7.4 Eval Ground Truth: Hand-Crafted vs. Pipeline-Derived
 
 The first version of the evaluation wrote ground truth by hand — predicting what claims the model would extract and what conflicts it would find. This produced F1=0.00 on all three paper pairs because the model's actual claim phrasings differed substantially from the hand-written expectations even at the same level of meaning.
 
@@ -276,15 +276,15 @@ The methodology was revised: run `eval/diagnose.py` on each paper pair to captur
 
 Additionally, the token overlap matching threshold was lowered from 0.6 to 0.25. The original threshold was too strict for paraphrase — a claim extracted as "EWC prevents catastrophic forgetting" would not match ground truth written as "Elastic weight consolidation overcomes catastrophic interference." At 0.25, meaningful partial matches succeed while random overlap is still rejected.
 
-### 6.5 Provider Non-Determinism and the `--save-preds` Flag
+### 7.5 Provider Non-Determinism and the `--save-preds` Flag
 
 Even at temperature=0, OpenRouter's provider routing causes different claim phrasings across runs, making it impossible to build stable ground truth by running the pipeline twice and expecting identical output. A `--save-preds` / `--load-preds` flag was added to the eval harness so that a reference run's predictions can be saved to JSON and reused for future evaluation runs without re-invoking the LLM. This makes evaluation reproducible and free after the initial reference run.
 
-### 6.6 Prompt for Claim Extraction: Domain and Key Terms
+### 7.6 Prompt for Claim Extraction: Domain and Key Terms
 
 Initial claim extraction runs produced generic paraphrases rather than atomic claims grounded in evidence. Adding `domain_signals` and `key_terms` fields to the required output schema improved extraction quality: forcing the model to tag what domain a claim belongs to and what technical terms it depends on caused it to extract more specific, field-aware claims. These tags also feed directly into Stage 2 (terminology normalization), which uses `key_terms` to identify divergent terminology across papers.
 
-### 6.7 Robustness Pass: Benchmark Expansion, Variance, Baseline, and Question Wiring
+### 7.7 Robustness Pass: Benchmark Expansion, Variance, Baseline, and Question Wiring
 
 A later hardening pass addressed the weakest parts of the evaluation. (1) The benchmark was expanded from 3 to 13 pairs over 10 papers, adding literature-grounded CONTRADICT and SUPPORT pairs so all three relationship types are tested with labels independent of model output (Section 4.1–4.2). (2) The harness gained a `--runs N` flag and now reports mean ± standard deviation over five runs, exposing the substantial run-to-run variance a single-point F1 had hidden. (3) A `--baseline` mode runs a monolithic single-prompt predictor through the *same* scoring harness, converting the previously anecdotal three-stage-vs-monolithic comparison into measured numbers (the three-stage advantage is precision, not detection). (4) A type-aware confusion matrix was added to measure label discrimination. (5) The pipeline's `question` parameter, discovered to be accepted but never used, was wired in; an ablation over *where* to inject it (Section 4.5) showed that conditioning extraction destroys recall, so the question now steers **detection only** and is exposed as an opt-in "Focus on my question" toggle in the UI, off by default. (6) The LLM client's retry path was broadened to cover transient HTTP errors (429/5xx) in addition to malformed JSON, so long evaluation sweeps survive provider hiccups.
 
@@ -313,7 +313,7 @@ A later hardening pass addressed the weakest parts of the evaluation. (1) The be
 
 ## 9. AI Disclosure
 
-**GitHub repository:** https://github.com/shreyas1230/cs153-project (commit history from May 26 to June 4, 2026 documents the full development arc described in Section 6).
+**GitHub repository:** https://github.com/shreyas1230/cs153-project (commit history from May 26 to June 4, 2026 documents the full development arc described in Section 7).
 
 **Code sources:** All code in this repository is original. No base repositories were forked or copied. Third-party libraries used: `pdfplumber` (PDF text extraction), `FastAPI` + `uvicorn` (backend server), `httpx` (async HTTP), `pydantic` (data schemas), `python-dotenv` (environment config), `Next.js` + `Tailwind CSS` (frontend). All are used as dependencies, not as code that was modified or incorporated.
 
@@ -323,7 +323,7 @@ This project was built with significant assistance from Claude Code (claude-sonn
 - Drafting and iterating on the three LLM system prompts
 - Writing the evaluation harness and ground truth files
 - Debugging the OpenRouter integration (`response_format` / tool-call issue)
-- The robustness pass in Section 6.7: expanding the benchmark, adding variance/baseline/confusion-matrix support to the harness, curating literature-grounded CONTRADICT/SUPPORT pairs, wiring in the previously-unused `question` parameter, and running the evaluation sweeps
+- The robustness pass in Section 7.7: expanding the benchmark, adding variance/baseline/confusion-matrix support to the harness, curating literature-grounded CONTRADICT/SUPPORT pairs, wiring in the previously-unused `question` parameter, and running the evaluation sweeps
 - Writing this report
 
 All code was reviewed and understood by the author. The prompting strategy, architecture decisions, and evaluation methodology were designed by the author with Claude Code's input. The intellectual contributions — the anti-synthesis framing, the three-way relationship taxonomy, the decision to use terminology normalization as a preprocessing step for conflict detection — are the author's own.
