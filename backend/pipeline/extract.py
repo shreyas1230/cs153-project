@@ -40,7 +40,7 @@ async def extract_claims(
 ) -> list[Claim]:
     # Extraction is intentionally question-BLIND: it builds the full claim pool so
     # detection has everything to work with. Narrowing extraction by the question
-    # permanently drops claims detection can never recover. See docs/question-steering.md.
+    # permanently drops claims detection can never recover.
     user_msg = (
         f"Paper title: {paper_title}\n\n"
         f"Full text:\n{text[:50000]}"  # guard against extreme length

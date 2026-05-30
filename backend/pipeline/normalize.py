@@ -41,7 +41,7 @@ Return a JSON object with this exact schema:
 
 async def normalize_terminology(claims: list[Claim]) -> list[TermConflict]:
     # Question-BLIND by design: the glossary should cover all cross-paper terminology
-    # drift, not only terms the question mentions. See docs/question-steering.md.
+    # drift, not only terms the question mentions.
     if not claims:
         return []
 

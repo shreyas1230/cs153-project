@@ -24,7 +24,7 @@ Three-stage LLM pipeline:
 
 Results are displayed in an interactive split-panel claim map. Clicking any conflict card shows the verbatim source passage from the original PDF.
 
-By default the analysis is **question-blind** — extraction and normalization see only the papers, so the system surfaces *all* cross-paper conflicts and terminology drift, including ones you didn't think to ask about. An optional **"Focus on my question"** toggle steers only the detection stage toward question-relevant relationships; it is off by default (the design rationale and the supporting ablation are in [docs/question-steering.md](docs/question-steering.md)).
+By default the analysis is **question-blind** — extraction and normalization see only the papers, so the system surfaces *all* cross-paper conflicts and terminology drift, including ones you didn't think to ask about. An optional **"Focus on my question"** toggle steers only the detection stage toward question-relevant relationships; it is off by default (the design rationale and the supporting ablation are in [REPORT.md §4.5](REPORT.md)).
 
 Full technical details in [REPORT.md](REPORT.md).
 
@@ -111,7 +111,7 @@ This project was built with [Claude Code](https://claude.ai/code) (claude-sonnet
 - **Debugging** — diagnosing the OpenRouter `response_format` / tool-call misrouting bug, fixing the within-paper pair contamination issue
 - **Evaluation harness** — writing `eval/harness.py`, `eval/diagnose.py`, and the ground truth JSONL files
 - **Robustness pass** — expanding the benchmark to 13 pairs with literature-grounded CONTRADICT/SUPPORT labels, adding variance/baseline/confusion-matrix support to the harness, wiring the previously-unused `question` parameter into the detection stage as an opt-in, and running the evaluation sweeps
-- **Report & docs** — writing `REPORT.md` and `docs/question-steering.md`
+- **Report** — writing `REPORT.md`
 
 All code was reviewed and understood by the author. The architecture decisions, the three-way relationship taxonomy (SUPPORT / CONTRADICT / INCOMMENSURABLE), the anti-synthesis framing, and the evaluation methodology are the author's own. No base repositories were forked; all code is original.
 

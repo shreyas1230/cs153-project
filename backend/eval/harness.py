@@ -60,7 +60,7 @@ async def _run_one(paper_files: list[Path], question: str) -> list[dict]:
     titles = [p.stem for p in paper_files]
 
     # Extraction and normalization are question-blind; the question steers only
-    # detection (Stage 3). See docs/question-steering.md.
+    # detection (Stage 3).
     all_claims_nested = await asyncio.gather(
         *[extract_claims(t, title, idx) for idx, (t, title) in enumerate(zip(texts, titles))]
     )

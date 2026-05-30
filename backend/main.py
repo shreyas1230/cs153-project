@@ -114,7 +114,7 @@ async def _run_pipeline(
 
     # The question only steers Stage 3 (detection), and only when the user opts in.
     # Extraction and normalization stay question-blind so the full claim pool and
-    # terminology glossary are preserved. See docs/question-steering.md.
+    # terminology glossary are preserved.
     detect_question = question if use_question else ""
 
     usage_records: list = []
