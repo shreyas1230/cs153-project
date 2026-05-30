@@ -8,6 +8,8 @@ A cross-domain literature reading assistant that surfaces conflicts and terminol
 
 ## Demo
 
+**Demo video:** _(3-minute walkthrough — link added on submission)_
+
 > Upload "Attention Is All You Need" + an Attention Schema neuroscience paper, ask *"What is attention and how does it work?"* → The system correctly identifies that both papers use the word "attention" to mean entirely different things, and explains why they cannot be directly compared.
 
 ---
@@ -22,20 +24,24 @@ Three-stage LLM pipeline:
 
 Results are displayed in an interactive split-panel claim map. Clicking any conflict card shows the verbatim source passage from the original PDF.
 
+By default the analysis is **question-blind** — extraction and normalization see only the papers, so the system surfaces *all* cross-paper conflicts and terminology drift, including ones you didn't think to ask about. An optional **"Focus on my question"** toggle steers only the detection stage toward question-relevant relationships; it is off by default (the design rationale and the supporting ablation are in [docs/question-steering.md](docs/question-steering.md)).
+
 Full technical details in [REPORT.md](REPORT.md).
 
 ---
 
 ## Evaluation Results
 
-Evaluated on 3 paper pairs (machine learning + neuroscience) with hand-verified ground truth:
+Evaluated on a **13-pair benchmark across 10 papers**, exercising all three relationship types. Ground truth for the CONTRADICT and SUPPORT categories is drawn from *documented relationships in the literature* (e.g. Santurkar et al. refuting the internal-covariate-shift explanation of batch normalization), so those labels do not depend on the model's own output. All numbers are **mean ± std over 5 independent runs**:
 
-| Paper Pair | Type | Precision | Recall | F1 |
-|---|---|---|---|---|
-| ML Attention vs. Neuro Attention | Cross-domain | 0.75 | 0.60 | 0.67 |
-| Catastrophic Forgetting vs. ML Attention | Same-domain | 0.40 | 1.00 | 0.57 |
-| Catastrophic Forgetting vs. Neuro Attention | Cross-domain | 0.80 | 0.80 | 0.80 |
-| **Aggregate** | | **0.65** | **0.80** | **0.68** |
+| Configuration (13 pairs) | Precision | Recall | F1 |
+|---|---|---|---|
+| Monolithic single-prompt baseline | 0.17 ± 0.02 | 0.62 ± 0.04 | 0.24 ± 0.02 |
+| **Three-stage pipeline (shipped default)** | **0.30 ± 0.03** | **0.62 ± 0.07** | **0.35 ± 0.04** |
+
+The three-stage pipeline beats the monolithic baseline by +0.11 F1, entirely on precision at equal recall. Known **CONTRADICT** pairs are labeled correctly in 9/10 runs and **SUPPORT** in 5/10. Reported precision is a lower bound (ground truth lists only the canonical relationship per pair, so additional valid pairs count as false positives).
+
+> An earlier evaluation reported F1 = 0.68 on just 3 pairs, but it used model-derived ground truth (the model graded against its own output) and a single run. The lower numbers here reflect a larger, non-circular, variance-aware benchmark — a harder and more honest evaluation, not a regression. See [REPORT.md §4](REPORT.md) for the full results, the question-steering ablation, and the confusion matrix.
 
 ---
 
@@ -67,16 +73,21 @@ Open http://localhost:3003. Upload 2+ PDF papers, type a research question, clic
 ```bash
 cd backend && source .venv/bin/activate
 
-# Run pipeline and save predictions (costs ~$0.01 total)
-python -m eval.harness --ground-truth eval/ground_truth/set1.jsonl \
-  --papers-dir test_papers --preds-file eval/preds_set1.json --save-preds
+# Full benchmark, 5 runs with mean +/- std (runs pipeline, ~$1-2 total)
+python -m eval.harness --ground-truth eval/ground_truth/all_pairs.jsonl \
+  --papers-dir test_papers --preds-file eval/preds_qaware_5runs.json --save-preds --runs 5
 
-# Evaluate from saved predictions (free, reproducible)
-python -m eval.harness --ground-truth eval/ground_truth/set1.jsonl \
-  --papers-dir test_papers --preds-file eval/preds_set1.json
+# Re-score from saved predictions (free, reproducible)
+python -m eval.harness --ground-truth eval/ground_truth/all_pairs.jsonl \
+  --papers-dir test_papers --preds-file eval/preds_qaware_5runs.json
+
+# Monolithic single-prompt baseline, same scoring harness
+python -m eval.harness --ground-truth eval/ground_truth/all_pairs.jsonl \
+  --papers-dir test_papers --preds-file eval/preds_baseline_3runs.json --save-preds --runs 3 --baseline
 ```
 
-Test papers (download from arXiv): `1706.03762`, `2402.01056`, `1612.00796` — save to `backend/test_papers/`.
+Test papers — download from arXiv into `backend/test_papers/` (`wget https://arxiv.org/pdf/<id>.pdf`):
+`1706.03762`, `2402.01056`, `1612.00796`, `1502.03167`, `1805.11604`, `1412.6980`, `1705.08292`, `1512.03385`, `1505.00387`, `1810.04805`.
 
 ---
 
@@ -84,7 +95,7 @@ Test papers (download from arXiv): `1706.03762`, `2402.01056`, `1612.00796` — 
 
 - **Backend:** Python 3.11, FastAPI, pdfplumber, httpx, Pydantic
 - **Frontend:** Next.js 16, Tailwind CSS
-- **LLM:** `meta-llama/llama-3.3-70b-instruct` via OpenRouter (~$0.003/analysis)
+- **LLM:** `meta-llama/llama-3.3-70b-instruct` via OpenRouter, pinned to the Nebius provider for run-to-run consistency (~$0.003/analysis)
 - **Original LLM (free tier):** Cloudflare Workers AI (hit 10k neuron/day limit)
 
 ---
@@ -97,7 +108,8 @@ This project was built with [Claude Code](https://claude.ai/code) (claude-sonnet
 - **LLM prompts** — drafting and iterating on the system prompts for all three pipeline stages
 - **Debugging** — diagnosing the OpenRouter `response_format` / tool-call misrouting bug, fixing the within-paper pair contamination issue
 - **Evaluation harness** — writing `eval/harness.py`, `eval/diagnose.py`, and the ground truth JSONL files
-- **Report** — writing `REPORT.md`
+- **Robustness pass** — expanding the benchmark to 13 pairs with literature-grounded CONTRADICT/SUPPORT labels, adding variance/baseline/confusion-matrix support to the harness, wiring the previously-unused `question` parameter into the detection stage as an opt-in, and running the evaluation sweeps
+- **Report & docs** — writing `REPORT.md` and `docs/question-steering.md`
 
 All code was reviewed and understood by the author. The architecture decisions, the three-way relationship taxonomy (SUPPORT / CONTRADICT / INCOMMENSURABLE), the anti-synthesis framing, and the evaluation methodology are the author's own. No base repositories were forked; all code is original.
 
