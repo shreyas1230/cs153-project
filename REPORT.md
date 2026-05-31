@@ -108,7 +108,7 @@ The LLM provider is abstracted behind a single `llm_client.py` module. Switching
 
 ## 3. Frontend
 
-The frontend is a Next.js 16 app deployed on Cloudflare Pages. It has two pages.
+The frontend is a Next.js 16 app deployed as a static export on Cloudflare Pages (live at https://cs153-project-6on.pages.dev/), talking to the FastAPI backend hosted on DigitalOcean (https://claims-lens-i256v.ondigitalocean.app). It has two pages.
 
 **Upload page:** Drag-and-drop PDF zone, a text input for the research question, an optional **"Focus on my question"** checkbox (off by default — when on, the question steers the detection stage; see Section 4.5), and an "Analyze" button that POSTs to `/api/analyze` and then polls `/api/status` with a progress bar that advances through the three pipeline stages.
 
@@ -312,6 +312,8 @@ A later hardening pass addressed the weakest parts of the evaluation. (1) The be
 ---
 
 ## 9. AI Disclosure
+
+**Live deployment:** Frontend at https://cs153-project-6on.pages.dev/ (Cloudflare Pages), backend API at https://claims-lens-i256v.ondigitalocean.app (DigitalOcean).
 
 **GitHub repository:** https://github.com/shreyas1230/cs153-project (commit history from May 26 to June 4, 2026 documents the full development arc described in Section 7).
 

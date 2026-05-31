@@ -8,6 +8,8 @@ A cross-domain literature reading assistant that surfaces conflicts and terminol
 
 ## Demo
 
+**Live app:** https://cs153-project-6on.pages.dev/ (frontend on Cloudflare Pages, backend API on DigitalOcean)
+
 **Demo video:** _(3-minute walkthrough — link added on submission)_
 
 > Upload "Attention Is All You Need" + an Attention Schema neuroscience paper, ask *"What is attention and how does it work?"* → The system correctly identifies that both papers use the word "attention" to mean entirely different things, and explains why they cannot be directly compared.
@@ -95,10 +97,11 @@ Test papers — download from arXiv into `backend/test_papers/` (`wget https://a
 
 ## Stack
 
-- **Backend:** Python 3.11, FastAPI, pdfplumber, httpx, Pydantic
+- **Backend:** Python 3.12, FastAPI, pdfplumber, httpx, Pydantic
 - **Frontend:** Next.js 16, Tailwind CSS
 - **LLM:** `meta-llama/llama-3.3-70b-instruct` via OpenRouter, pinned to the Nebius provider for run-to-run consistency (~$0.003/analysis)
 - **Original LLM (free tier):** Cloudflare Workers AI (hit 10k neuron/day limit)
+- **Deployment:** Frontend as a static export on Cloudflare Pages (https://cs153-project-6on.pages.dev/); FastAPI backend on DigitalOcean (https://claims-lens-i256v.ondigitalocean.app)
 
 ---
 
