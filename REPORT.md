@@ -377,7 +377,7 @@ Test papers (arXiv): 1706.03762, 2402.01056, 1612.00796, 1502.03167, 1805.11604,
 *Primary papers (the evaluation corpus):*
 - Vaswani et al. (2017). *Attention Is All You Need.* arXiv:1706.03762
 - Kirkpatrick et al. (2017). *Overcoming Catastrophic Forgetting in Neural Networks.* PNAS.
-- Webb et al. (2024). *Attention Schema in Visuospatial Attention.* arXiv:2402.01056
+- Piefke, Doerig, Kietzmann & Thorat (2024). *Computational characterization of the role of an attention schema in controlling visuospatial attention.* arXiv:2402.01056
 - Ioffe & Szegedy (2015). *Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift.* arXiv:1502.03167
 - Santurkar et al. (2018). *How Does Batch Normalization Help Optimization?* arXiv:1805.11604
 - Kingma & Ba (2014). *Adam: A Method for Stochastic Optimization.* arXiv:1412.6980
