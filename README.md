@@ -10,7 +10,7 @@ A cross-domain literature reading assistant that surfaces conflicts and terminol
 
 **Live app:** https://cs153-project-6on.pages.dev/ (frontend on Cloudflare Pages, backend API on DigitalOcean)
 
-**Demo video:** _(3-minute walkthrough — link added on submission)_
+**Demo video:** https://drive.google.com/file/d/1pD5ZOSqJlZ1iPR1pfOVBaxc8oZuLQDQq/view?usp=sharing
 
 > Upload "Attention Is All You Need" + an Attention Schema neuroscience paper, ask *"What is attention and how does it work?"* → The system correctly identifies that both papers use the word "attention" to mean entirely different things, and explains why they cannot be directly compared.
 
