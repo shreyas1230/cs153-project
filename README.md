@@ -4,6 +4,20 @@
 
 A cross-domain literature reading assistant that surfaces conflicts and terminology mismatches between papers rather than synthesizing them away. Upload PDFs, ask a question — the system shows which papers support each other, which genuinely contradict, and which only *appear* to conflict because each field uses the same word differently.
 
+```
+**************************************************************
+*                                                            *
+*   📄  PROJECT REPORT  →  REPORT.md                         *
+*                                                            *
+*   The full written report (design, methodology,            *
+*   evaluation, ablations, confusion matrix)                 *
+*   is in REPORT.md in the root of this repository.          *
+*                                                            *
+**************************************************************
+```
+
+➡️ **[Open the full report: REPORT.md](REPORT.md)**
+
 ---
 
 ## Demo
